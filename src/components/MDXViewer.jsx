@@ -1,5 +1,4 @@
 import Markdown from 'react-markdown'
-import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
 
@@ -11,22 +10,24 @@ import Definition from "./mathRender/Definition";
 import Example from "./mathRender/Example";
 import ShortAnswer from "./mathRender/ShortAnswer";
 
-const components = {
-  Test,
-  Graph,
-  Highlight,
-  Callout,
-  Definition,
-  Example,
-  ShortAnswer,
-};
+import 'katex/dist/katex.min.css'
+
+// const components = {
+//   Test,
+//   Graph,
+//   Highlight,
+//   Callout,
+//   Definition,
+//   Example,
+//   ShortAnswer,
+// };
 
 const MDXViewer = ({ data }) => {
     console.log(data)
     return (
     <div className="relative">
       <Markdown
-        remarkPlugins={[remarkMath, remarkGfm]}
+        remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeKatex]}
         components={{
             code({ inline, className, children, ...props }) {
@@ -40,6 +41,9 @@ const MDXViewer = ({ data }) => {
                 return (
                   <b>Unknown command</b>
                 )
+            },
+            inlinemath({props}){
+              console.log(props);
             }
         }}
         
