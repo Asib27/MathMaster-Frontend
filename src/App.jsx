@@ -17,11 +17,11 @@ const router = createBrowserRouter([
         element: <Courses/>, 
       },
       {
-        path: 'courses/:courseId/lessons',
+        path: 'courses/:courseId',
         element: <AllLessons/>,
         children: [
           {
-            path: ':lessonId',
+            path: 'lessons/:lessonId',
             element: <Lessons/>
           }
         ]
