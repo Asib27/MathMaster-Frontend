@@ -1,6 +1,6 @@
 import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeKatex from 'rehype-katex'
+// import remarkGfm from 'remark-gfm'
+// import rehypeKatex from 'rehype-katex'
 
 import Callout from './mathRender/Callout'
 // import Test from './mathRender/Test'
@@ -27,8 +27,6 @@ const MDXViewer = ({ data }) => {
   return (
     <div className='relative'>
       <Markdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeKatex]}
         components={{
           code ({ inline, className, children, ...props }) {
             if (inline) return <code {...props}>{children}</code>

@@ -388,12 +388,12 @@
 //   ]
 // }
 
-const content = `We $sa_2 b^4$ have learned the basics of function in the previous lessons. Now it's time to explore function parameters.
+const content = `A **linear function** is a function with $a^3$ We  have learned the basics of function in the previous lessons. Now it's time to explore function parameters.
 A **parameter** A parameter is like a **control knob** for a function. Changing the parameter changes the function in a smooth way.
-Simple
+Simple $sa_2 b^4$
 \`\`\`definition
 text : linear
-definition :  A **linear function** is a function 
+definition :  A **linear function** is a function with $a^3$
 \`\`\` 
 \n\`\`\`callout
 text :  I am a callout $a_2$

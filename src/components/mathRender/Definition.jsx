@@ -1,5 +1,6 @@
 import { validate } from '../../services/parser'
 import Latex from './Latex'
+import MDXViewer from '../MDXViewer'
 import { useState } from 'react'
 
 const Definition = ({ children }) => {
@@ -27,9 +28,10 @@ const Definition = ({ children }) => {
       </span>
 
       {open && (
-        <p className='absolute shadow-lg px-6 py-4 rounded-lg top-8 m-auto border bg-white text-sm w-56'>
-          <Latex>{children.definition}</Latex>
-        </p>
+        <div className='absolute shadow-lg px-6 py-4 rounded-lg top-8 m-auto border bg-white text-sm'>
+          <MDXViewer data={children.definition} />
+          {/* <Latex>{children.definition}</Latex> */}
+        </div>
       )}
     </span>
   )
