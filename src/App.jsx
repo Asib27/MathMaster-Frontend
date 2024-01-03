@@ -3,8 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './routes/root'
 import Courses from './routes/courses'
 import ErrorPage from './routes/error-page'
-import AllLessons from './routes/allLessons'
-import Lessons from './routes/lessons'
+import Course, {loader as courseLoader}  from './routes/course'
+import Lessons, {loader as lessonLoader} from './routes/lessons'
 import Quizes from './routes/quizes'
 
 const router = createBrowserRouter([
@@ -19,11 +19,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'courses/:courseId',
-        element: <AllLessons/>,
+        element: <Course/>,
+        loader: courseLoader,
         children: [
           {
             path: 'lessons/:lessonId',
-            element: <Lessons/>
+            element: <Lessons/>,
+            loader: lessonLoader,
           },
           {
             path: 'quizes/:quizId',
