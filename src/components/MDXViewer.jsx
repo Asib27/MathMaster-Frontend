@@ -6,7 +6,7 @@ import Callout from './mathRender/Callout'
 // import Test from './mathRender/Test'
 // import Graph from './mathRender/Graph'
 // import Highlight from './mathRender/Highlight'
-// import Definition from './mathRender/Definition'
+import Definition from './mathRender/Definition'
 // import Example from './mathRender/Example'
 // import ShortAnswer from './mathRender/ShortAnswer'
 
@@ -38,6 +38,10 @@ const MDXViewer = ({ data }) => {
             if (className === 'language-callout') {
               return (
                 <Callout>{parsedValue}</Callout>
+              )
+            } else if (className === 'language-definition') {
+              return (
+                <Definition>{parsedValue}</Definition>
               )
             }
 

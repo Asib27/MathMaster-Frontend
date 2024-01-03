@@ -8,7 +8,7 @@ export function parse (str) {
   const parsedValue = {}
 
   split(str, '\n').forEach(line => {
-    const [key, value, ..._] = line.split(':')
+    const [key, value] = line.split(':')
     const sanitizedKey = key.trim().toLowerCase()
     parsedValue[sanitizedKey] = value.trim()
   })
