@@ -5,6 +5,7 @@ import Courses from './routes/courses'
 import ErrorPage from './routes/error-page'
 import AllLessons from './routes/allLessons'
 import Lessons from './routes/lessons'
+import Quizes from './routes/quizes'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
           {
             path: 'lessons/:lessonId',
             element: <Lessons/>
+          },
+          {
+            path: 'quizes/:quizId',
+            element: <Quizes/>
           }
         ]
       }

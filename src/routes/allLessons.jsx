@@ -74,8 +74,8 @@ export default function AllLessons(){
     
 
     return (
-        <div className="flex flex-row pl-10">
-            <div className="basis-1/3">
+        <div className="flex flex-row gap-x-5 pl-10">
+            <div className="basis-1/4">
                 <h3 className="text-4xl p-3">Course Outline</h3>
                 <ul>
                     {outline.map(topic=>(
@@ -120,7 +120,7 @@ export default function AllLessons(){
                     ))}
                 </ul>
             </div>
-            <div className="basis-2/3"> 
+            <div className="basis-3/4"> 
                 <Outlet/>
             </div>
         </div>

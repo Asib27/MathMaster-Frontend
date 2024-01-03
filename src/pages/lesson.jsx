@@ -1,26 +1,8 @@
-import getLesson from "../services/lessonService";
-
 import MDXViewer from "../components/MDXViewer";
 
 // import LessonFooter from "./LessonFooter";
 
-const Lesson = () => {
-  const data = getLesson();
-  // const data = `A paragraph with *emphasis* and **strong importance**.
-
-  // > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-  
-  // * Lists
-  // * [ ] todo
-  // * [x] done
-  
-  // A table:
-  
-  // | a | b |
-  // | - | - |
-  // | a | b |
-  // `
-
+const Lesson = ({data}) => {
   return (
     <div className="relative">
 
