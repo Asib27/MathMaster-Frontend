@@ -10,7 +10,7 @@ import Callout from './mathRender/Callout'
 // import Example from './mathRender/Example'
 // import ShortAnswer from './mathRender/ShortAnswer'
 
-import 'katex/dist/katex.min.css'
+import { parse } from '../services/parser'
 
 // const components = {
 //   Test,
@@ -31,12 +31,13 @@ const MDXViewer = ({ data }) => {
         rehypePlugins={[rehypeKatex]}
         components={{
           code ({ inline, className, children, ...props }) {
-            const value = String(children).replace(/\n$/, '')
             if (inline) return <code {...props}>{children}</code>
+            const value = String(children).replace(/\n$/, '')
+            const parsedValue = parse(value)
 
             if (className === 'language-callout') {
               return (
-                <Callout>{value}</Callout>
+                <Callout>{parsedValue}</Callout>
               )
             }
 
