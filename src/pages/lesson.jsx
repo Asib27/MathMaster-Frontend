@@ -1,22 +1,22 @@
-import MDXViewer from "../components/MDXViewer";
+import MDXViewer from '../components/MDXViewer'
 
 // import LessonFooter from "./LessonFooter";
 
-const Lesson = ({data}) => {
+const Lesson = ({ data }) => {
   return (
-    <div className="relative">
+    <div className='relative'>
 
-      <div className="z-50">
+      <div className='z-50'>
         {/* <Progress num={4} active={1} from={"lesson"} /> */}
       </div>
 
-      <div className="prose text-container relative bg-white z-0">
-        <div className="h-24 w-1"></div>
+      <div className='prose text-container relative bg-white z-0'>
+        <div className='h-24 w-1' />
         <MDXViewer data={data} />
         {/* <LessonFooter /> */}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Lesson;
+export default Lesson

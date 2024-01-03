@@ -1,21 +1,21 @@
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import { MathJax, MathJaxContext } from 'better-react-mathjax'
 
 const config = {
-  loader: { load: ["[tex]/html"] },
+  loader: { load: ['[tex]/html'] },
   tex: {
-    packages: { "[+]": ["html"] },
+    packages: { '[+]': ['html'] },
     inlineMath: [
-      ["$", "$"],
-      ["\\(", "\\)"]
+      ['$', '$'],
+      ['\\(', '\\)']
     ],
     displayMath: [
-      ["$$", "$$"],
-      ["\\[", "\\]"]
+      ['$$', '$$'],
+      ['\\[', '\\]']
     ]
   }
-};
+}
 
-const Latex = ({children}) => {
+const Latex = ({ children }) => {
   return (
     <MathJaxContext version={3} config={config}>
       <MathJax>

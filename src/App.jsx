@@ -3,33 +3,33 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './routes/root'
 import Courses from './routes/courses'
 import ErrorPage from './routes/error-page'
-import Course, {loader as courseLoader}  from './routes/course'
-import Lessons, {loader as lessonLoader} from './routes/lessons'
+import Course, { loader as courseLoader } from './routes/course'
+import Lessons, { loader as lessonLoader } from './routes/lessons'
 import Quizes from './routes/quizes'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root/>,
-    errorElement: <ErrorPage/>,
+    element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: 'courses',
-        element: <Courses/>, 
+        element: <Courses />
       },
       {
         path: 'courses/:courseId',
-        element: <Course/>,
+        element: <Course />,
         loader: courseLoader,
         children: [
           {
             path: 'lessons/:lessonId',
-            element: <Lessons/>,
-            loader: lessonLoader,
+            element: <Lessons />,
+            loader: lessonLoader
           },
           {
             path: 'quizes/:quizId',
-            element: <Quizes/>
+            element: <Quizes />
           }
         ]
       }
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
   }
 ])
 
-function App() {
+function App () {
   return (
     <RouterProvider router={router} />
   )
