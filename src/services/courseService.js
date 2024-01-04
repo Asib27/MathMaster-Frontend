@@ -275,7 +275,7 @@ const courseOutline = {
     4: 50,
     5: 20
   },
-  isEnrolled: true,
+  isEnrolled: false,
   myRating: null
 }
 
@@ -294,6 +294,15 @@ export async function getCourses (query) {
 export async function getCourseOutline (courseId) {
   await fakeNetwork()
   return courseOutline
+}
+
+export async function enrollCourse (courseId) {
+  await fakeNetwork()
+  courseOutline.isEnrolled = true
+  return {
+    status: 'ok',
+    message: 'successful'
+  }
 }
 
 async function fakeNetwork () {

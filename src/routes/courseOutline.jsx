@@ -1,12 +1,22 @@
-import { useLoaderData } from 'react-router-dom'
+import { Form, useLoaderData } from 'react-router-dom'
 import AuthorList from '../components/authorList'
 import ProgressBar from '../components/progressBar'
 import Rating from '../components/rating'
-import { getCourseOutline } from '../services/courseService'
+import { enrollCourse, getCourseOutline } from '../services/courseService'
 
 export async function loader ({ params }) {
   const course = await getCourseOutline(params.courseId)
   return { course }
+}
+
+export async function action ({ request, params }) {
+  const formData = await request.formData()
+  const intent = formData.get('intent')
+
+  if (intent === 'enroll') {
+    const result = await enrollCourse(params.courseId)
+    return result
+  }
 }
 
 export default function CourseOutline () {
@@ -45,7 +55,15 @@ export default function CourseOutline () {
           </div>
           )
           // TODO: button functionality
-        : <button className='ml-5 mt-10  w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg'>Enroll</button>}
+        : (
+          <Form method='post'>
+            <button
+              className='ml-5 mt-10  w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg'
+              type='submit' name='intent' value='enroll'
+            >Enroll
+            </button>
+          </Form>
+          )}
 
       <div className='flex gap-6 items-center pl-5 mt-10'>
         <div>

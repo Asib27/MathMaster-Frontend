@@ -6,7 +6,7 @@ import ErrorPage from './routes/error-page'
 import Course, { loader as courseLoader } from './routes/course'
 import Lessons, { loader as lessonLoader } from './routes/lessons'
 import Quizes from './routes/quizes'
-import CourseOutline, { loader as courseOutlineLoader } from './routes/courseOutline'
+import CourseOutline, { loader as courseOutlineLoader, action as courseOutlineAction } from './routes/courseOutline'
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,8 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <CourseOutline />,
-            loader: courseOutlineLoader
+            loader: courseOutlineLoader,
+            action: courseOutlineAction
           },
           {
             path: 'lessons/:lessonId',
