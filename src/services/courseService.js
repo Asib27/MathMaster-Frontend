@@ -73,7 +73,17 @@ const course = {
   id: '1',
   name: 'Course Name 1',
   description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc. Cras ut lacinia nulla, ut luctus sem. Mauris non pretium tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam dignissim, eros non scelerisque commodo, justo nunc molestie mauris, at aliquet ex nibh quis est. Pellentesque porta dignissim enim viverra feugiat. In hac habitasse platea dictumst. Proin tempor nisi orci, quis cursus ipsum porttitor non. Proin tempor finibus quam, lacinia scelerisque dolor blandit ut. Vivamus vitae elementum enim. Aliquam erat volutpat.',
-  content: outline
+  content: outline,
+  authors: [
+    {
+      id: '1',
+      name: 'Shariful Rahi'
+    },
+    {
+      id: '2',
+      name: 'Rahi Khan'
+    }
+  ]
 }
 
 const courses = [
@@ -82,6 +92,7 @@ const courses = [
     name: 'Algebra 1',
     type: 'Algebra',
     estimatedTime: '24hours',
+    difficulty: 'hard',
     image: '/src/assets/online-course-icon.svg',
     description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc.',
     authors: [

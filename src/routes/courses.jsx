@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom'
 import { getCourses } from '../services/courseService'
+import AuthorList from '../components/authorList'
 
 export async function loader ({ params }) {
   const courses = await getCourses()
@@ -28,12 +29,7 @@ export default function Courses () {
                       <div className='inline-block p-10 basis-1/3 min-w-96'>
                         <div className='rounded overflow-hidden shadow-lg transition-shadow duration-300 ease-in-out'>
                           <img className='w-full' src={course.image} alt='Course Image' />
-                          <div className='flex gap-2 px-6 py-2'>
-                            {course.authors.map(author => (
-                              <Link to={`/authors/${author.id}`} className='underline' key={author.id}>{author.name}</Link>
-                            ))}
-                          </div>
-
+                          <AuthorList className='px-6 py-2'>{course.authors}</AuthorList>
                           <div className='px-6 py-4'>
                             <div className='font-bold text-xl mb-2'>{course.name}</div>
 
