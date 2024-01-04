@@ -1,7 +1,7 @@
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './routes/root'
-import Courses from './routes/courses'
+import Courses, { loader as allCoursesLoader } from './routes/courses'
 import ErrorPage from './routes/error-page'
 import Course, { loader as courseLoader } from './routes/course'
 import Lessons, { loader as lessonLoader } from './routes/lessons'
@@ -15,7 +15,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'courses',
-        element: <Courses />
+        element: <Courses />,
+        loader: allCoursesLoader
       },
       {
         path: 'courses/:courseId',
