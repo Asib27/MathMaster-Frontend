@@ -305,6 +305,15 @@ export async function enrollCourse (courseId) {
   }
 }
 
+export async function rateCourse (courseId, rating) {
+  await fakeNetwork()
+  courseOutline.myRating = rating
+  return {
+    status: 'ok',
+    message: 'successful'
+  }
+}
+
 async function fakeNetwork () {
   return new Promise(resolve => {
     setTimeout(resolve, Math.random() * 800)

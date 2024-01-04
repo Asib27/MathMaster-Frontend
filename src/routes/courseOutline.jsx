@@ -1,8 +1,9 @@
-import { Form, useLoaderData } from 'react-router-dom'
+import { Form, redirect, useLoaderData } from 'react-router-dom'
 import AuthorList from '../components/authorList'
 import ProgressBar from '../components/progressBar'
 import Rating from '../components/rating'
-import { enrollCourse, getCourseOutline } from '../services/courseService'
+import { enrollCourse, getCourseOutline, rateCourse } from '../services/courseService'
+import RatingForm from '../components/ratingForm'
 
 export async function loader ({ params }) {
   const course = await getCourseOutline(params.courseId)
@@ -13,10 +14,14 @@ export async function action ({ request, params }) {
   const formData = await request.formData()
   const intent = formData.get('intent')
 
+  console.log(intent)
   if (intent === 'enroll') {
-    const result = await enrollCourse(params.courseId)
-    return result
+    await enrollCourse(params.courseId)
+  } else if (intent === 'rating') {
+    await rateCourse(params.courseId, formData.get('stars'))
   }
+
+  return redirect(`/courses/${params.courseId}`)
 }
 
 export default function CourseOutline () {
@@ -86,7 +91,7 @@ export default function CourseOutline () {
         </div>
       </div>
 
-      <p className='pl-5 text-red-800'> Leave a Rating : Not yet implemented</p>
+      <RatingForm course={course} />
     </div>
   )
 }
