@@ -26,7 +26,7 @@ export default function Courses () {
                 {courses.filter(course => course.type === type).map(course => {
                   return (
                     <Link key={course.id} to={`/courses/${course.id}`}>
-                      <div className='inline-block p-10 basis-1/3 min-w-96'>
+                      <div className='inline-block p-10 basis-1/3 w-96'>
                         <div className='rounded overflow-hidden shadow-lg transition-shadow duration-300 ease-in-out'>
                           <img className='w-full' src={course.image} alt='Course Image' />
                           <AuthorList className='px-6 py-2'>{course.authors}</AuthorList>
