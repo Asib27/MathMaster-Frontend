@@ -404,8 +404,8 @@ const lesson1 = {
   id: '1',
   name: 'Lesson1',
   content,
-  completed: false,
-  vote: 1,
+  isCompleted: false,
+  myRating: null,
   authors: [
     {
       id: '1',
@@ -420,8 +420,26 @@ const lesson1 = {
 
 export async function getLesson (lessonId) {
   await fakeNetwork()
-  console.log(lessonId, lesson1)
+  // console.log(lessonId, lesson1)
   return lesson1
+}
+
+export async function submitLessonRating(lessonId, rating) {
+  await fakeNetwork()
+  lesson1.myRating = rating
+  return {
+    status: 'ok',
+    message: 'successful'
+  }
+}
+
+export async function markAsCompleted(lessonId) {
+  await fakeNetwork()
+  lesson1.isCompleted = !lesson1.isCompleted
+  return {
+    status: 'ok',
+    message: 'successful'
+  }
 }
 
 async function fakeNetwork () {

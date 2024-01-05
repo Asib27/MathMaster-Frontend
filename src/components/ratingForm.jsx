@@ -1,16 +1,16 @@
 import { Form } from 'react-router-dom'
 import Rating from './rating'
 
-export default function RatingForm ({ course }) {
+export default function RatingForm ({ rating, className }) {
   return (
-    <div>
-      {course.myRating &&
+    <div className={className}>
+      {rating &&
         <div className='flex gap-10 ml-5 mt-10'>
           <p className='text-green-700 text-xl'> Your previous rating</p>
-          <Rating rating={course.myRating} />
+          <Rating rating={rating} />
         </div>}
       <div className='flex gap-4 items-center'>
-        <p className='pl-5 text-green-700 text-center text-xl'> {course.myRating ? 'Change Rating' : 'Leave a Rating'}</p>
+        <p className='pl-5 text-green-700 text-center text-xl'> {rating ? 'Change Rating' : 'Leave a Rating'}</p>
         {/* Rating */}
         <Form className='flex items-center' method='post'>
           <div className='flex flex-row-reverse justify-end items-center'>

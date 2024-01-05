@@ -91,7 +91,7 @@ export default function CourseOutline () {
         </div>
       </div>
 
-      <RatingForm course={course} />
+      {course.isEnrolled && <RatingForm rating={course.myRating} />}
     </div>
   )
 }
