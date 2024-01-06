@@ -8,6 +8,7 @@ import Lessons, { loader as lessonLoader, action as lessonsAction } from './rout
 import Quizes from './routes/quizes'
 import CourseOutline, { loader as courseOutlineLoader, action as courseOutlineAction } from './routes/courseOutline'
 import Home, { loader as HomeLoader } from './routes/home'
+import Login from './routes/login'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         path: 'home',
         element: <Home />,
         loader: HomeLoader
+      },
+      {
+        path: 'login',
+        element: <Login />
       },
       {
         path: 'courses',
