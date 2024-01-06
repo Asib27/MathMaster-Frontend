@@ -1,13 +1,16 @@
 import { Link, useLoaderData } from 'react-router-dom'
 import { getCourses } from '../services/courseService'
 import CourseCard from '../components/courseCard'
+import { getUserStat } from '../services/statService'
 
 export async function loader ({ params }) {
   const courses = await getCourses()
+  const userStat = await getUserStat()
 
   return {
     continueCourse: courses,
-    recommendateCourse: courses
+    recommendateCourse: courses,
+    userStats: userStat
   }
 }
 
@@ -28,21 +31,11 @@ function Last7Days () {
 }
 
 export default function Home () {
-  const { continueCourse, recommendateCourse } = useLoaderData()
+  const { continueCourse, recommendateCourse, userStats } = useLoaderData()
   const profile = {
     image: '/src/assets/male_avatar.svg',
     name: 'Shariful Islam Khan',
     id: 10
-  }
-
-  const userStats = {
-    totalXp: 510,
-    dailyXp: [
-      10, 10, 16, 0, 10, 15
-    ],
-    enrolled: 3,
-    problemSolved: 64,
-    lessonsCompleted: 4
   }
 
   const days = Last7Days()
