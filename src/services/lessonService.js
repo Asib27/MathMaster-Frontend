@@ -424,7 +424,7 @@ export async function getLesson (lessonId) {
   return lesson1
 }
 
-export async function submitLessonRating(lessonId, rating) {
+export async function submitLessonRating (lessonId, rating) {
   await fakeNetwork()
   lesson1.myRating = rating
   return {
@@ -433,7 +433,7 @@ export async function submitLessonRating(lessonId, rating) {
   }
 }
 
-export async function markAsCompleted(lessonId) {
+export async function markAsCompleted (lessonId) {
   await fakeNetwork()
   lesson1.isCompleted = !lesson1.isCompleted
   return {

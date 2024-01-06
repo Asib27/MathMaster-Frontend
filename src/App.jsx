@@ -7,6 +7,7 @@ import Course, { loader as courseLoader } from './routes/course'
 import Lessons, { loader as lessonLoader, action as lessonsAction } from './routes/lessons'
 import Quizes from './routes/quizes'
 import CourseOutline, { loader as courseOutlineLoader, action as courseOutlineAction } from './routes/courseOutline'
+import Home, { loader as HomeLoader } from './routes/home'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,11 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: 'home',
+        element: <Home />,
+        loader: HomeLoader
+      },
       {
         path: 'courses',
         element: <Courses />,

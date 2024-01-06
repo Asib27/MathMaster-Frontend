@@ -14,8 +14,7 @@ export async function action ({ request, params }) {
 
   if (intent === 'rating') {
     await submitLessonRating(params.lessonId, formData.get('stars'))
-  }
-  else if (intent === 'completed') {
+  } else if (intent === 'completed') {
     await markAsCompleted(params.lessonId)
   }
 
@@ -44,7 +43,7 @@ export default function Lessons () {
         </button>
       </Form>
 
-      <RatingForm rating={lesson.myRating} className='mt-10'/>
+      <RatingForm rating={lesson.myRating} className='mt-10' />
     </div>
   )
 }
