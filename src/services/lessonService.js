@@ -428,7 +428,7 @@ export async function submitLessonRating (lessonId, rating) {
   await fakeNetwork()
   lesson1.myRating = rating
   return {
-    status: 'ok',
+    status: 'success',
     message: 'successful'
   }
 }
@@ -437,7 +437,7 @@ export async function markAsCompleted (lessonId) {
   await fakeNetwork()
   lesson1.isCompleted = !lesson1.isCompleted
   return {
-    status: 'ok',
+    status: 'success',
     message: 'successful'
   }
 }

@@ -29,7 +29,7 @@ function PasswordSvg () {
   )
 }
 
-export default function LoginForm ({ className }) {
+export default function LoginForm ({ errosMsg, className }) {
   const submit = useSubmit()
 
   return (
@@ -81,6 +81,15 @@ export default function LoginForm ({ className }) {
             Icon={PasswordSvg}
           />
 
+          {
+          errosMsg &&
+            <div className='flex justify-center'>
+              <p className=' show_info text-sm mb-4 w-max text-red-400'>
+                {errosMsg}
+              </p>
+            </div>
+          }
+
           <div className='flex justify-center'>
             <button
               className='w-32 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
@@ -91,6 +100,7 @@ export default function LoginForm ({ className }) {
           </div>
         </Form>
       </Formik>
+
     </div>
   )
 }

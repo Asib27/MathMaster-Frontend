@@ -1,5 +1,6 @@
-import { Form, redirect } from 'react-router-dom'
+import { Form, redirect, useActionData } from 'react-router-dom'
 import LoginForm from '../components/loginForm'
+import { login } from '../services/authService'
 
 export async function action ({ request, params }) {
   const formData = await request.formData()
@@ -7,7 +8,13 @@ export async function action ({ request, params }) {
 
   if (data.intent === 'login') {
     delete data.intent
-    console.log(data)
+    const status = await login(data)
+
+    if (status.status === 'success') {
+      return redirect('/home')
+    } else {
+      return status
+    }
   } else if (data.intent === 'signup') {
     return redirect('/singup')
   }
@@ -15,6 +22,9 @@ export async function action ({ request, params }) {
 }
 
 export default function Login () {
+  const actiondata = useActionData()
+  console.log(actiondata)
+
   return (
     <div className='flex justify-center overflow-x-hidden'>
       <div className='flex w-2/3'>
@@ -38,7 +48,7 @@ export default function Login () {
           </div>
 
         </div>
-        <LoginForm className='basis-2/3 flex flex-col justify-center p-10' />
+        <LoginForm className='basis-2/3 flex flex-col justify-center p-10' errosMsg={actiondata && actiondata.message} />
 
       </div>
     </div>

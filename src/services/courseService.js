@@ -300,7 +300,7 @@ export async function enrollCourse (courseId) {
   await fakeNetwork()
   courseOutline.isEnrolled = true
   return {
-    status: 'ok',
+    status: 'success',
     message: 'successful'
   }
 }
@@ -309,7 +309,7 @@ export async function rateCourse (courseId, rating) {
   await fakeNetwork()
   courseOutline.myRating = rating
   return {
-    status: 'ok',
+    status: 'success',
     message: 'successful'
   }
 }
