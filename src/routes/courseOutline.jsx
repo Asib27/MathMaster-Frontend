@@ -37,7 +37,7 @@ export default function CourseOutline () {
       <img className='w-44' src={course.image} />
       <p className='text-3xl px-5 mt-5'> {course.name}</p>
       <p className='text-zinc-700 pl-5'>{course.type}</p>
-      <AuthorList className='pl-5 text-zinc-700'>{course.authors}</AuthorList>
+      <AuthorList className='pl-5 text-zinc-700' links>{course.authors}</AuthorList>
       <p className='pl-5 text-zinc-700'> {`${course.enrollmentCount} Enrolled | ${course.estimatedTime} Hours`}</p>
 
       <p className='pl-5 mt-10 mr-1 text-justify text-zinc-700'>{course.description}</p>
