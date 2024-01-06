@@ -28,9 +28,10 @@ function PasswordSvg () {
   )
 }
 
-export default function Login () {
+function LoginForm ({className}) {
   return (
-    <>
+    <div className={className}>
+      <p className='text-3xl text-center'>Login </p>
       <Formik
         initialValues={{
           email: '',
@@ -74,12 +75,39 @@ export default function Login () {
             <button
               className='w-32 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
               type='submit'
-            >Submit
+            > SIGN IN
             </button>
 
           </div>
         </Form>
       </Formik>
-    </>
+    </div>
+  )
+}
+
+export default function Login () {
+  return (
+    <div className='flex justify-center overflow-x-hidden'>
+      <div className='flex w-2/3'>
+        <div className='flex flex-col basis-1/3 justify-center text-center'> 
+          <p className='text-3xl'>Welcome</p>
+          <p className='text-zinc-400'> Join The Interesting</p>
+          <p className='text-zinc-400'>Journey of Math</p>
+          <p className='text-xs mt-8'>Dont Have an account</p>
+
+          <div className='flex justify-center'>
+            <button
+              className='w-32 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
+              type='submit'
+            >SIGN UP
+            </button>
+
+          </div>
+
+        </div>
+        <LoginForm className='basis-2/3 flex flex-col justify-center p-10'/>
+
+      </div>
+    </div>
   )
 }
