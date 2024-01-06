@@ -7,8 +7,8 @@ import Course, { loader as courseLoader } from './routes/course'
 import Lessons, { loader as lessonLoader, action as lessonsAction } from './routes/lessons'
 import Quizes from './routes/quizes'
 import CourseOutline, { loader as courseOutlineLoader, action as courseOutlineAction } from './routes/courseOutline'
-import Home, { loader as HomeLoader } from './routes/home'
-import Login from './routes/login'
+import Home, { loader as homeLoader } from './routes/home'
+import Login, { action as loginAction } from './routes/login'
 
 const router = createBrowserRouter([
   {
@@ -19,11 +19,12 @@ const router = createBrowserRouter([
       {
         path: 'home',
         element: <Home />,
-        loader: HomeLoader
+        loader: homeLoader
       },
       {
         path: 'login',
-        element: <Login />
+        element: <Login />,
+        action: loginAction
       },
       {
         path: 'courses',
