@@ -1,7 +1,7 @@
 import { validate } from '../../services/parser'
 import Latex from './Latex'
-import MDXViewer from '../MDXViewer'
 import { useState } from 'react'
+import Markdown from 'react-markdown'
 
 const Definition = ({ children }) => {
   const [open, setOpen] = useState(false)
@@ -29,7 +29,7 @@ const Definition = ({ children }) => {
 
       {open && (
         <div className='absolute shadow-lg px-6 py-4 rounded-lg top-8 m-auto border bg-white text-sm'>
-          <MDXViewer data={children.definition} />
+          <Latex><Markdown>{children.definition}</Markdown></Latex>
           {/* <Latex>{children.definition}</Latex> */}
         </div>
       )}

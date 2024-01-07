@@ -46,9 +46,6 @@ const MDXViewer = ({ data }) => {
             return (
               <b>Unknown command</b>
             )
-          },
-          inlinemath ({ props }) {
-            console.log(props)
           }
         }}
       >{data}

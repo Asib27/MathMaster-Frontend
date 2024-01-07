@@ -396,7 +396,7 @@ text : linear
 definition :  A **linear function** is a function with $a^3$
 \`\`\` 
 \n\`\`\`callout
-text :  I am a callout $a_2$
+text :  I am a **callout** $a_2$
 \`\`\`
 `
 
