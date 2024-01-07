@@ -7,10 +7,11 @@ import Callout from './mathRender/Callout'
 // import Graph from './mathRender/Graph'
 // import Highlight from './mathRender/Highlight'
 import Definition from './mathRender/Definition'
-// import Example from './mathRender/Example'
 // import ShortAnswer from './mathRender/ShortAnswer'
 
 import { parse } from '../services/parser'
+import { Link } from 'react-router-dom'
+import ProblemContainer from './mathRender/ProblemContainer'
 
 // const components = {
 //   Test,
@@ -41,11 +42,17 @@ const MDXViewer = ({ data }) => {
               return (
                 <Definition>{parsedValue}</Definition>
               )
+            } else if (className === 'language-example') {
+              console.log(parsedValue)
+              return <ProblemContainer {...parsedValue} />
             }
 
             return (
               <b>Unknown command</b>
             )
+          },
+          a ({ href, children }) {
+            return <Link className='border-dashed border-b-2 border-blue-600' to={href}>{children}</Link>
           }
         }}
       >{data}
