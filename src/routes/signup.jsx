@@ -1,29 +1,21 @@
 import { Form, redirect, useActionData } from 'react-router-dom'
-import LoginForm from '../components/loginForm'
-import { login } from '../services/authService'
+import SignupForm from '../components/signupForm'
 
 export async function action ({ request, params }) {
   const formData = await request.formData()
   const data = Object.fromEntries(formData)
 
   if (data.intent === 'login') {
-    delete data.intent
-    const status = await login(data)
-
-    if (status.status === 'success') {
-      return redirect('/home')
-    } else {
-      return status
-    }
+    return redirect('/login')
   } else if (data.intent === 'signup') {
-    return redirect('/signup')
+    console.log(data)
   }
-  return redirect('/login')
+
+  return redirect('/signup')
 }
 
-export default function Login () {
+export default function Signup () {
   const actiondata = useActionData()
-  console.log(actiondata)
 
   return (
     <div className='flex justify-center overflow-x-hidden'>
@@ -32,7 +24,7 @@ export default function Login () {
           <p className='text-3xl'>Welcome</p>
           <p className='text-zinc-400'> Join The Interesting</p>
           <p className='text-zinc-400'>Journey of Math</p>
-          <p className='text-xs mt-8'>Dont Have an account</p>
+          <p className='text-xs mt-8'>Already Have an account</p>
 
           <div className='flex justify-center'>
             <Form method='post'>
@@ -40,15 +32,15 @@ export default function Login () {
                 className='w-32 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
                 type='submit'
                 name='intent'
-                value='signup'
-              >SIGN UP
+                value='login'
+              >SIGN IN
               </button>
             </Form>
 
           </div>
 
         </div>
-        <LoginForm className='basis-2/3 flex flex-col justify-center p-10' errosMsg={actiondata && actiondata.message} />
+        <SignupForm className='basis-2/3 flex flex-col justify-center p-10' errosMsg={actiondata && actiondata.message} />
 
       </div>
     </div>

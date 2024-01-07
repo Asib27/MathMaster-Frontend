@@ -9,6 +9,7 @@ import Quizes from './routes/quizes'
 import CourseOutline, { loader as courseOutlineLoader, action as courseOutlineAction } from './routes/courseOutline'
 import Home, { loader as homeLoader } from './routes/home'
 import Login, { action as loginAction } from './routes/login'
+import Signup, { action as signupAction } from './routes/signup'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
         path: 'login',
         element: <Login />,
         action: loginAction
+      },
+      {
+        path: 'signup',
+        element: <Signup />,
+        action: signupAction
       },
       {
         path: 'courses',
