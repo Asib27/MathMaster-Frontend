@@ -6,6 +6,7 @@ import { useSubmit } from 'react-router-dom'
 import UsernameSvg from './svgs/userNameSvg'
 import PasswordSvg from './svgs/passwordSvg'
 import EmailSvg from './svgs/emailSvg'
+import { isUniqueUsername } from '../services/authService'
 
 const getCharacterValidationError = (str) => {
   return `Your password must have at least 1 ${str} character`
@@ -42,13 +43,14 @@ export default function SignupForm ({ errosMsg, className }) {
             .required('Required')
             .min(4, 'Must be at least 4 characters')
             .max(20, 'Must be at less than 20 characters')
-            .test('Unique username', 'Username Already in use', (value) => {
-              console.log(value)
-              return true
+            .test('Unique username', 'Username Already in use', async (value) => {
+              const status = await isUniqueUsername(value)
+              return status.isUnique
             })
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(false)
+
           const formData = new FormData()
           Object.entries(values).forEach(([key, value]) => {
             formData.append(key, value)
@@ -100,10 +102,10 @@ export default function SignupForm ({ errosMsg, className }) {
           />
 
           {
-          errosMsg &&
+          errosMsg && errosMsg.formError &&
             <div className='flex justify-center'>
               <p className=' show_info text-sm mb-4 w-max text-red-400'>
-                {errosMsg}
+                {errosMsg.formError}
               </p>
             </div>
           }

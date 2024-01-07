@@ -13,7 +13,9 @@ export async function action ({ request, params }) {
     if (status.status === 'success') {
       return redirect('/home')
     } else {
-      return status
+      return {
+        formError: status.message
+      }
     }
   } else if (data.intent === 'signup') {
     return redirect('/signup')
@@ -48,7 +50,7 @@ export default function Login () {
           </div>
 
         </div>
-        <LoginForm className='basis-2/3 flex flex-col justify-center p-10' errosMsg={actiondata && actiondata.message} />
+        <LoginForm className='basis-2/3 flex flex-col justify-center p-10' errosMsg={actiondata} />
 
       </div>
     </div>

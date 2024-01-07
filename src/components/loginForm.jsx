@@ -59,10 +59,10 @@ export default function LoginForm ({ errosMsg, className }) {
           />
 
           {
-          errosMsg &&
+          errosMsg && errosMsg.formError &&
             <div className='flex justify-center'>
               <p className=' show_info text-sm mb-4 w-max text-red-400'>
-                {errosMsg}
+                {errosMsg.formError}
               </p>
             </div>
           }

@@ -1,5 +1,6 @@
 import { Form, redirect, useActionData } from 'react-router-dom'
 import SignupForm from '../components/signupForm'
+import { signup } from '../services/authService'
 
 export async function action ({ request, params }) {
   const formData = await request.formData()
@@ -8,7 +9,17 @@ export async function action ({ request, params }) {
   if (data.intent === 'login') {
     return redirect('/login')
   } else if (data.intent === 'signup') {
+    delete data.intent
+    delete data.retypePassword
     console.log(data)
+    const status = await signup(data)
+    if (status.status === 'success') {
+      return redirect('/home')
+    } else {
+      return {
+        formError: status.message
+      }
+    }
   }
 
   return redirect('/signup')
@@ -40,7 +51,7 @@ export default function Signup () {
           </div>
 
         </div>
-        <SignupForm className='basis-2/3 flex flex-col justify-center p-10' errosMsg={actiondata && actiondata.message} />
+        <SignupForm className='basis-2/3 flex flex-col justify-center p-10' errosMsg={actiondata} />
 
       </div>
     </div>
