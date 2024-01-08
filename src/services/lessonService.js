@@ -396,6 +396,12 @@ Simple $sa_2 b^4$
 text :  I am a **callout** $a_2$
 \`\`\`
 
+\n\`\`\`graph
+1 : plot, red, y = ax^2+bx+c, -2 < a < 2, -2 < b < 2, 0 < c < 2
+2 : points, blue, (1,1)
+\`\`\`
+
+
 \n\`\`\`question
 type : mcq
 question : For what value of parameter $m$ does the line intersect the point?
@@ -413,23 +419,6 @@ explanation : demo $x$
 hint: a simple hint
 \`\`\`
 
-\n\`\`\`question
-type : mcq
-question : For what value of parameter $m$ does the line intersect the point?
-options : -1, -2, -3
-correct : -1
-explanation : demo $x$
-hint: a simple hint
-\`\`\`
-
-
-\n\`\`\`question
-type : short_question
-question : For what value of parameter $m$ does the line intersect the point?
-correct : -1
-explanation : demo $x$
-hint: a simple hint
-\`\`\`
 `
 
 const lesson1 = {
