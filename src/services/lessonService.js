@@ -396,10 +396,36 @@ Simple $sa_2 b^4$
 text :  I am a **callout** $a_2$
 \`\`\`
 
-\n\`\`\`example
+\n\`\`\`question
 type : mcq
 question : For what value of parameter $m$ does the line intersect the point?
 options : -1, -2, -3, -4
+correct : -1
+explanation : demo $x$
+hint: a simple hint
+\`\`\`
+
+\n\`\`\`question
+type : short_question
+question : For what value of parameter $m$ does the line intersect the point?
+correct : -1
+explanation : demo $x$
+hint: a simple hint
+\`\`\`
+
+\n\`\`\`question
+type : mcq
+question : For what value of parameter $m$ does the line intersect the point?
+options : -1, -2, -3
+correct : -1
+explanation : demo $x$
+hint: a simple hint
+\`\`\`
+
+
+\n\`\`\`question
+type : short_question
+question : For what value of parameter $m$ does the line intersect the point?
 correct : -1
 explanation : demo $x$
 hint: a simple hint

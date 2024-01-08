@@ -24,7 +24,6 @@ import ProblemContainer from './mathRender/ProblemContainer'
 // };
 
 const MDXViewer = ({ data }) => {
-  console.log(data)
   return (
     <div className='relative'>
       <Markdown
@@ -42,7 +41,7 @@ const MDXViewer = ({ data }) => {
               return (
                 <Definition>{parsedValue}</Definition>
               )
-            } else if (className === 'language-example') {
+            } else if (className === 'language-question') {
               console.log(parsedValue)
               return <ProblemContainer {...parsedValue} />
             }

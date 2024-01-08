@@ -1,49 +1,39 @@
-'use client'
+import { useId } from 'react'
 
-import ProblemContainer from './ProblemContainer'
-import { useState } from 'react'
-
-import { Input } from '@material-tailwind/react'
-
-import { RxCross2 } from 'react-icons/rx'
-import { FiCheck } from 'react-icons/fi'
 import Latex from './Latex'
+import { useField } from 'formik'
+import Markdown from 'react-markdown'
 
 const ShortAnswer = ({
   question,
-  correct,
-  explanation,
-  hint,
-  inputType = 'text'
+  className,
+  name,
+  ...props
 }) => {
-  const [isCorrect, setIsCorrect] = useState(-1)
-  const [answer, setAnswer] = useState()
-
-  const handleSubmission = () => {
-    if (!answer) return
-
-    console.log(answer)
-
-    if (answer === correct) setIsCorrect(1)
-    else setIsCorrect(0)
-  }
+  const [field, meta] = useField(name)
+  const id = useId()
 
   return (
-    <ProblemContainer
-      hint={hint}
-      explanation={explanation}
-      handleSubmission={handleSubmission}
-    >
-      {question}
-
-      <div className='w-60 mt-8 flex items-center gap-x-2'>
-        <Input
-          label='Answer'
-          type={inputType || 'number'}
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
+    <div className='px-10 '>
+      <label className='flex flex-col gap-4 mb-4'>
+        <Latex><Markdown>{question}</Markdown></Latex>
+        <input
+          name={id}
+          id={id}
+          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5'
+          placeholder='Answer'
+          {...field}
         />
-        {isCorrect === 1 && (
+      </label>
+      <div>
+        {meta.touched && meta.error
+          ? (
+            <div className='text-red-600 block mb-2 text-sm font-medium'>{meta.error}</div>
+            )
+          : null}
+      </div>
+      <div>
+        {/* {isCorrect === 1 && (
           <div
             className='text-green-500 p-3 flex items-center justify-center rounded-md shadow bg-green-50'
           >
@@ -56,15 +46,15 @@ const ShortAnswer = ({
           >
             <RxCross2 />
           </div>
-        )}
+        )} */}
       </div>
 
-      {isCorrect === 0 && (
+      {/* {isCorrect === 0 && (
         <div className='flex items-center'>
           <p>Correct:&nbsp; </p> <Latex>{correct}</Latex>
         </div>
-      )}
-    </ProblemContainer>
+      )} */}
+    </div>
   )
 }
 

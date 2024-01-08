@@ -6,8 +6,11 @@ import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import McqProblem from './McqProblem'
 import Markdown from 'react-markdown'
+import ShortAnswer from './ShortAnswer'
 
 const ProblemContainer = ({
+  elementId,
+  type,
   correct,
   explanation,
   hint,
@@ -40,11 +43,21 @@ const ProblemContainer = ({
         }}
       >
         <Form>
-          <McqProblem
-            className=''
-            name='answer'
-            {...props}
-          />
+          {type === 'mcq' && (
+            <McqProblem
+              className=''
+              name='answer'
+              {...props}
+            />
+          )}
+
+          {type === 'short_question' && (
+            <ShortAnswer
+              className=''
+              name='answer'
+              {...props}
+            />
+          )}
 
           <div className='bg-gray-200 rounded-b-2xl px-8 py-4'>
             <div className='flex items-center justify-between'>
