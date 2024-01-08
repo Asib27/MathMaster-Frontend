@@ -1,22 +1,25 @@
 import { useState } from 'react'
 
 import { BsQuestion } from 'react-icons/bs'
-import Latex from './Latex'
+
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import McqProblem from './McqProblem'
+import McqProblem from '../components/mathRender/McqProblem'
 import Markdown from 'react-markdown'
-import ShortAnswer from './ShortAnswer'
+import ShortAnswer from '../components/mathRender/ShortAnswer'
+import { parse } from '../services/parser'
+import Latex from '../components/mathRender/Latex'
 
-const ProblemContainer = ({
-  type,
-  correct,
-  explanation,
-  hint,
+const QuizQuestion = ({
+  questionStr,
+  answerUpdateCallback,
   ...props
 }) => {
   const [show, setShow] = useState('')
   const [message, setMessage] = useState('')
+  const [submitted, setSubmiited] = useState(false)
+
+  const { type, explanation, hint, correct, ...questionParams } = parse(questionStr)
 
   return (
     <div className='bg-gray-100 text-justify rounded-2xl pt-10 mb-12 relative'>
@@ -34,11 +37,17 @@ const ProblemContainer = ({
             .required('Please Submit an Answer')
         })}
         onSubmit={(values, { setSubmitting }) => {
+          setSubmiited(true)
           if (values.answer.trim() === correct) {
-            setMessage('Your answer is correct')
+            setMessage('correct')
+            answerUpdateCallback('correct')
+            setShow('explanation')
           } else {
-            setMessage('Your answer is wrong')
+            setMessage('wrong')
+            answerUpdateCallback('wrong')
+            setShow('explanation')
           }
+
         }}
       >
         <Form>
@@ -46,7 +55,8 @@ const ProblemContainer = ({
             <McqProblem
               className=''
               name='answer'
-              {...props}
+              disabled={submitted}
+              {...questionParams}
             />
           )}
 
@@ -54,29 +64,13 @@ const ProblemContainer = ({
             <ShortAnswer
               className=''
               name='answer'
-              {...props}
+              disabled={submitted}
+              {...questionParams}
             />
           )}
 
           <div className='bg-gray-200 rounded-b-2xl px-8 py-4'>
             <div className='flex items-center justify-between'>
-              <div className=''>
-                <button
-                  className='border border-black bg-black text-white inline px-4 py-2 rounded-full cursor-pointer mr-8'
-                  type='submit'
-                >
-                  Submit
-                </button>
-                {explanation && (
-                  <div
-                    className='border border-gray-500 inline px-4 py-2 rounded-full cursor-pointer'
-                    onClick={() => setShow('explanation')}
-                  >
-                    Show Explanation
-                  </div>
-                )}
-              </div>
-
               <div className=''>
                 {hint && (
                   <div
@@ -87,19 +81,47 @@ const ProblemContainer = ({
                   </div>
                 )}
               </div>
+
+              <div className=''>
+                <button
+                  className={
+                    'border bg-zinc-900 text-white inline px-4 py-2 rounded-full cursor-pointer mr-8' + 
+                    'disabled:bg-green-700 disabled:cursor-not-allowed'
+                  }
+                  type='submit'
+                  disabled={submitted}
+                >
+                  Submit
+                </button>
+              </div>
             </div>
 
-            {message && (
-              <p className='mt-8'> {message} </p>
+            {message === 'correct' && (
+              <div className='mt-8'>
+                <p className='text-green-900'>Correct Answer</p>
+              </div>
+
             )}
 
-            {show === 'explanation' && (
-              <div className='mt-8 ml-2'>
+            {message === 'wrong' && (
+              <div className='mt-8'>
+                <p className='text-red-600'>Wrong Answer</p>
+                <div className='flex gap-2'>
+                  <p className='text-zinc-700'> Correct Answer : </p>
+                  <p className=''> {correct}</p>
+                </div>
+              </div>
+
+            )}
+
+            {explanation && show === 'explanation' && (
+              <div className='mt-8'>
+                <p className='text-zinc-600'> Explanation</p>
                 <Latex><Markdown>{explanation}</Markdown></Latex>
               </div>
             )}
             {show === 'hint' && (
-              <div className='mt-8 ml-2'>
+              <div className='mt-8'>
                 <Latex><Markdown>{hint}</Markdown></Latex>
               </div>
             )}
@@ -110,4 +132,4 @@ const ProblemContainer = ({
   )
 }
 
-export default ProblemContainer
+export default QuizQuestion

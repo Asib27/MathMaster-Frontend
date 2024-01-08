@@ -5,6 +5,7 @@ const McqProblem = ({
   type = 'mcq',
   question,
   options,
+  disabled,
   ...props
 }) => {
   const [field, meta, helpers] = useField(props)
@@ -31,19 +32,22 @@ const McqProblem = ({
     <div className='px-10'>
       <Latex>{question}</Latex>
 
-      <>
+      <div className={`${disabled && 'cursor-not-allowed'}`}>
         {options.split(',').map((option, i) => (
           <div
             className={
-                'flex my-2 px-4 py-1 rounded-md items-center justify-between ' + ''
-
+                'flex my-2 px-4 py-1 rounded-md items-center justify-between  ' +
+                ''
               }
             key={i}
-            onClick={() => helpers.setValue(option)}
+            onClick={() => !disabled && helpers.setValue(option)}
           >
             <div
               data-ripple-dark='false'
-              className='flex items-center justify-left gap-x-3 flex-1 cursor-pointer'
+              className={
+                'flex items-center justify-left gap-x-3 flex-1 cursor-pointer ' +
+                `${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`
+              }
             >
               {option === field.value
                 ? (
@@ -79,7 +83,7 @@ const McqProblem = ({
               )
             : null}
         </div>
-      </>
+      </div>
 
     </div>
   )

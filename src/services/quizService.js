@@ -1,21 +1,33 @@
-const quiz1 = `\`\`\`question
-type : mcq
+const quiz1 = `type : mcq
 question : For what value of parameter $m$ does the line intersect the point?
 options : -1, -2, -3, -4
 correct : -1
 explanation : demo $x$
 hint: a simple hint
-\`\`\``
+`
 
-const quiz2 = `\`\`\`question
-type : short_question
-question : For what value of parameter $m$ does the line intersect the point?
+const quiz3 = `type : mcq
+question : For what value of parameter $m$ does the line intersect the point? 3
+options : 1, 2, 3, 4
+correct : 3
+explanation : demo $x$
+hint: a simple hint
+`
+
+const quiz2 = `type : short_question
+question : For what value of parameter $m$ does the line intersect the point? -1
 correct : -1
 explanation : demo $x$
 hint: a simple hint
-\`\`\``
+`
 
 
+const quiz4 = `type : short_question
+question : For what value of parameter $m$ does the line intersect the point? abc
+correct : abc
+explanation : demo $x$
+hint: a simple hint
+`
 
 const quizes = [
   {
@@ -25,6 +37,14 @@ const quizes = [
   {
     id: 2,
     quiz: quiz2
+  },
+  {
+    id: 3,
+    quiz: quiz3
+  },
+  {
+    id: 4,
+    quiz: quiz4
   }
 ]
 

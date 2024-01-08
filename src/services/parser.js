@@ -5,6 +5,7 @@ export function validate (parsedValue, required) {
 }
 
 export function parse (str) {
+  console.log(str)
   const parsedValue = {}
 
   split(str, '\n').forEach(line => {
