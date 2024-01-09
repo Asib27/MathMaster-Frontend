@@ -44,9 +44,10 @@ const fullDefs = [
   }
 ]
 
-export async function getDefinitions () {
+export async function getDefinitions (query) {
   await fakeNetwork()
-  return defs
+  if (!query) return defs
+  else return defs.filter((def) => def.name.toLowerCase().includes(query))
 }
 
 export async function getDefinition (definitionId) {

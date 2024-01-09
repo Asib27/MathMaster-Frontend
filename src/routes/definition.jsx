@@ -13,7 +13,7 @@ export default function Definition () {
   return (
     <div className='m-10'>
       <div className='text-2xl'>{def.name}</div>
-      <MDXViewer data={def.content} className='my-10 mr-10 text-justify' />
+      <MDXViewer data={def.content} className='my-10 mr-20 text-justify' />
     </div>
   )
 }

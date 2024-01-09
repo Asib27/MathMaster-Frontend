@@ -1,14 +1,17 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 
 export default function Root () {
+  const location = useLocation()
+  console.log(location)
   return (
-    <>
+    <div className='flex flex-col min-h-screen'>
       <header className='w-full flex items-center justify-between bg-zinc-700 text-white p-2'>
         <div className='flex items-center gap-6'>
           <Link to='/' className='text-2xl'>MathMaster</Link>
           <Link to='home'> Home</Link>
           <Link to='courses'> Courses </Link>
-          <a href='/#features'> Features </a>
+          {location.pathname === '/' && <a href='/#features'> Features </a>}
+          <Link to='definitions'>Definitions</Link>
         </div>
         <div className='flex gap-6 pr-3'>
           <Link to='login'> Login</Link>
@@ -18,7 +21,7 @@ export default function Root () {
       <div>
         <Outlet />
       </div>
-      <footer className='w-full pt-4 text-sm pb-10 bg-black text-white text-center flex flex-col items-center'>
+      <footer className='w-full pt-4 text-sm pb-10 bg-black text-white text-center flex flex-col items-center flex-grow'>
         <span className=' text-gray-500 text-center dark:text-gray-400'> &copy; 2023 <Link to='/' className='hover:underline'>MathMaster</Link>. All Rights Reserved.
         </span>
         <div className='text-gray-500 mt-2'>
@@ -63,6 +66,6 @@ export default function Root () {
 
         </div>
       </footer>
-    </>
+    </div>
   )
 }
