@@ -21,7 +21,6 @@ explanation : demo $x$
 hint: a simple hint
 `
 
-
 const quiz4 = `type : short_question
 question : For what value of parameter $m$ does the line intersect the point? abc
 correct : abc

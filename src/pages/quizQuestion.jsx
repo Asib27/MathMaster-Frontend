@@ -47,7 +47,6 @@ const QuizQuestion = ({
             answerUpdateCallback('wrong')
             setShow('explanation')
           }
-
         }}
       >
         <Form>
@@ -85,7 +84,7 @@ const QuizQuestion = ({
               <div className=''>
                 <button
                   className={
-                    'border bg-zinc-900 text-white inline px-4 py-2 rounded-full cursor-pointer mr-8' + 
+                    'border bg-zinc-900 text-white inline px-4 py-2 rounded-full cursor-pointer mr-8' +
                     'disabled:bg-green-700 disabled:cursor-not-allowed'
                   }
                   type='submit'

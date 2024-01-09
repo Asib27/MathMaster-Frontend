@@ -59,16 +59,14 @@ export default function Quizes () {
             onClick={() => setCurQuiz(curQuiz + 1)}
           >
             Next Question
-          </button>
-        }
+          </button>}
 
-        {curQuiz >= noQuiz-1 &&
+        {curQuiz >= noQuiz - 1 &&
           <button
             className='h-14 w-32 rounded-lg text-white bg-blue-700'
           >
             Finish Quiz
-          </button>
-        }
+          </button>}
       </div>
       <div>
         <QuizQuestion key={curQuiz} questionStr={quizes[curQuiz].quiz} answerUpdateCallback={updateAnswer} />
