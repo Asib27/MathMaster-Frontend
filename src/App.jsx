@@ -11,6 +11,7 @@ import Home, { loader as homeLoader } from './routes/home'
 import Login, { action as loginAction } from './routes/login'
 import Signup, { action as signupAction } from './routes/signup'
 import Landing from './routes/landing'
+import Definitions, { loader as definitionsLoader } from './routes/definitions'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
         path: 'signup',
         element: <Signup />,
         action: signupAction
+      },
+      {
+        path: 'definitions',
+        element: <Definitions />,
+        loader: definitionsLoader
       },
       {
         path: 'courses',
