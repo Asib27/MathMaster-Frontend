@@ -10,6 +10,7 @@ import CourseOutline, { loader as courseOutlineLoader, action as courseOutlineAc
 import Home, { loader as homeLoader } from './routes/home'
 import Login, { action as loginAction } from './routes/login'
 import Signup, { action as signupAction } from './routes/signup'
+import Landing from './routes/landing'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        index: true,
+        element: <Landing />
+      },
       {
         path: 'home',
         element: <Home />,
