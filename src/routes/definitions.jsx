@@ -11,7 +11,7 @@ export default function Definitions () {
   const { defs } = useLoaderData()
 
   return (
-    <div className='grid grid-cols-[30%_75%] m-10'>
+    <div className='grid grid-cols-[40%_60%] m-10'>
       <div className='flex flex-col'>
         {defs.map((def, idx) => {
           return <Link to={`/definitions/${def.id}`} key={idx}>{def.name}</Link>

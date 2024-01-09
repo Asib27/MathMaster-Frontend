@@ -12,6 +12,7 @@ import Definition from './mathRender/Definition'
 import { parse } from '../services/parser'
 import { Link } from 'react-router-dom'
 import ProblemContainer from './mathRender/ProblemContainer'
+import Latex from './mathRender/Latex'
 
 // const components = {
 //   Test,
@@ -23,39 +24,41 @@ import ProblemContainer from './mathRender/ProblemContainer'
 //   ShortAnswer,
 // };
 
-const MDXViewer = ({ data }) => {
+const MDXViewer = ({ data, className }) => {
   return (
-    <div className='relative'>
-      <Markdown
-        components={{
-          code ({ inline, className, children, ...props }) {
-            if (inline) return <code {...props}>{children}</code>
-            const value = String(children).replace(/\n$/, '')
-            const parsedValue = parse(value)
+    <div className={className}>
+      <Latex>
+        <Markdown
+          components={{
+            code ({ inline, className, children, ...props }) {
+              if (inline) return <code {...props}>{children}</code>
+              const value = String(children).replace(/\n$/, '')
+              const parsedValue = parse(value)
 
-            if (className === 'language-callout') {
+              if (className === 'language-callout') {
+                return (
+                  <Callout>{parsedValue}</Callout>
+                )
+              } else if (className === 'language-definition') {
+                return (
+                  <Definition>{parsedValue}</Definition>
+                )
+              } else if (className === 'language-question') {
+                console.log(parsedValue)
+                return <ProblemContainer {...parsedValue} />
+              }
+
               return (
-                <Callout>{parsedValue}</Callout>
+                <b>Unknown command</b>
               )
-            } else if (className === 'language-definition') {
-              return (
-                <Definition>{parsedValue}</Definition>
-              )
-            } else if (className === 'language-question') {
-              console.log(parsedValue)
-              return <ProblemContainer {...parsedValue} />
+            },
+            a ({ href, children }) {
+              return <Link className='border-dashed border-b-2 border-blue-600' to={href}>{children}</Link>
             }
-
-            return (
-              <b>Unknown command</b>
-            )
-          },
-          a ({ href, children }) {
-            return <Link className='border-dashed border-b-2 border-blue-600' to={href}>{children}</Link>
-          }
-        }}
-      >{data}
-      </Markdown>
+          }}
+        >{data}
+        </Markdown>
+      </Latex>
     </div>
   )
 }
