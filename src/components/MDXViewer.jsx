@@ -6,7 +6,7 @@ import Callout from './mathRender/Callout'
 // import Test from './mathRender/Test'
 // import Graph from './mathRender/Graph'
 
-import { parse } from '../services/parser'
+import { parse, parseEquation } from '../services/parser'
 import ProblemContainer from './mathRender/ProblemContainer'
 import Latex from './mathRender/Latex'
 import DefinitionDisplay from './mathRender/DefinitionDisplay'
@@ -27,8 +27,12 @@ const MDXViewer = ({ data, className }) => {
                   <Callout>{parsedValue}</Callout>
                 )
               } else if (className === 'language-question') {
-                console.log(parsedValue)
                 return <ProblemContainer {...parsedValue} />
+              } else if (className === 'language-graph') {
+                const equations = Object.keys(parsedValue).map((key) => {
+                  return parseEquation(parsedValue[key])
+                })
+                console.log(equations)
               }
 
               return (
