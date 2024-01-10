@@ -5,28 +5,15 @@ import Markdown from 'react-markdown'
 import Callout from './mathRender/Callout'
 // import Test from './mathRender/Test'
 // import Graph from './mathRender/Graph'
-// import Highlight from './mathRender/Highlight'
-import Definition from './mathRender/Definition'
-// import ShortAnswer from './mathRender/ShortAnswer'
 
 import { parse } from '../services/parser'
-import { Link } from 'react-router-dom'
 import ProblemContainer from './mathRender/ProblemContainer'
 import Latex from './mathRender/Latex'
-
-// const components = {
-//   Test,
-//   Graph,
-//   Highlight,
-//   Callout,
-//   Definition,
-//   Example,
-//   ShortAnswer,
-// };
+import DefinitionDisplay from './mathRender/DefinitionDisplay'
 
 const MDXViewer = ({ data, className }) => {
   return (
-    <div className={className}>
+    <div className={className + ' text-justify'}>
       <Latex>
         <Markdown
           components={{
@@ -39,10 +26,6 @@ const MDXViewer = ({ data, className }) => {
                 return (
                   <Callout>{parsedValue}</Callout>
                 )
-              } else if (className === 'language-definition') {
-                return (
-                  <Definition>{parsedValue}</Definition>
-                )
               } else if (className === 'language-question') {
                 console.log(parsedValue)
                 return <ProblemContainer {...parsedValue} />
@@ -53,7 +36,7 @@ const MDXViewer = ({ data, className }) => {
               )
             },
             a ({ href, children }) {
-              return <Link className='border-dashed border-b-2 border-blue-600' to={href}>{children}</Link>
+              return <DefinitionDisplay href={href} text={children} />
             }
           }}
         >{data}
