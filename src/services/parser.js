@@ -57,3 +57,12 @@ export function getAllPointFromEquaitons (equations) {
 
   return points
 }
+
+export function getExplicitEquation (equation) {
+  const [left, right, err] = equation.split('=').map(eq => eq.trim())
+  if (err || !left || !right) console.error('Invalid equation ' + equation)
+
+  if (left === 'y' || left === 'x') {
+    return { left, right }
+  }
+}

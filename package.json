@@ -12,6 +12,7 @@
   "dependencies": {
     "formik": "^2.4.5",
     "localforage": "^1.10.0",
+    "mathjs": "^12.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
