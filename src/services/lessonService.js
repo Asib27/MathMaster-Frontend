@@ -399,6 +399,7 @@ text :  I am a **callout** $a_2$
 \n\`\`\`graph
 1 : plot, red, y = ax^2+bx+c, -2 < a < 2, -2 < b < 2, 0 < c < 2
 2 : points, blue, (1 1), (2 1)
+3 : points, red, (2 3), (-1 0)
 \`\`\`
 
 

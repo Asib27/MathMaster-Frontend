@@ -10,6 +10,7 @@ import { parse, parseEquation } from '../services/parser'
 import ProblemContainer from './mathRender/ProblemContainer'
 import Latex from './mathRender/Latex'
 import DefinitionDisplay from './mathRender/DefinitionDisplay'
+import Graph from './mathRender/Graph'
 
 const MDXViewer = ({ data, className }) => {
   return (
@@ -32,7 +33,7 @@ const MDXViewer = ({ data, className }) => {
                 const equations = Object.keys(parsedValue).map((key) => {
                   return parseEquation(parsedValue[key])
                 })
-                console.log(equations)
+                return <Graph equations={equations} />
               }
 
               return (

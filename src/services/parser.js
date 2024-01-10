@@ -17,8 +17,6 @@ export function parse (str) {
 }
 
 export function parseEquation (equation) {
-  console.log(equation)
-
   const splited = equation.split(',').map(s => s.trim())
 
   const parsed = {
@@ -46,4 +44,16 @@ export function parseEquation (equation) {
   }
 
   return parsed
+}
+
+export function getAllPointFromEquaitons (equations) {
+  const points = []
+  equations.filter(eq => eq.type === 'points').forEach(equation => {
+    const color = equation.color
+    equation.points.forEach(point => {
+      points.push({ ...point, color })
+    })
+  })
+
+  return points
 }
