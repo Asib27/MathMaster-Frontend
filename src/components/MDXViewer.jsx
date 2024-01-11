@@ -30,10 +30,10 @@ const MDXViewer = ({ data, className }) => {
               } else if (className === 'language-question') {
                 return <ProblemContainer {...parsedValue} />
               } else if (className === 'language-graph') {
-                const equations = Object.keys(parsedValue).map((key) => {
+                const equations = Object.keys(parsedValue).filter(key => /^\+?(0|[1-9]\d*)$/.test(key.trim())).map((key) => {
                   return parseEquation(parsedValue[key])
                 })
-                return <Graph equations={equations} />
+                return <Graph equations={equations} view={parsedValue.view} className='m-4'/>
               }
 
               return (

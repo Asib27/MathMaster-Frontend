@@ -66,3 +66,35 @@ export function getExplicitEquation (equation) {
     return { left, right }
   }
 }
+
+export function getAllParams (equations) {
+  const variables = {}
+  const range = {}
+
+  equations.filter(eq => eq.type === 'plot').forEach(eq => {
+    eq.range.forEach( param => {
+      variables[param.variable] = 0
+
+      let interval = (param.high - param.low) / 5
+      interval = Math.round(interval)
+      range[param.variable] = { low: param.low, high: param.high, interval}
+    })
+  })
+
+  return { variables, range }
+}
+
+export function parseViewParam( view) {
+  if(!view) return null
+
+  const [x, y] = view.split(',')
+  const [lowX, , highX] = x.split('<').map( s => s.trim())
+  const [lowY, , highY] = y.split('<').map( s => s.trim())
+  const intervalX = Math.round(( highX - lowX) / 7)
+  const intervalY = Math.round(( highY - lowY) / 7)
+
+  return {
+    x: { low: lowX, high: highX, interval: intervalX},
+    y: { low: lowY, high: highY, interval: intervalY}
+  }
+}

@@ -2,31 +2,45 @@
 import { Mafs, Coordinates, Plot, Point, Text, MovablePoint } from 'mafs'
 
 // import Latex from './Latex'
-import { getAllPointFromEquaitons, getExplicitEquation } from '../../services/parser'
+import { getAllParams, getAllPointFromEquaitons, getExplicitEquation, parseViewParam } from '../../services/parser'
 import * as math from 'mathjs'
 import { useState } from 'react'
 // const INTERPOLATION_SPEED = 1e6
 
 const Graph = ({
-  equations
+  equations,
+  view,
+  className
 }) => {
   const points = getAllPointFromEquaitons(equations)
-  const [params, setParams] = useState({
-    a: 1,
-    b: 2,
-    c: 1
-  })
+  const {variables, range} = getAllParams(equations)
+  const [params, setParams] = useState(variables)
+
+  const viewBox = parseViewParam(view)
+  console.log(viewBox)
 
   const width = 300
   const height = 300
 
   return (
-    <div className='flex gap-10 items-center justify-center'>
+    <div className={className + ' flex gap-10 items-center justify-center'}>
       <Mafs
         height={height}
         width={width}
+        viewBox={{
+          x: [+viewBox.x.low, +viewBox.x.high],
+          y: [+viewBox.y.low, +viewBox.y.high],
+        }}
+        preserveAspectRatio={false}
       >
-        <Coordinates.Cartesian />
+        <Coordinates.Cartesian
+          xAxis={{
+            lines: +viewBox.x.interval
+          }}
+          yAxis={{
+            lines: +viewBox.y.interval
+          }}
+        />
         {points.map((point, idx) => {
           return <Point key={idx} {...point} />
         })}
@@ -51,14 +65,16 @@ const Graph = ({
 
       <div>
         {Object.keys(params).map(key => {
+          const {high, low, interval} = range[key]
           const point = [params[key], 0]
+
           return (
             <div key={key} className='  '>
               <Mafs
                 height='80'
                 width={width}
                 viewBox={{
-                  x: [-3, 3],
+                  x: [+low, +high],
                   y: [-2, 1],
                   padding: 0.5
                 }}
@@ -69,7 +85,7 @@ const Graph = ({
                 <Coordinates.Cartesian
                   xAxis={{
                     lines: false,
-                    labels: (n) => n
+                    labels: (n) => n % interval === 0 ? n : ''
                   }}
                   yAxis={{
                     axis: false,
@@ -82,7 +98,8 @@ const Graph = ({
                   onMove={([x, y]) => {
                     const toSet = { ...params }
                     toSet[key] = x
-                    setParams({ ...toSet })
+                    if(toSet[key] <= range[key].high && toSet[key] >= range[key].low)
+                      setParams({ ...toSet })
                   }}
                   color='blue'
                 />
