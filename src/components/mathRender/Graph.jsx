@@ -13,7 +13,7 @@ const Graph = ({
   className
 }) => {
   const points = getAllPointFromEquaitons(equations)
-  const {variables, range} = getAllParams(equations)
+  const { variables, range } = getAllParams(equations)
   const [params, setParams] = useState(variables)
 
   const viewBox = parseViewParam(view)
@@ -29,7 +29,7 @@ const Graph = ({
         width={width}
         viewBox={{
           x: [+viewBox.x.low, +viewBox.x.high],
-          y: [+viewBox.y.low, +viewBox.y.high],
+          y: [+viewBox.y.low, +viewBox.y.high]
         }}
         preserveAspectRatio={false}
       >
@@ -65,7 +65,7 @@ const Graph = ({
 
       <div>
         {Object.keys(params).map(key => {
-          const {high, low, interval} = range[key]
+          const { high, low, interval } = range[key]
           const point = [params[key], 0]
 
           return (
@@ -98,8 +98,7 @@ const Graph = ({
                   onMove={([x, y]) => {
                     const toSet = { ...params }
                     toSet[key] = x
-                    if(toSet[key] <= range[key].high && toSet[key] >= range[key].low)
-                      setParams({ ...toSet })
+                    if (toSet[key] <= range[key].high && toSet[key] >= range[key].low) { setParams({ ...toSet }) }
                   }}
                   color='blue'
                 />

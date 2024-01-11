@@ -27,10 +27,11 @@ export function parseEquation (equation) {
     parsed.equation = splited[2]
     parsed.range = []
     for (let i = 3; i < splited.length; i++) {
-      const [low, variable, high, err] = splited[i].split('<').map(s => s.trim())
+      const [low, variableInitial, high, err] = splited[i].split('<').map(s => s.trim())
+      const [variable, initial] = variableInitial.split('=').map(s => s.trim())
 
       if (err || !low || !high || !variable) console.error('Invalid format: should be in low < variable < high format')
-      parsed.range.push({ low, variable, high })
+      parsed.range.push({ low, variable, high, initial })
     }
   } else if (splited[0] === 'points') {
     parsed.points = []
@@ -72,29 +73,29 @@ export function getAllParams (equations) {
   const range = {}
 
   equations.filter(eq => eq.type === 'plot').forEach(eq => {
-    eq.range.forEach( param => {
-      variables[param.variable] = 0
+    eq.range.forEach(param => {
+      variables[param.variable] = param.initial
 
       let interval = (param.high - param.low) / 5
       interval = Math.round(interval)
-      range[param.variable] = { low: param.low, high: param.high, interval}
+      range[param.variable] = { low: param.low, high: param.high, interval }
     })
   })
 
   return { variables, range }
 }
 
-export function parseViewParam( view) {
-  if(!view) return null
+export function parseViewParam (view) {
+  if (!view) return null
 
   const [x, y] = view.split(',')
-  const [lowX, , highX] = x.split('<').map( s => s.trim())
-  const [lowY, , highY] = y.split('<').map( s => s.trim())
-  const intervalX = Math.round(( highX - lowX) / 7)
-  const intervalY = Math.round(( highY - lowY) / 7)
+  const [lowX, , highX] = x.split('<').map(s => s.trim())
+  const [lowY, , highY] = y.split('<').map(s => s.trim())
+  const intervalX = Math.round((highX - lowX) / 7)
+  const intervalY = Math.round((highY - lowY) / 7)
 
   return {
-    x: { low: lowX, high: highX, interval: intervalX},
-    y: { low: lowY, high: highY, interval: intervalY}
+    x: { low: lowX, high: highX, interval: intervalX },
+    y: { low: lowY, high: highY, interval: intervalY }
   }
 }

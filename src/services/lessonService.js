@@ -397,8 +397,8 @@ text :  I am a **callout** $a_2$
 \`\`\`
 
 \n\`\`\`graph
-1 : plot, red, y = a*x^2+b*x+c, -2 < a < 2, -2 < b < 2, -10 < c < 10
-2 : plot, blue, x = d, -2 < d < 2  
+1 : plot, red, y = a*x^2+b*x+c, -2 < a=2 < 2, -2 < b=1 < 2, -10 < c=4 < 10
+2 : plot, blue, x = d, -10 < d=2 < 10  
 view : -20 < x < 20, -10 < y < 10
 \`\`\`
 

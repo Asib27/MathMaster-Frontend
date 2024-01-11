@@ -33,7 +33,7 @@ const MDXViewer = ({ data, className }) => {
                 const equations = Object.keys(parsedValue).filter(key => /^\+?(0|[1-9]\d*)$/.test(key.trim())).map((key) => {
                   return parseEquation(parsedValue[key])
                 })
-                return <Graph equations={equations} view={parsedValue.view} className='m-4'/>
+                return <Graph equations={equations} view={parsedValue.view} className='m-4' />
               }
 
               return (
