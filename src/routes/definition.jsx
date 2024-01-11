@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom'
-import { getDefinition } from '../services/definitionService,js'
+import { getDefinition } from '../services/definitionService.js'
 import MDXViewer from '../components/MDXViewer'
 
 export async function loader ({ params }) {

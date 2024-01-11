@@ -1,10 +1,10 @@
 // import { useEffect, useState } from 'react'
-import { Mafs, Coordinates, Plot, Theme, Point, Text, MovablePoint, vec, Circle, useMovablePoint } from 'mafs'
+import { Mafs, Coordinates, Plot, Point, Text, MovablePoint } from 'mafs'
 
 // import Latex from './Latex'
 import { getAllPointFromEquaitons, getExplicitEquation } from '../../services/parser'
 import * as math from 'mathjs'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 // const INTERPOLATION_SPEED = 1e6
 
 const Graph = ({
@@ -16,13 +16,16 @@ const Graph = ({
     b: 2,
     c: 1
   })
-  const sep = useMovablePoint([1, 0], {
-    constrain: 'horizontal'
-  })
+
+  const width = 300
+  const height = 300
 
   return (
-    <div>
-      <Mafs className='touch-none'>
+    <div className='flex gap-10 items-center justify-center'>
+      <Mafs
+        height={height}
+        width={width}
+      >
         <Coordinates.Cartesian />
         {points.map((point, idx) => {
           return <Point key={idx} {...point} />
@@ -34,7 +37,7 @@ const Graph = ({
 
           if (left === 'x') {
             const evalFn = (y) => expr.evaluate({ ...params, y })
-            return <Plot.OfY key={idx} x={evalFn} color={eq.color}>Equation x</Plot.OfY>
+            return <Plot.OfY key={idx} x={evalFn} color={eq.color} />
           } else if (left === 'y') {
             const evalFn = (x) => expr.evaluate({ ...params, x })
             return <Plot.OfX key={idx} y={evalFn} color={eq.color} />
@@ -46,28 +49,49 @@ const Graph = ({
         <Point x='0' y='0' />
       </Mafs>
 
-      {Object.keys(params).map(key => {
-        const point = [params[key], 0]
-        return (
-          <div key={key} className='  '>
-            <Mafs
-              height='40' viewBox={{
-                x: [-19, 10],
-                y: [-0.25, 0.25],
-                padding: 0
-              }}
-            >
-              <MovablePoint
-                point={point}
-                onMove={([x, y]) => {
-                  setParams({ ...params, c: x })
+      <div>
+        {Object.keys(params).map(key => {
+          const point = [params[key], 0]
+          return (
+            <div key={key} className='  '>
+              <Mafs
+                height='80'
+                width={width}
+                viewBox={{
+                  x: [-3, 3],
+                  y: [-2, 1],
+                  padding: 0.5
                 }}
-                color='blue'
-              />
-            </Mafs>
-          </div>
-        )
-      })}
+                preserveAspectRatio={false}
+                pan={false}
+                zoom={false}
+              >
+                <Coordinates.Cartesian
+                  xAxis={{
+                    lines: false,
+                    labels: (n) => n
+                  }}
+                  yAxis={{
+                    axis: false,
+                    lines: false,
+                    labels: (n) => ''
+                  }}
+                />
+                <MovablePoint
+                  point={point}
+                  onMove={([x, y]) => {
+                    const toSet = { ...params }
+                    toSet[key] = x
+                    setParams({ ...toSet })
+                  }}
+                  color='blue'
+                />
+                <Text x={0} y={-1.5} size={15}> {key} </Text>
+              </Mafs>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

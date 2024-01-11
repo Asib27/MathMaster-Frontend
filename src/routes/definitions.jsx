@@ -1,5 +1,5 @@
 import { Form, NavLink, Outlet, useLoaderData } from 'react-router-dom'
-import { getDefinitions } from '../services/definitionService,js'
+import { getDefinitions } from '../services/definitionService.js'
 import { useEffect } from 'react'
 
 export async function loader ({ params, request }) {
