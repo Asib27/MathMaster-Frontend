@@ -1,7 +1,7 @@
 import Latex from './Latex'
 import { useEffect, useState } from 'react'
 import Markdown from 'react-markdown'
-import { getDefinition } from '../../services/definitionService,js'
+import { getDefinition } from '../../services/definitionService.js'
 import { Link } from 'react-router-dom'
 import LoadingIndicator from '../svgs/loading'
 

@@ -1,7 +1,16 @@
+@import "mafs/core.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.MafsView {
+  --mafs-bg: white;
+  --mafs-fg: black;
+
+  --mafs-line-color: #555;
+  --grid-line-subdivision-color: #222;
+  
+}
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
