@@ -94,7 +94,7 @@ const ProblemContainer = ({
             )}
 
             {show === 'explanation' && (
-              <div className='mt-8 ml-2'>
+              <div className='mt-8 ml-2 text-wrap'>
                 <Latex><Markdown>{explanation}</Markdown></Latex>
               </div>
             )}

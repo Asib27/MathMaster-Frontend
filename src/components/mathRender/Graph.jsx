@@ -17,7 +17,6 @@ const Graph = ({
   const [params, setParams] = useState(variables)
 
   const viewBox = parseViewParam(view)
-  console.log(viewBox)
 
   const width = 300
   const height = 300
@@ -102,7 +101,7 @@ const Graph = ({
                   }}
                   color='blue'
                 />
-                <Text x={0} y={-1.5} size={15}> {key} </Text>
+                <Text x={((+low) + (+high)) / 2} y={-1.5} size={15}> {key} </Text>
               </Mafs>
             </div>
           )

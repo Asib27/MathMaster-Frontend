@@ -2,7 +2,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 
 export default function Root () {
   const location = useLocation()
-  console.log(location)
+
   return (
     <div className='flex flex-col min-h-screen'>
       <header className='w-full flex items-center justify-between bg-zinc-700 text-white p-2'>
