@@ -30,7 +30,7 @@ The graph of a quadratic function is a **parabola**, which is a type of two-dime
 A quadratic function can be written in the form $f(x) = ax^2 + bx + c $, where a, b, and c are all non-zero values. A quadratic function can be identified if the highest exponent of the function is **2** 
 `
 
-const def3 = "The slope of a line is the ratio between the change of and the change of . It describes the steepness of a line."
+const def3 = 'The slope of a line is the ratio between the change of and the change of . It describes the steepness of a line.'
 
 const fullDefs = [
   {
