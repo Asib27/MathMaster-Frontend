@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom'
 import { getLesson } from '../services/lessonService'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import EditTitleForm from '../components/editing/EditTitkeForm'
 import DoneIconSVG from '../components/svgs/doneIconSVG'
 import Markdown from 'react-markdown'
@@ -14,7 +14,16 @@ export async function loader ({ params }) {
 function TextEditor ({ lesson }) {
   const [text, setText] = useState('')
   const [inPreview, setInPreview] = useState(false)
-  const textareaRef = useRef(null);
+  const textareaRef = useRef(null)
+  const [cursor, setCursor] = useState({
+    start: 0,
+    end: 0
+  })
+
+  useEffect(() => {
+    textareaRef.current.setSelectionRange(cursor.start, cursor.end)
+    textareaRef.current.focus()
+  }, [cursor])
 
   return (
     <form>
@@ -40,20 +49,50 @@ function TextEditor ({ lesson }) {
                     type='button' 
                     className='p-2  text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
                     onClick={() => {
-                      textareaRef.current.focus()
-                      setText(text + '****')
+                      if (textareaRef.current.selectionStart !== textareaRef.current.selectionEnd) {
+                        const start = textareaRef.current.selectionStart
+                        const end = textareaRef.current.selectionEnd
+
+                        const newText = text.substring(0, start) + '**' + text.substring(start, end) + '**' + text.substring(end)
+                        setText(newText)
+                        setCursor({
+                          start: start + 2,
+                          end: end + 2
+                        })
+                      } else {
+                        setText(text + '****')
+                        setCursor({
+                          start: textareaRef.current.textLength + 2,
+                          end: textareaRef.current.textLength + 2
+                        })
+                      }
                     }}
                   >
                     <p className='font-bold text-xl'>B</p>
                     <span className='sr-only'>Bold</span>
                   </button>
 
-                  <button 
+                  <button
                     type='button' 
                     className='p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
                     onClick={() => {
-                      textareaRef.current.focus()
-                      setText(text + '**')
+                      if (textareaRef.current.selectionStart !== textareaRef.current.selectionEnd) {
+                        const start = textareaRef.current.selectionStart
+                        const end = textareaRef.current.selectionEnd
+
+                        const newText = text.substring(0, start) + '*' + text.substring(start, end) + '*' + text.substring(end)
+                        setText(newText)
+                        setCursor({
+                          start: start + 2,
+                          end: end + 2
+                        })
+                      } else {
+                        setText(text + '**')
+                        setCursor({
+                          start: textareaRef.current.textLength + 1,
+                          end: textareaRef.current.textLength + 1
+                        })
+                      }
                     }}
                   >
                     <p className='italic font-serif text-2xl'>I</p>
@@ -64,8 +103,8 @@ function TextEditor ({ lesson }) {
                     type='button'
                     className='p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
                     onClick={() => {
-                      textareaRef.current.focus()
                       setText(text + '## ')
+                      textareaRef.current.focus()
                     }}
                   >
                     <p className='font-extrabold text-xl'>H</p>
