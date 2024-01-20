@@ -16,6 +16,46 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
     textareaRef.current.focus()
   }, [cursor])
 
+  const italicText = () => {
+    const start = textareaRef.current.selectionStart
+    const end = textareaRef.current.selectionEnd
+    if (start !== end) {
+      const newText = text.substring(0, start) + '*' + text.substring(start, end) + '*' + text.substring(end)
+      setText(newText)
+      setCursor({
+        start: start + 1,
+        end: end + 1
+      })
+    } else {
+      const newText = text.substring(0, start) + '**' + text.substring(end)
+      setText(newText)
+      setCursor({
+        start: start + 1,
+        end: start + 1
+      })
+    }
+  }
+
+  const boldText = () => {
+    const start = textareaRef.current.selectionStart
+    const end = textareaRef.current.selectionEnd
+    if (start !== end) {
+      const newText = text.substring(0, start) + '**' + text.substring(start, end) + '**' + text.substring(end)
+      setText(newText)
+      setCursor({
+        start: start + 2,
+        end: end + 2
+      })
+    } else {
+      const newText = text.substring(0, start) + '****' + text.substring(end)
+      setText(newText)
+      setCursor({
+        start: start + 2,
+        end: start + 2
+      })
+    }
+  }
+
   return (
     <form>
       <div className='w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
@@ -38,25 +78,7 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
                 <button
                   type='button'
                   className='p-2  text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
-                  onClick={() => {
-                    const start = textareaRef.current.selectionStart
-                    const end = textareaRef.current.selectionEnd
-                    if (start !== end) {
-                      const newText = text.substring(0, start) + '**' + text.substring(start, end) + '**' + text.substring(end)
-                      setText(newText)
-                      setCursor({
-                        start: start + 2,
-                        end: end + 2
-                      })
-                    } else {
-                      const newText = text.substring(0, start) + '****' + text.substring(end)
-                      setText(newText)
-                      setCursor({
-                        start: start + 2,
-                        end: start + 2
-                      })
-                    }
-                  }}
+                  onClick={() => boldText()}
                 >
                   <p className='font-bold text-xl'>B</p>
                   <span className='sr-only'>Bold</span>
@@ -65,25 +87,7 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
                 <button
                   type='button'
                   className='p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
-                  onClick={() => {
-                    const start = textareaRef.current.selectionStart
-                    const end = textareaRef.current.selectionEnd
-                    if (start !== end) {
-                      const newText = text.substring(0, start) + '*' + text.substring(start, end) + '*' + text.substring(end)
-                      setText(newText)
-                      setCursor({
-                        start: start + 2,
-                        end: end + 2
-                      })
-                    } else {
-                      const newText = text.substring(0, start) + '**' + text.substring(end)
-                      setText(newText)
-                      setCursor({
-                        start: start + 1,
-                        end: start + 1
-                      })
-                    }
-                  }}
+                  onClick={() => italicText()}
                 >
                   <p className='italic font-serif text-2xl'>I</p>
                   <span className='sr-only'>Italic</span>
@@ -141,7 +145,21 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
             : (
               <div className='px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800'>
                 <label htmlFor='editor' className='sr-only'>Write text</label>
-                <textarea id='editor' ref={textareaRef} rows='8' className='block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:outline-none dark:text-white dark:placeholder-gray-400' placeholder='Write an article...' required value={text} onChange={(event) => setText(event.target.value)} />
+                <textarea
+                  id='editor'
+                  ref={textareaRef}
+                  rows='8'
+                  onKeyDown={(event) => {
+                    if (event.ctrlKey && (event.key === 'B' || event.key === 'b')) {
+                      boldText()
+                    } else if (event.ctrlKey && (event.key === 'I' || event.key === 'i')) {
+                      italicText()
+                    } else if (event.ctrlKey && (event.key === 'Enter')) {
+                      setInPreview(!inPreview)
+                    }
+                  }}
+                  className='block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:outline-none dark:text-white dark:placeholder-gray-400' placeholder='Write an article...' required value={text} onChange={(event) => setText(event.target.value)}
+                />
               </div>
               )}
         </div>
