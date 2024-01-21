@@ -2,14 +2,17 @@ const lessonContent = `We have learned the basics of function in the previous le
 A **parameter** A parameter is like a **control knob** for a function. Changing the parameter changes the function in a smooth way.
 Here's an example of a simple [linear]('/definitions/1') function with a parameter $m$ that controls the [slope](/definitions/4)
 
+
 \`\`\`graph
 1: plot, red, y = m*x + 2, -3 < m=0 < 3 
 view: -20 < x < 20, -20 < y < 20
 \`\`\`
 
+
 \`\`\`callout
 text: This is a dummy callout
 \`\`\`
+
 
 \`\`\`graph
 1: plot, red, y = m*x + 2, -5 < m=1 < 5
@@ -27,6 +30,7 @@ explanation : demo $x$
 hint: a simple hint
 \`\`\`
 
+
 \`\`\`graph
 1: plot, red, y = a * x + 4, -4 < a=1 < 4
 2: plot, blue, y = a * x^2, -4 < a=1 < 4
@@ -34,15 +38,15 @@ hint: a simple hint
 view: -20 < x < 20, -20 < y < 20
 \`\`\`
 
-These functions both depend on the parameter $a$ :
 
+These functions both depend on the parameter $a$ :
 $$
 y=ax+4
 $$
-
 $$
 y=ax^2
 $$
+
 
 \`\`\`question
 type : mcq
@@ -52,6 +56,7 @@ correct : 2
 explanation : If a function goes through the point $(-1,2)$, this means that for the input $-1$, the output is $2$. Substitute these values into the first relationship: $$y=a*x+4$$ $$ 2=a(-1)+4 $$ $$\\implies a=2.$$ This means that when $a=2$, the straight line goes through our target point. Then we check whether this parameter value leads the parabola through the target, too: $$ y=ax^2$$ $$ 2=(2)(-1)^2$$ $$ \\implies 2=2 $$
 \`\`\`
 
+
 \`\`\`graph
 1: plot, red, y = b*x + c, -5 < b=0.5 < 5, -5 < c=0.5 < 5
 2: plot, blue, y = a * x ^ 2, -5 < a=0.5 < 5
@@ -60,14 +65,13 @@ view: -20 < x < 20 , -20 < y < 20
 
 
 Here're two functions $-$ one with parameter $a$ and the other with separate parameters $b$ and $c$:
-
 $$
 f(x)=ax^2
 $$
-
 $$
 g(x)=bx+c.
 $$
+
 
 \`\`\`question
 type : mcq
@@ -78,9 +82,11 @@ explanation : Parameter $a$ controls the orientation of the $U$-shaped quadradic
 hint: Parameter $c$ controls the $y$-intercept,or vertical shift, of the graph of $g(x)$. If $c$ is negative, then $g(x)$ can intersect the $y$-axis below $f(x)$ and avoid $f(x)$.
 \`\`\`
 
+
 So far, we've seen that function parameters can control various features of a function like its shape and height.
 
 We've also adjusted these parameters to meet a goal, like creating an intersection.
+
 
 \`\`\`graph
 1: plot, red ,y = sqrt(a*a-(x-0.5)*(x-0.5))+1.5, 0 < a=.5 < 4
@@ -90,10 +96,10 @@ view: -1 < x < 4, -1 < y < 4
 
 
 Adjust the parameter $a$ to complete the circle
-
 $$
 f(x)=\\sqrt{a^2-(x-0.5)^2}+1.5
 $$
+
 
 \`\`\`question
 type: mcq
@@ -103,6 +109,7 @@ correct: The radius of the circle
 explanation: Recall that a circle has equation $x^2+y^2=a^2$, where $a$ is the radius. Solving for $y$, we find the two equations $y=\\pm \\sqrt{a^2 - x^2}.$ The positive solution corresponds to the top of the circle. In this case, our function has also been shifted up and to the right.
 \`\`\`
 
+
 \`\`\`graph
 1: plot, red, y = (x+1.5*a)*(x-2*a)*(x+a)-a, -10 < a=1 < 10
 view: -20 < x < 20 , -20 < y < 20
@@ -110,8 +117,8 @@ view: -20 < x < 20 , -20 < y < 20
 
 
 In the previous example, the parameter $a$ corresponded to a clear geometric feature.
-
 In this example, the meaning of the control isn't nearly as intuitive.
+
 
 \`\`\`graph
 1: plot, red, y = (x-a) ^ 2, -5 < a=.5 < 5
@@ -119,15 +126,15 @@ In this example, the meaning of the control isn't nearly as intuitive.
 view: -5 < x < 5, -5 < y < 5
 \`\`\`
 
-These two functions intersect for many parameter values:
 
+These two functions intersect for many parameter values:
 $$
 y=(x-a)^2
 $$
-
 $$
 y=x^3+a
 $$
+
 
 \`\`\`question
 type : mcq
@@ -139,8 +146,8 @@ explanation: The graph of each function continues indefinitely to the left and r
 
 
 Sometimes the effect of parameters is clear, while sometimes it's quite complicated.
-
 Also, we should be careful when adjusting parameters to consider what's happening outside our field of view.
+
 
 \`\`\`graph
 1: plot, red, y = m*x + c, .5 < m=.1 < 1.5, 1 < c=1 < 20
@@ -149,8 +156,8 @@ view: -10 < x < 25, -3 < y < 40
 \`\`\`
 
 
-Playing with parameters is part of the process of modeling data. Here we use a simple linear model with two parameters: $m$ is the slope and $b$ is the $y$-intercept.
-
+Playing with parameters is part of the process of modeling data. 
+Here we use a simple linear model with two parameters: $m$ is the slope and $b$ is the $y$-intercept.
 This graph shows the average cost of attendance for a $4$-year private college in the United States.
 
 

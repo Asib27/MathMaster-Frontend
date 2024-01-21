@@ -5,13 +5,13 @@ import { Form } from 'react-router-dom'
 import DoneIconSVG from '../svgs/doneIconSVG'
 import * as Yup from 'yup'
 
-export default function EditTitleForm ({ curLesson, setCurLesson }) {
+export default function EditTitleForm ({ lessonTitle, setLessonTitle }) {
   const [isEditingTitle, setIsEditingTitle] = useState(false)
 
   if (!isEditingTitle) {
     return (
       <div className='flex justify-between items-center'>
-        <h2 className='text-3xl p-2'> {curLesson.name}</h2>
+        <h2 className='text-3xl p-2'> {lessonTitle}</h2>
         <div onClick={() => setIsEditingTitle(true)}>
           <EditIconSVG classname='h-5 w-5 cursor-pointer' />
         </div>
@@ -22,7 +22,7 @@ export default function EditTitleForm ({ curLesson, setCurLesson }) {
       <div>
         <Formik
           initialValues={{
-            title: curLesson.name
+            title: lessonTitle
           }}
           validationSchema={Yup.object({
             title: Yup.string()
@@ -30,10 +30,7 @@ export default function EditTitleForm ({ curLesson, setCurLesson }) {
               .max(20, 'Title should be less than 20 characters')
           })}
           onSubmit={(value) => {
-            setCurLesson({
-              ...curLesson,
-              name: value.title
-            })
+            setLessonTitle(value.title)
             setIsEditingTitle(false)
           }}
         >

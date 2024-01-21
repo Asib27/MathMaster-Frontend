@@ -2,9 +2,8 @@ import { useLoaderData } from 'react-router-dom'
 import { getLesson } from '../services/lessonService'
 import { useState } from 'react'
 import EditTitleForm from '../components/editing/EditTitkeForm'
-import Markdown from 'react-markdown'
-import Latex from '../components/mathRender/Latex'
 import { TextEditorForm } from '../components/editing/TextEditorForm'
+import MDXViewer from '../components/MDXViewer'
 
 export async function loader ({ params }) {
   const lesson = await getLesson(params.lessonId)
@@ -12,12 +11,12 @@ export async function loader ({ params }) {
 }
 
 function TextEditor ({ lesson }) {
-  const [text, setText] = useState('')
+  const [text, setText] = useState(lesson)
   const [isViewMode, setIsViewMode] = useState(true)
 
   if (isViewMode) {
     return (
-      <div className='w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
+      <div className='mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
         <div className='flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600'>
           <div className='h-25 flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600'>
             <div className='p-2 flex flex-wrap items-center space-x-1 rtl:space-x-reverse sm:ps-4'>
@@ -40,7 +39,9 @@ function TextEditor ({ lesson }) {
           </div>
         </div>
         <div className='px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800 text-sm'>
-          <Latex><Markdown>{text}</Markdown></Latex>
+          <div className=''>
+            <MDXViewer data={text} />
+          </div>
         </div>
       </div>
     )
@@ -53,13 +54,22 @@ function TextEditor ({ lesson }) {
 
 export default function EditLesson () {
   const { lesson } = useLoaderData()
-  const [curLesson, setCurLesson] = useState(lesson)
-  console.log(curLesson)
+
+  const lessonFragment = lesson.content.split('\n\n\n').filter(t => t !== '')
+  console.log(lessonFragment[7])
+  const [curLesson, setCurLesson] = useState(lessonFragment)
+  const [lessonTitle, setLessonTitle] = useState(lesson.name)
 
   return (
-    <div className='p-10'>
-      <EditTitleForm curLesson={curLesson} setCurLesson={setCurLesson} />
-      <TextEditor />
+    <div className='p-10 flex flex-col gap-2'>
+      <EditTitleForm lessonTitle={lessonTitle} setLessonTitle={setLessonTitle} />
+      {/* <MDXViewer data={lesson.content} /> */}
+      {
+        curLesson.map((text, idx) => {
+          // return <MDXViewer key={idx} data={text} />
+          return <TextEditor key={idx} lesson={text} />
+        })
+      }
     </div>
   )
 }
