@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import DoneIconSVG from '../svgs/doneIconSVG'
-import Markdown from 'react-markdown'
-import Latex from '../mathRender/Latex'
+import MDXViewer from '../MDXViewer'
 
 export function TextEditorForm ({ text, setText, setIsViewMode }) {
   const [inPreview, setInPreview] = useState(false)
@@ -139,7 +138,7 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
           {inPreview
             ? (
               <div className='px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800 text-sm'>
-                <Latex><Markdown>{text}</Markdown></Latex>
+                <MDXViewer data={text} />
               </div>
               )
             : (
