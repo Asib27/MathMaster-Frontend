@@ -123,7 +123,10 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
             type='button'
             data-tooltip-target='tooltip-fullscreen'
             className='p-2 text-gray-500 rounded cursor-pointer sm:ms-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
-            onClick={() => setIsViewMode(true)}
+            onClick={() => {
+              setIsViewMode(true)
+              setText(textareaRef.current.value)
+            }}
           >
             <DoneIconSVG className='h-5 w-5' />
             <span className='sr-only'>Done</span>
@@ -157,7 +160,11 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
                       setInPreview(!inPreview)
                     }
                   }}
-                  className='block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:outline-none dark:text-white dark:placeholder-gray-400' placeholder='Write an article...' required value={text} onChange={(event) => setText(event.target.value)}
+                  className='block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:outline-none dark:text-white dark:placeholder-gray-400' 
+                  placeholder='Write an article...'
+                  required 
+                  defaultValue={text}
+                  onBlur={(event) => setText(event.target.value)}
                 />
               </div>
               )}
