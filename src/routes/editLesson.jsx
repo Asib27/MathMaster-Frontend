@@ -44,16 +44,15 @@ export default function EditLesson () {
   }
 
   const getEditedLesson = () => {
-    return curLesson.map(t => t.lesson).join('\n\n\n')
+    return {
+      id: lesson.id,
+      name: lessonTitle,
+      content: curLesson.map(t => t.lesson).join('\n\n\n')
+    }
   }
 
   const submitLesson = () => {
-    const newLesson = {
-      id: lesson.id,
-      name: lessonTitle,
-      content: getEditedLesson()
-    }
-
+    const newLesson = getEditedLesson()
     editLesson(lesson.id, newLesson)
   }
 
@@ -94,7 +93,7 @@ export default function EditLesson () {
   } else {
     return (
       <div>
-        <Lesson data={getEditedLesson()} />
+        <Lesson lesson={getEditedLesson()} />
         <PreviewAndSubmitButton />
       </div>
     )
