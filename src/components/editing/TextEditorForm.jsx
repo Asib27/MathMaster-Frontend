@@ -4,6 +4,7 @@ import MDXViewer from '../MDXViewer'
 
 export function TextEditorForm ({ text, setText, setIsViewMode }) {
   const [inPreview, setInPreview] = useState(false)
+  const [internalText, setInternalText] = useState(text)
   const textareaRef = useRef(null)
   const [cursor, setCursor] = useState({
     start: text.length,
@@ -20,14 +21,14 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
     const end = textareaRef.current.selectionEnd
     if (start !== end) {
       const newText = text.substring(0, start) + '*' + text.substring(start, end) + '*' + text.substring(end)
-      setText(newText)
+      setInternalText(newText)
       setCursor({
         start: start + 1,
         end: end + 1
       })
     } else {
       const newText = text.substring(0, start) + '**' + text.substring(end)
-      setText(newText)
+      setInternalText(newText)
       setCursor({
         start: start + 1,
         end: start + 1
@@ -40,14 +41,14 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
     const end = textareaRef.current.selectionEnd
     if (start !== end) {
       const newText = text.substring(0, start) + '**' + text.substring(start, end) + '**' + text.substring(end)
-      setText(newText)
+      setInternalText(newText)
       setCursor({
         start: start + 2,
         end: end + 2
       })
     } else {
       const newText = text.substring(0, start) + '****' + text.substring(end)
-      setText(newText)
+      setInternalText(newText)
       setCursor({
         start: start + 2,
         end: start + 2
@@ -56,7 +57,7 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
   }
 
   return (
-    <form>
+    <div>
       <div className='w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
         <div className='flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600'>
           <div className='h-25 flex flex-wrap items-center divide-gray-200 sm:divide-x sm:rtl:divide-x-reverse dark:divide-gray-600'>
@@ -96,7 +97,7 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
                   type='button'
                   className='p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
                   onClick={() => {
-                    setText(text + '## ')
+                    setInternalText(text + '\n## ')
                     textareaRef.current.focus()
                   }}
                 >
@@ -163,13 +164,14 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
                   className='block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:outline-none dark:text-white dark:placeholder-gray-400' 
                   placeholder='Write an article...'
                   required 
-                  defaultValue={text}
+                  value={internalText}
+                  onChange={(event)=> setInternalText(event.target.value)}
                   onBlur={(event) => setText(event.target.value)}
                 />
               </div>
               )}
         </div>
       </div>
-    </form>
+    </div>
   )
 }

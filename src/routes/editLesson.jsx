@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom'
 import { getLesson } from '../services/lessonService'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import EditTitleForm from '../components/editing/EditTitkeForm'
 import { TextEditor } from '../components/editing/TextEditor'
 
@@ -23,13 +23,13 @@ export default function EditLesson () {
   const updateLesson = (idx) => {
     return ({ lesson, remove }) => {
       if (remove) {
-        const newLessons = curLesson.filter((cur, index) => {
-          return idx !== index
+        const newLessons = curLesson.filter((cur) => {
+          return idx !== cur.idx
         })
         setCurLesson(newLessons)
       } else {
-        const newLessons = curLesson.map((cur, index) => {
-          if (idx === index) {
+        const newLessons = curLesson.map((cur) => {
+          if (idx === cur.idx) {
             return {
               lesson,
               idx: cur.idx
@@ -52,7 +52,7 @@ export default function EditLesson () {
       {
         curLesson.map((text, idx) => {
           // return <MDXViewer key={idx} data={text} />
-          return <TextEditor key={text.idx} lesson={text.lesson} updateLesson={updateLesson(idx)} />
+          return <TextEditor key={text.idx} lesson={text.lesson} updateLesson={updateLesson(text.idx)} />
         })
       }
       <div className='flex'>
