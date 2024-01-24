@@ -161,11 +161,11 @@ export function TextEditorForm ({ text, setText, setIsViewMode }) {
                       setInPreview(!inPreview)
                     }
                   }}
-                  className='block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:outline-none dark:text-white dark:placeholder-gray-400' 
+                  className='block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:outline-none dark:text-white dark:placeholder-gray-400'
                   placeholder='Write an article...'
-                  required 
+                  required
                   value={internalText}
-                  onChange={(event)=> setInternalText(event.target.value)}
+                  onChange={(event) => setInternalText(event.target.value)}
                   onBlur={(event) => setText(event.target.value)}
                 />
               </div>

@@ -237,6 +237,14 @@ export async function submitLessonRating (lessonId, rating) {
   }
 }
 
+export async function editLesson (lessonId, lesson) {
+  await fakeNetwork()
+  return {
+    status: 'success',
+    message: 'successful'
+  }
+}
+
 export async function markAsCompleted (lessonId) {
   await fakeNetwork()
   lesson1.isCompleted = !lesson1.isCompleted
