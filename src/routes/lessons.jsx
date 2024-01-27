@@ -1,4 +1,4 @@
-import { Form, Link, redirect, useLoaderData } from 'react-router-dom'
+import { Form, redirect, useLoaderData } from 'react-router-dom'
 import Lesson from '../pages/lesson'
 import { getLesson, markAsCompleted, submitLessonRating } from '../services/lessonService'
 import RatingForm from '../components/ratingForm'

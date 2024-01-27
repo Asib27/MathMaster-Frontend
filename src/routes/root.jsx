@@ -1,7 +1,14 @@
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLoaderData, useLocation } from 'react-router-dom'
+import { isAuthenticated } from '../services/authService'
+
+export async function loader ({ params }) {
+  const authenticated = await isAuthenticated()
+  return { authenticated }
+}
 
 export default function Root () {
   const location = useLocation()
+  const { authenticated } = useLoaderData()
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -13,10 +20,20 @@ export default function Root () {
           {location.pathname === '/' && <a href='/#features'> Features </a>}
           <Link to='definitions'>Definitions</Link>
         </div>
-        <div className='flex gap-6 pr-3'>
-          <Link to='login'> Login</Link>
-          <Link to='signup'> Register</Link>
-        </div>
+        {authenticated
+          ? (
+            <div>
+              <div> Logout
+              </div>
+            </div>
+            )
+
+          : (
+            <div className='flex gap-6 pr-3'>
+              <Link to='login'> Login</Link>
+              <Link to='signup'> Register</Link>
+            </div>
+            )}
       </header>
       <div>
         <Outlet />

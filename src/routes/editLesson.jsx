@@ -1,13 +1,18 @@
-import { useLoaderData } from 'react-router-dom'
+import { redirect, useLoaderData } from 'react-router-dom'
 import { editLesson, getLesson } from '../services/lessonService'
 import { useState } from 'react'
 import EditTitleForm from '../components/editing/EditTitkeForm'
 import { TextEditor } from '../components/editing/TextEditor'
 import Lesson from '../pages/lesson'
+import { getRole } from '../services/authService'
 
 export async function loader ({ params }) {
-  const lesson = await getLesson(params.lessonId)
-  return { lesson }
+  if (getRole() === 'author') {
+    const lesson = await getLesson(params.lessonId)
+    return { lesson }
+  } else {
+    return redirect('/login')
+  }
 }
 
 export default function EditLesson () {
