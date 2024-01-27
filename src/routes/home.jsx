@@ -33,7 +33,7 @@ function Last7Days () {
 export default function Home () {
   const { continueCourse, recommendateCourse, userStats } = useLoaderData()
   const profile = {
-    image: '/src/assets/male_avatar.svg',
+    image: '/male_avatar.svg',
     name: 'Shariful Islam Khan',
     id: 10
   }

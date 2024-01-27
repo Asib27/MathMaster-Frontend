@@ -93,7 +93,7 @@ const courses = [
     type: 'Algebra',
     estimatedTime: '24hours',
     difficulty: 'hard',
-    image: '/src/assets/online-course-icon.svg',
+    image: '/online-course-icon.svg',
     description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc.',
     authors: [
       {
@@ -115,7 +115,7 @@ const courses = [
     name: 'Algebra II',
     type: 'Algebra',
     estimatedTime: '3hours',
-    image: '/src/assets/online-course-icon.svg',
+    image: '/online-course-icon.svg',
     description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc.',
     authors: [
       {
@@ -137,7 +137,7 @@ const courses = [
     name: 'Fractions',
     type: 'Algebra',
     estimatedTime: '4hours',
-    image: '/src/assets/online-course-icon.svg',
+    image: '/online-course-icon.svg',
     description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc.',
     authors: [
       {
@@ -159,7 +159,7 @@ const courses = [
     name: 'Euclidean Geometry',
     type: 'Geometry',
     estimatedTime: '10hours',
-    image: '/src/assets/online-course-icon.svg',
+    image: '/online-course-icon.svg',
     description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc.',
     authors: [
       {
@@ -181,7 +181,7 @@ const courses = [
     name: 'Coordinate Geometry',
     type: 'Geometry',
     estimatedTime: '8hours',
-    image: '/src/assets/online-course-icon.svg',
+    image: '/online-course-icon.svg',
     description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc.',
     authors: [
       {
@@ -203,7 +203,7 @@ const courses = [
     name: 'Basic Counting',
     type: 'Combinatorics and Probability',
     estimatedTime: '9hours',
-    image: '/src/assets/online-course-icon.svg',
+    image: '/online-course-icon.svg',
     description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc.',
     authors: [
       {
@@ -226,7 +226,7 @@ const courses = [
     type: 'Combinatorics and Probability',
     difficulty: 'hard',
     estimatedTime: '1',
-    image: '/src/assets/online-course-icon.svg',
+    image: '/online-course-icon.svg',
     description: 'description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc.',
     authors: [
       {
@@ -251,7 +251,7 @@ const courseOutline = {
   type: 'Algebra',
   difficulty: 'hard',
   estimatedTime: '24',
-  image: '/src/assets/online-course-icon.svg',
+  image: '/online-course-icon.svg',
   description: 'Description1 about the topic Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper, tellus eu efficitur commodo, ante lorem tincidunt nunc, et rutrum leo massa non nunc. Cras ut lacinia nulla, ut luctus sem. Mauris non pretium tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam dignissim, eros non scelerisque commodo, justo nunc molestie mauris, at aliquet ex nibh quis est. Pellentesque porta dignissim enim viverra feugiat. In hac habitasse platea dictumst. Proin tempor nisi orci, quis cursus ipsum porttitor non. Proin tempor finibus quam, lacinia scelerisque dolor blandit ut. Vivamus vitae elementum enim. Aliquam erat volutpat.',
   authors: [
     {
