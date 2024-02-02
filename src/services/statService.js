@@ -150,6 +150,29 @@ export async function getAdminHomeStat () {
   }
 }
 
+export async function getDataForChart (chartName) {
+  await fakeNetwork()
+
+  const data =
+    [
+      { x: '2024-02-03', y: 71 },
+      { x: '2024-02-02', y: 55 },
+      { x: '2024-02-01', y: -5 },
+      { x: '2024-01-31', y: 65 },
+      { x: '2024-01-30', y: 71 },
+      { x: '2024-01-29', y: 68 },
+      { x: '2024-01-28', y: 38 },
+      { x: '2024-01-27', y: 92 },
+      { x: '2024-01-26', y: 54 },
+      { x: '2024-01-25', y: 60 },
+      { x: '2024-01-24', y: 21 },
+      { x: '2024-01-23', y: 49 },
+      { x: '2024-01-22', y: 36 }
+    ]
+
+  return data
+}
+
 async function fakeNetwork () {
   return new Promise(resolve => {
     setTimeout(resolve, Math.random() * 800)
