@@ -21,7 +21,7 @@ export default function AdminLayout () {
         <SideNavLinks name='Calculus' route='stat/calculus' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
         <SideNavLinks name='Users' route='users' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
       </div>
-      <div>
+      <div className='grow'>
         <Outlet />
       </div>
     </div>
