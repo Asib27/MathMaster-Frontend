@@ -14,6 +14,7 @@ import Landing from './routes/landing'
 import Definitions, { loader as definitionsLoader } from './routes/definitions'
 import Definition, { loader as definitionLoader } from './routes/definition'
 import EditLesson, { loader as editLessonLoader } from './routes/editLesson'
+import AdminLayout, { loader as adminLayoutLoader } from './routes/admin/adminLayout'
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,11 @@ const router = createBrowserRouter([
             loader: quizLoader
           }
         ]
+      },
+      {
+        path: 'admin',
+        element: AdminLayout,
+        loader: adminLayoutLoader
       }
     ]
   }

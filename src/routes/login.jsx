@@ -25,7 +25,6 @@ export async function action ({ request, params }) {
 
 export default function Login () {
   const actiondata = useActionData()
-  console.log(actiondata)
 
   return (
     <div className='flex justify-center overflow-x-hidden'>

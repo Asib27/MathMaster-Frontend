@@ -1,29 +1,34 @@
-const auth = {
-  isAuthenticated: false,
-  role: ''
-}
+import { getObjectFromCookie, saveObjectInCookie } from './cookieService'
 
 export async function login (loginInfo) {
   await fakeNetwork()
 
   if (loginInfo.password === 'aaa') {
-    auth.isAuthenticated = true
-    auth.role = 'user'
+    saveObjectInCookie('auth', {
+      isAuthenticated: true,
+      role: 'user'
+    })
 
     return {
       status: 'success',
       message: 'success'
     }
   } else if (loginInfo.password === 'bbb') {
-    auth.isAuthenticated = true
-    auth.role = 'author'
+    saveObjectInCookie('auth', {
+      isAuthenticated: true,
+      role: 'author'
+    })
+
     return {
       status: 'success',
       message: 'success'
     }
   } else if (loginInfo.password === 'ccc') {
-    auth.isAuthenticated = true
-    auth.role = 'moderator'
+    saveObjectInCookie('auth', {
+      isAuthenticated: true,
+      role: 'admin'
+    })
+
     return {
       status: 'success',
       message: 'success'
@@ -48,17 +53,25 @@ export async function signup (signupInfo) {
 export async function getRole () {
   await fakeNetwork()
 
-  return auth.role()
+  const auth = getObjectFromCookie('auth')
+
+  return auth && auth.role
 }
 
 export async function isAuthenticated () {
   await fakeNetwork()
 
-  return auth.isAuthenticated
+  const auth = getObjectFromCookie('auth')
+
+  return auth && auth.isAuthenticated
 }
 
 export async function logout () {
-  auth.isAuthenticated = false
+  saveObjectInCookie('auth', {
+    isAuthenticated: false,
+    role: ''
+  })
+
   return {
     status: 'success',
     message: 'success'
