@@ -1,5 +1,5 @@
-import { Link, Outlet, useLoaderData, useLocation } from 'react-router-dom'
-import { isAuthenticated } from '../services/authService'
+import { Link, Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
+import { isAuthenticated, logout } from '../services/authService'
 
 export async function loader ({ params }) {
   const authenticated = await isAuthenticated()
@@ -8,6 +8,7 @@ export async function loader ({ params }) {
 
 export default function Root () {
   const location = useLocation()
+  const navigate = useNavigate()
   const { authenticated } = useLoaderData()
 
   return (
@@ -23,7 +24,13 @@ export default function Root () {
         {authenticated
           ? (
             <div>
-              <div> Logout
+              <div
+                className='cursor-pointer' onClick={async () => {
+                  await logout()
+                  navigate('/')
+                  console.log('looged out')
+                }}
+              > Logout
               </div>
             </div>
             )

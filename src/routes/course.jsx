@@ -1,7 +1,12 @@
-import { Link, Outlet, useLoaderData } from 'react-router-dom'
+import { Link, Outlet, redirect, useLoaderData } from 'react-router-dom'
 import { getCourse } from '../services/courseService'
+import { isAuthenticated } from '../services/authService'
 
 export async function loader ({ params }) {
+  const auth = await isAuthenticated()
+  if (auth === false) {
+    return redirect('/login')
+  }
   const course = await getCourse(params.courseId)
   return { course }
 }

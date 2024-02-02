@@ -17,6 +17,17 @@ export async function login (loginInfo) {
   } else if (loginInfo.password === 'bbb') {
     auth.isAuthenticated = true
     auth.role = 'author'
+    return {
+      status: 'success',
+      message: 'success'
+    }
+  } else if (loginInfo.password === 'ccc') {
+    auth.isAuthenticated = true
+    auth.role = 'moderator'
+    return {
+      status: 'success',
+      message: 'success'
+    }
   } else {
     return {
       status: 'failed',
@@ -37,7 +48,7 @@ export async function signup (signupInfo) {
 export async function getRole () {
   await fakeNetwork()
 
-  return 'user'
+  return auth.role()
 }
 
 export async function isAuthenticated () {
@@ -47,7 +58,6 @@ export async function isAuthenticated () {
 }
 
 export async function logout () {
-  await fakeNetwork()
   auth.isAuthenticated = false
   return {
     status: 'success',

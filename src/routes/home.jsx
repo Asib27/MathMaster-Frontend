@@ -1,9 +1,15 @@
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link, redirect, useLoaderData } from 'react-router-dom'
 import { getCourses } from '../services/courseService'
 import CourseCard from '../components/courseCard'
 import { getUserStat } from '../services/statService'
+import { isAuthenticated } from '../services/authService'
 
 export async function loader ({ params }) {
+  const auth = await isAuthenticated()
+  if (auth === false) {
+    return redirect('/login')
+  }
+
   const courses = await getCourses()
   const userStat = await getUserStat()
 
