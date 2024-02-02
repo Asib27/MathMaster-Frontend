@@ -139,30 +139,36 @@ function ChartViewer ({ chartName, chartTitle }) {
 }
 
 export default function AdminHome () {
+  const chartidxToName = {
+    0: { chartName: 'newUser', chartTitle: 'New User' },
+    1: { chartName: 'enrollment', chartTitle: 'New Enrolled' },
+    2: { chartName: 'avgLogin', chartTitle: 'Avg Login' }
+  }
+  const [chartIndex, setChartIndex] = useState(0)
   const { stat } = useLoaderData()
 
   return (
     <div className='flex flex-col gap-10 grow'>
       <div className='flex grow h-24 gap-2 items-center bg-zinc-300 rounded-3xl justify-around'>
-        <div className='text-center'>
+        <div className='text-center cursor-pointer' onClick={() => setChartIndex(0)}>
           <p>New User</p>
           <div className='flex flex-row '>
             <p>{`${stat.newUser.count}`}</p>
           </div>
         </div>
 
-        <div className='text-center'>
+        <div className='text-center cursor-pointer' onClick={() => setChartIndex(1)}>
           <p>New Enrolled</p>
           <p>{`${stat.enrollment.count}`}</p>
         </div>
 
-        <div className='text-center'>
+        <div className='text-center cursor-pointer' onClick={() => setChartIndex(2)}>
           <p>Avg Login</p>
           <p>{`${stat.avgLogin.count} `}</p>
         </div>
       </div>
 
-      <ChartViewer chartName='newUser' chartTitle='New User' />
+      <ChartViewer {...chartidxToName[chartIndex]} />
 
       <div className='flex flex-col gap-10'>
         <SideBySideRankViewer
