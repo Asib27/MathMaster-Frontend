@@ -15,11 +15,11 @@ export default function AdminLayout () {
   return (
     <div className='flex '>
       <div className='m-20'>
-        <SideNavLinks name='Home' route='home' className='border-b-2 border-gray-300 text-center text-2xl p-2 w-96 m-3' />
-        <SideNavLinks name='Algebra' route='stat/algebra' className='border-b-2 border-gray-300 text-center text-2xl p-2 w-96 m-3' />
-        <SideNavLinks name='Geometry' route='stat/geometry' className='border-b-2 border-gray-300 text-center text-2xl p-2 w-96 m-3' />
-        <SideNavLinks name='Calculus' route='stat/calculus' className='border-b-2 border-gray-300 text-center text-2xl p-2 w-96 m-3' />
-        <SideNavLinks name='Users' route='users' className='border-b-2 border-gray-300 text-center text-2xl p-2 w-96 m-3' />
+        <SideNavLinks name='Home' route='home' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
+        <SideNavLinks name='Algebra' route='stat/algebra' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
+        <SideNavLinks name='Geometry' route='stat/geometry' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
+        <SideNavLinks name='Calculus' route='stat/calculus' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
+        <SideNavLinks name='Users' route='users' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
       </div>
       <div>
         <Outlet />
@@ -39,7 +39,7 @@ function SideNavLinks ({ name, route, className }) {
             ? ''
             : ''}
       >
-        <div className='bg-inherit rounded-md text-center'>{name}</div>
+        <div className='bg-inherit rounded-md text-center p-2'>{name}</div>
       </NavLink>
     </div>
   )

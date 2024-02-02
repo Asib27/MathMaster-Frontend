@@ -15,6 +15,9 @@ import Definitions, { loader as definitionsLoader } from './routes/definitions'
 import Definition, { loader as definitionLoader } from './routes/definition'
 import EditLesson, { loader as editLessonLoader } from './routes/editLesson'
 import AdminLayout, { loader as adminLayoutLoader } from './routes/admin/adminLayout'
+import AdminHome, { loader as adminHomeLoader } from './routes/admin/adminHome'
+import AdminCourseStat, { loader as adminCourseStatLoader } from './routes/admin/courseStat'
+import AdminUserStat, { loader as adminUserStatLoader } from './routes/admin/adminUserStat'
 
 const router = createBrowserRouter([
   {
@@ -91,7 +94,25 @@ const router = createBrowserRouter([
       {
         path: 'admin',
         element: <AdminLayout />,
-        loader: adminLayoutLoader
+        loader: adminLayoutLoader,
+        children: [
+          {
+            path: 'home',
+            index: true,
+            element: <AdminHome />,
+            loader: adminHomeLoader
+          },
+          {
+            path: 'stat/:courseType',
+            element: <AdminCourseStat />,
+            loader: adminCourseStatLoader
+          },
+          {
+            path: 'users',
+            element: <AdminUserStat />,
+            loader: adminUserStatLoader
+          }
+        ]
       }
     ]
   }
