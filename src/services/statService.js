@@ -173,6 +173,37 @@ export async function getDataForChart (chartName) {
   return data
 }
 
+export async function getAdminUserStat () {
+  await fakeNetwork()
+
+  return {
+    newUser: {
+      count: 10,
+      trend: 'increasing'
+    },
+    onlineUser: {
+      count: 21,
+      trend: 'decreasing'
+    },
+    completion: {
+      count: '31%',
+      trend: 'same'
+    },
+    avgLogin: {
+      count: '-9%',
+      trend: 'same'
+    },
+    avgStreak: {
+      count: '-9%',
+      trend: 'same'
+    },
+    avgTime: {
+      count: '31min',
+      trend: 'same'
+    }
+  }
+}
+
 async function fakeNetwork () {
   return new Promise(resolve => {
     setTimeout(resolve, Math.random() * 800)

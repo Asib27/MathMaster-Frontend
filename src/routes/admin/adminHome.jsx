@@ -4,6 +4,7 @@ import { getAdminHomeStat } from '../../services/statService'
 import { useState } from 'react'
 import SideBySideRankViewer from '../../components/stats/sideBySideRankViewer'
 import ChartViewer from '../../components/stats/chartViewer'
+import StatViewer from '../../components/statViewer'
 
 export async function loader () {
   const role = await getRole()
@@ -18,36 +19,20 @@ export async function loader () {
 }
 
 export default function AdminHome () {
-  const chartidxToName = {
-    0: { chartName: 'newUser', chartTitle: 'New User' },
-    1: { chartName: 'enrollment', chartTitle: 'New Enrolled' },
-    2: { chartName: 'avgLogin', chartTitle: 'Avg Login' }
-  }
-  const [chartIndex, setChartIndex] = useState(0)
+  const [chartData, setChartData] = useState({ chartName: 'newUser', chartTitle: 'New User' })
+
   const { stat } = useLoaderData()
+  const nameMap = {
+    newUser: 'New User',
+    enrollment: 'New Enrolled',
+    avgLogin: 'Avg Login'
+  }
 
   return (
     <div className='flex flex-col gap-10 grow'>
-      <div className='flex grow h-24 gap-2 items-center bg-zinc-300 rounded-3xl justify-around'>
-        <div className='text-center cursor-pointer' onClick={() => setChartIndex(0)}>
-          <p>New User</p>
-          <div className='flex flex-row '>
-            <p>{`${stat.newUser.count}`}</p>
-          </div>
-        </div>
+      <StatViewer nameMap={nameMap} setChartData={setChartData} stat={stat} />
 
-        <div className='text-center cursor-pointer' onClick={() => setChartIndex(1)}>
-          <p>New Enrolled</p>
-          <p>{`${stat.enrollment.count}`}</p>
-        </div>
-
-        <div className='text-center cursor-pointer' onClick={() => setChartIndex(2)}>
-          <p>Avg Login</p>
-          <p>{`${stat.avgLogin.count} `}</p>
-        </div>
-      </div>
-
-      <ChartViewer {...chartidxToName[chartIndex]} />
+      <ChartViewer {...chartData} />
 
       <div className='flex flex-col gap-10'>
         <SideBySideRankViewer
