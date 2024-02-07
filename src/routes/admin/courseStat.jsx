@@ -27,6 +27,7 @@ export default function AdminCourseStat () {
       <SerachBar search={search} />
 
       <div className='flex flex-nowrap gap-5 overflow-x-scroll no-scrollbar'>
+        <CourseCardShort course={{ name: 'Overall' }} />
         {courses.map(course => {
           return (
             <CourseCardShort key={course.id} course={course} />
