@@ -19,6 +19,7 @@ import AdminHome, { loader as adminHomeLoader } from './routes/admin/adminHome'
 import AdminCourseStat, { loader as adminCourseStatLoader } from './routes/admin/courseStat'
 import AdminUserStat, { loader as adminUserStatLoader } from './routes/admin/adminUserStat'
 import AdminIndCourseStatIndex, { loader as AdminIndCourseStatIndexLoader } from './routes/admin/individualCourseStatIndex'
+import AdminIndCourseStat, { loader as adminIndCourseStatLoader } from './routes/admin/indCourseStat'
 
 const router = createBrowserRouter([
   {
@@ -112,6 +113,11 @@ const router = createBrowserRouter([
                 index: true,
                 element: <AdminIndCourseStatIndex />,
                 loader: AdminIndCourseStatIndexLoader
+              },
+              {
+                path: ':courseId',
+                element: <AdminIndCourseStat />,
+                loader: adminIndCourseStatLoader
               }
             ]
           },
