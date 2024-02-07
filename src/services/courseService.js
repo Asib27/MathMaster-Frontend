@@ -281,14 +281,13 @@ const courseOutline = {
 
 export async function getCourse (courseId) {
   await fakeNetwork()
-  console.log(courseId)
   return course
 }
 
 export async function getCourses (query) {
   await fakeNetwork()
-  console.log(courses)
-  return courses
+  if (!query) return courses
+  else return courses.filter((def) => def.name.toLowerCase().includes(query))
 }
 
 export async function getCourseOutline (courseId) {

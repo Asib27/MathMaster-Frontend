@@ -1,4 +1,4 @@
-import { redirect, useLoaderData } from 'react-router-dom'
+import { Outlet, redirect, useLoaderData } from 'react-router-dom'
 import { getRole } from '../../services/authService'
 import { getCourses } from '../../services/courseService'
 import CourseCardShort from '../../components/courseCardShort'
@@ -13,12 +13,10 @@ export async function loader ({ params, request }) {
 
   const url = new URL(request.url)
   const search = url.searchParams.get('search')
-  console.log(search)
 
-  const courseType = params.courseType
-  const courses = await getCourses('type=courseType')
+  const courses = await getCourses(search)
 
-  return { courseType, courses, search }
+  return { courses, search }
 }
 
 export default function AdminCourseStat () {
@@ -27,12 +25,17 @@ export default function AdminCourseStat () {
   return (
     <div className='w-full'>
       <SerachBar search={search} />
+
       <div className='flex flex-nowrap gap-5 overflow-x-scroll no-scrollbar'>
         {courses.map(course => {
           return (
             <CourseCardShort key={course.id} course={course} />
           )
         })}
+      </div>
+
+      <div className='mt-10'>
+        <Outlet />
       </div>
     </div>
   )
