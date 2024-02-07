@@ -13,7 +13,7 @@ export async function loader () {
 
 export default function AdminLayout () {
   return (
-    <div className='flex '>
+    <div className='flex flex-nowrap'>
       <div className='m-20'>
         <SideNavLinks name='Home' route='home' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
         <SideNavLinks name='Algebra' route='stat/algebra' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
@@ -21,7 +21,7 @@ export default function AdminLayout () {
         <SideNavLinks name='Calculus' route='stat/calculus' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
         <SideNavLinks name='Users' route='users' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
       </div>
-      <div className='grow m-20'>
+      <div className='grow m-20 overflow-hidden'>
         <Outlet />
       </div>
     </div>
