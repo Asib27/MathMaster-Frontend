@@ -1,9 +1,9 @@
 import { Form, redirect, useLoaderData } from 'react-router-dom'
 import AuthorList from '../components/authorList'
 import ProgressBar from '../components/progressBar'
-import Rating from '../components/rating'
 import { enrollCourse, getCourseOutline, rateCourse } from '../services/courseService'
 import RatingForm from '../components/ratingForm'
+import DetailedRatingViewer from '../components/stats/detailedRatingViewer'
 
 export async function loader ({ params }) {
   const course = await getCourseOutline(params.courseId)
@@ -26,9 +26,6 @@ export async function action ({ request, params }) {
 
 export default function CourseOutline () {
   const { course } = useLoaderData()
-
-  const totalRated = Object.values(course.ratings).reduce((prev, cur) => prev + cur, 0)
-  const avgRating = Object.keys(course.ratings).reduce((prev, cur) => prev + course.ratings[cur] * cur, 0) / totalRated
 
   const completeion = (course.lessonCompleted * course.lessonCount + course.quizCompleted * course.quizCount) / (course.lessonCount * course.quizCount)
 
@@ -69,28 +66,7 @@ export default function CourseOutline () {
             </button>
           </Form>
           )}
-
-      <div className='flex gap-6 items-center pl-5 mt-10'>
-        <div>
-          <p className='text-5xl text-center'>{avgRating.toFixed(2)}</p>
-          <Rating rating={avgRating} />
-          <p className='text-center mt-3'> {`${totalRated} reviews`} </p>
-        </div>
-        <div className='flex flex-col w-96'>
-          {
-            Object.keys(course.ratings).map((rating) => {
-              const noPeople = course.ratings[rating]
-              return (
-                <div key={rating} className='flex gap-2'>
-                  <p>{rating}</p>
-                  <ProgressBar key={rating} className='my-2' complete={noPeople / totalRated} />
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
-
+      <DetailedRatingViewer ratings={course.ratings} />
       {course.isEnrolled && <RatingForm rating={course.myRating} />}
     </div>
   )

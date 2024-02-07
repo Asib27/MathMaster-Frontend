@@ -204,7 +204,7 @@ export async function getAdminUserStat () {
   }
 }
 
-export async function getOverallCourseStat () {
+export async function getOverallCourseStat (query) {
   await fakeNetwork()
 
   return {
@@ -233,6 +233,47 @@ export async function getOverallCourseStat () {
       trend: 'same'
     },
     courseEngagement: courseList
+  }
+}
+
+export async function getIndividyalCourseStat (courseId) {
+  await fakeNetwork()
+
+  return {
+    id: courseId,
+    name: 'Algebra',
+    enrollment: {
+      count: 12,
+      trend: 'increasing'
+    },
+    avgTimeSpent: {
+      count: 21,
+      trend: 'decreasing'
+    },
+    progressRate: {
+      count: '31%',
+      trend: 'same'
+    },
+    upVote: {
+      count: '-9%',
+      trend: 'same'
+    },
+    downVote: {
+      count: '-9%',
+      trend: 'same'
+    },
+    problemSolved: {
+      count: '31',
+      trend: 'same'
+    },
+    lessonEngagement: courseList,
+    ratings: {
+      1: 5,
+      2: 10,
+      3: 30,
+      4: 50,
+      5: 20
+    }
   }
 }
 

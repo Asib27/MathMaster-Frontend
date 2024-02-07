@@ -11,7 +11,7 @@ export async function loader () {
 }
 
 export default function AdminIndCourseStatIndex () {
-  const [chartData, setChartData] = useState({ chartName: 'newUser', chartTitle: 'New User' })
+  const [chartData, setChartData] = useState({ chartName: 'enrollment', chartTitle: 'Enrollment' })
 
   const { stat } = useLoaderData()
   const nameMap = {

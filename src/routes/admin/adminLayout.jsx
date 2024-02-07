@@ -16,9 +16,8 @@ export default function AdminLayout () {
     <div className='flex flex-nowrap'>
       <div className='m-20'>
         <SideNavLinks name='Home' route='home' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
-        <SideNavLinks name='Algebra' route='courses' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
-        <SideNavLinks name='Geometry' route='courses' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
-        <SideNavLinks name='Calculus' route='courses' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
+        <SideNavLinks name='Courses' route='courses' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
+        <SideNavLinks name='Authors' route='courses' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
         <SideNavLinks name='Users' route='users' className='border-b-2 border-gray-300 text-center text-2xl  w-96 m-3' />
       </div>
       <div className='grow m-20 overflow-hidden'>
