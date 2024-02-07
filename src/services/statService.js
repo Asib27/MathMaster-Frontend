@@ -13,65 +13,65 @@ export async function getUserStat (userId) {
   return userStats
 }
 
+const courseList = {
+  top5: [
+    {
+      name: 'Algebra 1',
+      id: 1,
+      count: 100
+    },
+    {
+      name: 'Calculus',
+      id: 2,
+      count: 80
+    },
+    {
+      name: 'Euclidean Geometry',
+      id: 3,
+      count: 60
+    },
+    {
+      name: 'Functions and Graph',
+      id: 4,
+      count: 58
+    },
+    {
+      name: 'Logic',
+      id: 5,
+      count: 55
+    }
+  ],
+  least5: [
+    {
+      name: 'Trigonometry 1',
+      id: 1,
+      count: 10
+    },
+    {
+      name: 'Trigonometry 2',
+      id: 2,
+      count: 10
+    },
+    {
+      name: 'Mechanics',
+      id: 3,
+      count: 10
+    },
+    {
+      name: 'Probability',
+      id: 4,
+      count: 10
+    },
+    {
+      name: '3D Geometry',
+      id: 5,
+      count: 10
+    }
+  ]
+}
+
 export async function getAdminHomeStat () {
   await fakeNetwork()
-
-  const courseList = {
-    top5: [
-      {
-        name: 'Algebra 1',
-        id: 1,
-        count: 100
-      },
-      {
-        name: 'Calculus',
-        id: 2,
-        count: 80
-      },
-      {
-        name: 'Euclidean Geometry',
-        id: 3,
-        count: 60
-      },
-      {
-        name: 'Functions and Graph',
-        id: 4,
-        count: 58
-      },
-      {
-        name: 'Logic',
-        id: 5,
-        count: 55
-      }
-    ],
-    least5: [
-      {
-        name: 'Trigonometry 1',
-        id: 1,
-        count: 10
-      },
-      {
-        name: 'Trigonometry 2',
-        id: 2,
-        count: 10
-      },
-      {
-        name: 'Mechanics',
-        id: 3,
-        count: 10
-      },
-      {
-        name: 'Probability',
-        id: 4,
-        count: 10
-      },
-      {
-        name: '3D Geometry',
-        id: 5,
-        count: 10
-      }
-    ]
-  }
 
   const authorlist = {
     top5: [
@@ -201,6 +201,38 @@ export async function getAdminUserStat () {
       count: '31min',
       trend: 'same'
     }
+  }
+}
+
+export async function getOverallCourseStat () {
+  await fakeNetwork()
+
+  return {
+    enrollment: {
+      count: 12,
+      trend: 'increasing'
+    },
+    avgTimeSpent: {
+      count: 21,
+      trend: 'decreasing'
+    },
+    progressRate: {
+      count: '31%',
+      trend: 'same'
+    },
+    upVote: {
+      count: '-9%',
+      trend: 'same'
+    },
+    downVote: {
+      count: '-9%',
+      trend: 'same'
+    },
+    problemSolved: {
+      count: '31',
+      trend: 'same'
+    },
+    courseEngagement: courseList
   }
 }
 
