@@ -4,7 +4,7 @@ import Rating from './rating'
 export default function RatingForm ({ rating, className }) {
   return (
     <div className={className}>
-      {rating &&
+      {rating !== 0 &&
         <div className='flex gap-10 ml-5 mt-10'>
           <p className='text-green-700 text-xl'> Your previous rating</p>
           <Rating rating={rating} />

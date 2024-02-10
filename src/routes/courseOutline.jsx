@@ -51,7 +51,7 @@ export default function CourseOutline () {
               <ProgressBar className='w-96 m-2' complete={course.lessonCompleted} />
             </div>
             <div className='flex gap-4'>
-              <div className='text-nowrap'>{`Course Completed : ${course.quizCompleted}% `}</div>
+              <div className='text-nowrap'>{`Quiz Completed : ${course.quizCompleted}% `}</div>
               <ProgressBar className='w-96 m-2' complete={course.quizCompleted} />
             </div>
           </div>

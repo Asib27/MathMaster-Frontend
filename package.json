@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@canvasjs/react-charts": "^1.0.0",
+    "axios": "^1.6.7",
     "formik": "^2.4.5",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
