@@ -1,44 +1,57 @@
 import { getObjectFromCookie, saveObjectInCookie } from './cookieService'
 
+import axios from 'axios'
+const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
+
 export async function login (loginInfo) {
-  await fakeNetwork()
-
-  if (loginInfo.password === 'aaa') {
-    saveObjectInCookie('auth', {
-      isAuthenticated: true,
-      role: 'user'
+  console.log(loginInfo)
+  const data = await axios.post(
+    API_BASE + 'auth/login',
+    loginInfo,
+    {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
     })
+  console.log(data)
+  return data.data
 
-    return {
-      status: 'success',
-      message: 'success'
-    }
-  } else if (loginInfo.password === 'bbb') {
-    saveObjectInCookie('auth', {
-      isAuthenticated: true,
-      role: 'author'
-    })
+  // if (loginInfo.password === 'aaa') {
+  //   saveObjectInCookie('auth', {
+  //     isAuthenticated: true,
+  //     role: 'user'
+  //   })
 
-    return {
-      status: 'success',
-      message: 'success'
-    }
-  } else if (loginInfo.password === 'ccc') {
-    saveObjectInCookie('auth', {
-      isAuthenticated: true,
-      role: 'admin'
-    })
+  //   return {
+  //     status: 'success',
+  //     message: 'success'
+  //   }
+  // } else if (loginInfo.password === 'bbb') {
+  //   saveObjectInCookie('auth', {
+  //     isAuthenticated: true,
+  //     role: 'author'
+  //   })
 
-    return {
-      status: 'success',
-      message: 'success'
-    }
-  } else {
-    return {
-      status: 'failed',
-      message: 'wrong password'
-    }
-  }
+  //   return {
+  //     status: 'success',
+  //     message: 'success'
+  //   }
+  // } else if (loginInfo.password === 'ccc') {
+  //   saveObjectInCookie('auth', {
+  //     isAuthenticated: true,
+  //     role: 'admin'
+  //   })
+
+  //   return {
+  //     status: 'success',
+  //     message: 'success'
+  //   }
+  // } else {
+  //   return {
+  //     status: 'failed',
+  //     message: 'wrong password'
+  //   }
+  // }
 }
 
 export async function signup (signupInfo) {
