@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const lessonContent = `We have learned the basics of function in the previous lessons. Now it's time to explore function parameters.
 A **parameter** A parameter is like a **control knob** for a function. Changing the parameter changes the function in a smooth way.
 Here's an example of a simple [linear]('/definitions/1') function with a parameter $m$ that controls the [slope](/definitions/4)
@@ -222,10 +224,12 @@ const lesson1 = {
   ]
 }
 
+const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
+
 export async function getLesson (lessonId) {
-  await fakeNetwork()
-  // console.log(lessonId, lesson1)
-  return lesson1
+  const data = await axios.get(`${API_BASE}lessons/${lessonId}`)
+  console.log(data.data)
+  return data.data
 }
 
 export async function submitLessonRating (lessonId, rating) {

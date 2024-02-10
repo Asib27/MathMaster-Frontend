@@ -105,7 +105,7 @@ export default function Home () {
         })}
       </div>
 
-      <Link className='w-full text-center'>
+      <Link to='/courses' className='w-full text-center'>
         <div className='my-10 h-10  w-19 text-center p-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg'>Browse All Course</div>
       </Link>
     </div>
