@@ -1,18 +1,13 @@
+import axios from 'axios'
 import { getObjectFromCookie, saveObjectInCookie } from './cookieService'
 
-import axios from 'axios'
 const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
 
 export async function login (loginInfo) {
   console.log(loginInfo)
   const data = await axios.post(
     API_BASE + 'auth/login',
-    loginInfo,
-    {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    })
+    loginInfo)
   console.log(data)
   return data.data
 

@@ -8,7 +8,9 @@ export async function getCourse (courseId) {
 }
 
 export async function getCourses (query) {
-  const data = await axios.get(API_BASE + 'courses/')
+  const data = await axios.get(
+    API_BASE + 'courses/'
+  )
   return data.data
 }
 

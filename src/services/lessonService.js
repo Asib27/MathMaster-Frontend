@@ -228,7 +228,6 @@ const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
 
 export async function getLesson (lessonId) {
   const data = await axios.get(`${API_BASE}lessons/${lessonId}`)
-  console.log(data.data)
   return data.data
 }
 
