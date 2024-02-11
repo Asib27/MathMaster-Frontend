@@ -20,6 +20,7 @@ import AdminCourseStat, { loader as adminCourseStatLoader } from './routes/admin
 import AdminUserStat, { loader as adminUserStatLoader } from './routes/admin/adminUserStat'
 import AdminIndCourseStatIndex, { loader as AdminIndCourseStatIndexLoader } from './routes/admin/individualCourseStatIndex'
 import AdminIndCourseStat, { loader as adminIndCourseStatLoader } from './routes/admin/indCourseStat'
+import AuthorHome, { loader as authorHomeLoader } from './routes/author/authorHome'
 
 const router = createBrowserRouter([
   {
@@ -127,6 +128,11 @@ const router = createBrowserRouter([
             loader: adminUserStatLoader
           }
         ]
+      },
+      {
+        path: 'author/home',
+        element: <AuthorHome />,
+        loader: authorHomeLoader
       }
     ]
   }

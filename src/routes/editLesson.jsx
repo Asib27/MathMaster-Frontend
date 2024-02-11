@@ -7,7 +7,8 @@ import Lesson from '../pages/lesson'
 import { getRole } from '../services/authService'
 
 export async function loader ({ params }) {
-  if (getRole() === 'author') {
+  const role = await getRole()
+  if (role === 'author') {
     const lesson = await getLesson(params.lessonId)
     return { lesson }
   } else {
