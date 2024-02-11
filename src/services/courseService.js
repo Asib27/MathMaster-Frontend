@@ -20,13 +20,13 @@ export async function getCourseOutline (courseId) {
 }
 
 export async function enrollCourse (courseId) {
-  const data = await axios.get(`${API_BASE}courses/${courseId}/enroll`)
+  const data = await axios.post(`${API_BASE}courses/${courseId}/enroll`)
   return data.data
 }
 
 export async function rateCourse (courseId, rating) {
   const data = await axios.post(`${API_BASE}courses/${courseId}/rate`, {
-    rating
+    rating: +rating
   })
 
   return data.data

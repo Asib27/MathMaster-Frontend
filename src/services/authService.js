@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getObjectFromCookie, saveObjectInCookie } from './cookieService'
+import Cookies from 'js-cookie'
 
 const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
 
@@ -8,7 +9,7 @@ export async function login (loginInfo) {
   const data = await axios.post(
     API_BASE + 'auth/login',
     loginInfo)
-  console.log(data)
+  saveObjectInCookie('user', data.data.user)
   return data.data
 
   // if (loginInfo.password === 'aaa') {
@@ -61,24 +62,19 @@ export async function signup (signupInfo) {
 export async function getRole () {
   await fakeNetwork()
 
-  const auth = getObjectFromCookie('auth')
+  const auth = getObjectFromCookie('user')
 
-  return auth && auth.role
+  return auth && auth.role.name
 }
 
 export async function isAuthenticated () {
-  await fakeNetwork()
-
-  const auth = getObjectFromCookie('auth')
-
-  return auth && auth.isAuthenticated
+  const auth = getObjectFromCookie('user')
+  return auth && auth.name
 }
 
 export async function logout () {
-  saveObjectInCookie('auth', {
-    isAuthenticated: false,
-    role: ''
-  })
+  Cookies.remove('token')
+  saveObjectInCookie('user', {})
 
   return {
     status: 'success',
@@ -92,6 +88,11 @@ export async function isUniqueUsername (username) {
   return {
     isUnique: username !== 'aaaa'
   }
+}
+
+export async function getUserData () {
+  const auth = getObjectFromCookie('user')
+  return auth
 }
 
 async function fakeNetwork () {

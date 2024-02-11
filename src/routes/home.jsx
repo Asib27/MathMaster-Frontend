@@ -2,7 +2,7 @@ import { Link, redirect, useLoaderData } from 'react-router-dom'
 import { getCourses } from '../services/courseService'
 import CourseCard from '../components/courseCard'
 import { getUserStat } from '../services/statService'
-import { isAuthenticated } from '../services/authService'
+import { getUserData, isAuthenticated } from '../services/authService'
 
 export async function loader ({ params }) {
   const auth = await isAuthenticated()
@@ -12,11 +12,13 @@ export async function loader ({ params }) {
 
   const courses = await getCourses()
   const userStat = await getUserStat()
+  const profile = await getUserData()
 
   return {
     continueCourse: courses,
     recommendateCourse: courses,
-    userStats: userStat
+    userStats: userStat,
+    profile
   }
 }
 
@@ -37,19 +39,13 @@ function Last7Days () {
 }
 
 export default function Home () {
-  const { continueCourse, recommendateCourse, userStats } = useLoaderData()
-  const profile = {
-    image: '/male_avatar.svg',
-    name: 'Shariful Islam Khan',
-    id: 10
-  }
-
+  const { continueCourse, recommendateCourse, userStats, profile } = useLoaderData()
   const days = Last7Days()
 
   return (
     <div className='m-20'>
       <div className='flex items-center gap-4 m-10'>
-        <img src={profile.image} className='w-20 h-20 rounded-full' alt='avatar' />
+        <img src={profile.picture} className='w-20 h-20 rounded-full' alt='avatar' />
         <div>
           <p className='text-xl'> {profile.name}</p>
           <p className='text-xl'> {`🔥 ${userStats.totalXp}`} </p>
