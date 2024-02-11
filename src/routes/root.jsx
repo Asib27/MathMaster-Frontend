@@ -1,47 +1,14 @@
-import { Link, Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
-import { isAuthenticated, logout } from '../services/authService'
+import { Link, Outlet } from 'react-router-dom'
+import Navbar from './navbar'
 
 export async function loader ({ params }) {
-  const authenticated = await isAuthenticated()
-  return { authenticated }
+  return 2
 }
 
 export default function Root () {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const { authenticated } = useLoaderData()
-
   return (
     <div className='flex flex-col min-h-screen'>
-      <header className='w-full flex items-center justify-between bg-zinc-700 text-white p-2'>
-        <div className='flex items-center gap-6'>
-          <Link to='/' className='text-2xl'>MathMaster</Link>
-          <Link to='home'> Home</Link>
-          <Link to='courses'> Courses </Link>
-          {location.pathname === '/' && <a href='/#features'> Features </a>}
-          <Link to='definitions'>Definitions</Link>
-        </div>
-        {authenticated
-          ? (
-            <div>
-              <div
-                className='cursor-pointer' onClick={async () => {
-                  await logout()
-                  navigate('/')
-                  console.log('looged out')
-                }}
-              > Logout
-              </div>
-            </div>
-            )
-
-          : (
-            <div className='flex gap-6 pr-3'>
-              <Link to='login'> Login</Link>
-              <Link to='signup'> Register</Link>
-            </div>
-            )}
-      </header>
+      <Navbar />
       <div>
         <Outlet />
       </div>
