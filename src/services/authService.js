@@ -11,43 +11,6 @@ export async function login (loginInfo) {
     loginInfo)
   saveObjectInCookie('user', data.data.user)
   return data.data
-
-  // if (loginInfo.password === 'aaa') {
-  //   saveObjectInCookie('auth', {
-  //     isAuthenticated: true,
-  //     role: 'user'
-  //   })
-
-  //   return {
-  //     status: 'success',
-  //     message: 'success'
-  //   }
-  // } else if (loginInfo.password === 'bbb') {
-  //   saveObjectInCookie('auth', {
-  //     isAuthenticated: true,
-  //     role: 'author'
-  //   })
-
-  //   return {
-  //     status: 'success',
-  //     message: 'success'
-  //   }
-  // } else if (loginInfo.password === 'ccc') {
-  //   saveObjectInCookie('auth', {
-  //     isAuthenticated: true,
-  //     role: 'admin'
-  //   })
-
-  //   return {
-  //     status: 'success',
-  //     message: 'success'
-  //   }
-  // } else {
-  //   return {
-  //     status: 'failed',
-  //     message: 'wrong password'
-  //   }
-  // }
 }
 
 export async function signup (signupInfo) {
@@ -64,7 +27,7 @@ export async function getRole () {
 
   const auth = getObjectFromCookie('user')
 
-  return auth && auth.role.name
+  return auth && auth.role && auth.role.name
 }
 
 export async function isAuthenticated () {
@@ -73,7 +36,8 @@ export async function isAuthenticated () {
 }
 
 export async function logout () {
-  Cookies.remove('token')
+  // Cookies.remove('token', { path: '', domain: 'math-master.azurewebsites.net'})
+  Cookies.set('token', null, { path: '/', domain: 'math-master.azurewebsites.net' })
   saveObjectInCookie('user', {})
 
   return {

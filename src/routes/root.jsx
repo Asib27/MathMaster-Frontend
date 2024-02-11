@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
-import Navbar from './navbar'
+import Navbar from '../components/navbar'
 
 export async function loader ({ params }) {
   return 2
@@ -12,7 +12,7 @@ export default function Root () {
       <div>
         <Outlet />
       </div>
-      <footer className='w-full pt-4 text-sm pb-10 bg-black text-white text-center flex flex-col items-center flex-grow'>
+      <footer id='footer' className='w-full pt-4 text-sm pb-10 bg-black text-white text-center flex flex-col items-center flex-grow'>
         <span className=' text-gray-500 text-center dark:text-gray-400'> &copy; 2023 <Link to='/' className='hover:underline'>MathMaster</Link>. All Rights Reserved.
         </span>
         <div className='text-gray-500 mt-2'>

@@ -1,6 +1,6 @@
 import { Form, redirect, useActionData } from 'react-router-dom'
 import LoginForm from '../components/loginForm'
-import { login } from '../services/authService'
+import { getRole, login } from '../services/authService'
 
 export async function action ({ request, params }) {
   const formData = await request.formData()
@@ -11,7 +11,16 @@ export async function action ({ request, params }) {
     const status = await login(data)
 
     if (status.status === 'success') {
-      return redirect('/home')
+      const role = await getRole()
+      if (role === 'user') {
+        return redirect('/home')
+      } else if (role === 'author') {
+        return redirect('/author/home')
+      } else if (role === 'moderator') {
+        return redirect('/moderator/home')
+      } else if (role === 'admin') {
+        return redirect('/admin/home')
+      }
     } else {
       return {
         formError: status.message
