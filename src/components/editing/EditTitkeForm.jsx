@@ -11,7 +11,7 @@ export default function EditTitleForm ({ lessonTitle, setLessonTitle }) {
   if (!isEditingTitle) {
     return (
       <div className='flex justify-between items-center'>
-        <h2 className='text-3xl p-2'> {lessonTitle}</h2>
+        <h2 className='text-3xl py-2'> {lessonTitle}</h2>
         <div onClick={() => setIsEditingTitle(true)}>
           <EditIconSVG classname='h-5 w-5 cursor-pointer' />
         </div>

@@ -241,11 +241,17 @@ export async function submitLessonRating (lessonId, rating) {
 }
 
 export async function editLesson (lessonId, lesson) {
-  await fakeNetwork()
-  return {
-    status: 'success',
-    message: 'successful'
-  }
+  const data = await axios.patch(`${API_BASE}lessons/${lessonId}/update`, {
+    language: lesson.language,
+    abstraction_level: lesson.abstractionLevel,
+    lessonContent: lesson.content,
+    lessonName: lesson.name
+  })
+  return data.data
+}
+
+export async function getLessonForAuthor (lessonId, lang, absLevel) {
+  return await getLesson(lessonId)
 }
 
 export async function markAsCompleted (lessonId) {
