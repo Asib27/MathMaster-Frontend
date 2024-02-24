@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom'
-import { getQuizStat, getQuizes } from '../services/quizService'
+import { getQuizStat, getQuizes, submitResult } from '../services/quizService'
 import { useState } from 'react'
 import QuizQuestion from '../pages/quizQuestion'
 import QuizStartingView from '../components/quiz/quizStartingView'
@@ -9,12 +9,12 @@ import QuizStartingView from '../components/quiz/quizStartingView'
 export async function loader ({ params }) {
   const quizes = await getQuizes(params.quizId)
   const quizStat = await getQuizStat(params.quizId)
-  return { quizes, quizStat }
+  return { quizes, quizStat, quizId: params.quizId }
 }
 
 export default function Quizes () {
   const [quizViewState, setQuizViewState] = useState(0)
-  const { quizes, quizStat } = useLoaderData()
+  const { quizes, quizStat, quizId } = useLoaderData()
   const [curQuiz, setCurQuiz] = useState(0)
   const [quizState, setQuizState] = useState(Array.from({ length: quizes.length }, () => ''))
 
@@ -39,11 +39,15 @@ export default function Quizes () {
     updateArray(curQuiz, answer)
   }
 
+  const getScore = () => {
+    return quizState.filter(q => q === 'correct').length
+  }
+
   if (quizViewState === 0) {
     return (
       <QuizStartingView quizStat={quizStat} setQuizViewState={setQuizViewState} />
     )
-  } else {
+  } else if (quizViewState === 1) {
     return (
       <div className='p-10'>
         <div className='flex items-center m-10'>
@@ -72,7 +76,10 @@ export default function Quizes () {
           {curQuiz >= noQuiz - 1 &&
             <button
               className='h-14 w-32 rounded-lg text-white bg-blue-700'
-              onClick={() => setQuizViewState(2)}
+              onClick={() => {
+                setQuizViewState(2)
+                submitResult(quizId, getScore() / quizes.length * quizStat.score, quizStat.xp)
+              }}
             >
               Finish Quiz
             </button>}
@@ -82,6 +89,25 @@ export default function Quizes () {
         </div>
       </div>
 
+    )
+  } else {
+    return (
+      <div className='p-10'>
+        <p className='text-3xl'>{quizStat.name}</p>
+        <p className='text-2xl mt-10 text-green-600'>Congrats You have successfully corrected {getScore()} out of {quizes.length}</p>
+
+        <div className='mt-10 grid grid-cols-2'>
+          <p className='text-xl'>Highest Score :</p>
+          <p className='text-xl'>{quizStat.highest_score}</p>
+
+          <p className='text-xl'>Your Previous Highest Score :</p>
+          <p className='text-xl'>{quizStat.my_highest_score}</p>
+
+          <p className='text-xl'>Your Current Score :</p>
+          <p className='text-xl'>{getScore() / quizes.length * quizStat.score}</p>
+        </div>
+
+      </div>
     )
   }
 }

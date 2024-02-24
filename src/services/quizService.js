@@ -52,6 +52,14 @@ export async function getQuizes (quizId) {
   return quizes
 }
 
+export async function submitResult (quizId, score, xp) {
+  await fakeNetwork()
+  // { score: score, xp: xp}
+  return {
+    status: 'success'
+  }
+}
+
 export async function getQuizStat (quizId) {
   await fakeNetwork()
   return {
