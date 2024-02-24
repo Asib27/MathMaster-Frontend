@@ -52,6 +52,17 @@ export async function getQuizes (quizId) {
   return quizes
 }
 
+export async function getQuizStat (quizId) {
+  await fakeNetwork()
+  return {
+    name: 'Quiz 1',
+    score: 50,
+    xp: 20,
+    highest_score: 40,
+    my_highest_score: 40
+  }
+}
+
 async function fakeNetwork () {
   return new Promise(resolve => {
     setTimeout(resolve, Math.random() * 800)
