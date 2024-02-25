@@ -277,6 +277,20 @@ export async function getIndividyalCourseStat (courseId) {
   }
 }
 
+export async function getAuthorStat () {
+  return {
+    courses_count: 3,
+    total_enroll: 10,
+    ratings: {
+      1: 5,
+      2: 10,
+      3: 30,
+      4: 50,
+      5: 20
+    }
+  }
+}
+
 async function fakeNetwork () {
   return new Promise(resolve => {
     setTimeout(resolve, Math.random() * 800)
