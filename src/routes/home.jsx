@@ -1,8 +1,8 @@
 import { Link, redirect, useLoaderData } from 'react-router-dom'
 import { getCourses } from '../services/courseService'
-import CourseCard from '../components/courseCard'
 import { getUserStat } from '../services/statService'
 import { getUserData, isAuthenticated } from '../services/authService'
+import CourseAccordion from '../components/courseAccordion'
 
 export async function loader ({ params }) {
   const auth = await isAuthenticated()
@@ -83,23 +83,8 @@ export default function Home () {
         </div>
       </div>
 
-      <p className='text-3xl my-10'> Continue Learning</p>
-      <div className='flex flex-nowrap overflow-x-scroll no-scrollbar'>
-        {continueCourse.map(course => {
-          return (
-            <CourseCard key={course.id} course={course} />
-          )
-        })}
-      </div>
-
-      <p className='text-3xl my-10'> Recommended Course</p>
-      <div className='flex flex-nowrap overflow-x-scroll no-scrollbar'>
-        {recommendateCourse.map(course => {
-          return (
-            <CourseCard key={course.id} course={course} />
-          )
-        })}
-      </div>
+      <CourseAccordion courses={continueCourse} name='Continue Learning' />
+      <CourseAccordion courses={recommendateCourse} name='Recommended Course' />
 
       <Link to='/courses' className='w-full text-center'>
         <div className='my-10 h-10  w-19 text-center p-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg'>Browse All Course</div>

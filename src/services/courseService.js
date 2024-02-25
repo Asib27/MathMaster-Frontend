@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { objectToQueryString } from './util'
 
 const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
 
@@ -8,8 +9,9 @@ export async function getCourse (courseId) {
 }
 
 export async function getCourses (query) {
+  const queryString = objectToQueryString(query)
   const data = await axios.get(
-    API_BASE + 'courses/'
+    API_BASE + 'courses' + queryString
   )
   return data.data
 }
