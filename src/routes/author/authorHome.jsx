@@ -1,4 +1,4 @@
-import { redirect, useLoaderData } from 'react-router-dom'
+import { redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import { getRole, getUserData } from '../../services/authService'
 import { getCourses } from '../../services/courseService'
 import CourseAccordion from '../../components/courseAccordion'
@@ -22,31 +22,25 @@ export async function loader () {
 
 export default function AuthorHome () {
   const { myCourses, allCourses, profile, authorStat } = useLoaderData()
-  console.log(authorStat)
+  const navigate = useNavigate()
   return (
     <div className='px-40 py-32'>
-      <div className='flex justify-between items-center mb-20'>
+      <div className='flex justify-center items-center mb-20'>
         <div className=''>
           <img src={profile.picture} className='w-20 h-20 rounded-full' alt='avatar' />
           <p className='text-xl'> {profile.name}</p>
           {/* <p className='text-xl'> {`🔥 ${userStats.totalXp}`} </p> */}
         </div>
 
-        <div className='pr-10 '>
-          <button
-            onClick={() => { }}
-            className='w-96 text-blue-800 border-blue-700 border-2 hover:border-blue-800 hover:bg-zinc-100  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
-          >
-            Create New Definition
-          </button>
+      </div>
 
-          <button
-            onClick={() => { }}
-            className='w-96 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
-          >
-            Create New Course
-          </button>
-        </div>
+      <div className='pr-10 '>
+        <button
+          onClick={() => { navigate('/definitions/new') }}
+          className='w-96 text-blue-800 border-blue-700 border-2 hover:border-blue-800 hover:bg-zinc-100  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+        >
+          Create New Definition
+        </button>
       </div>
 
       <div className='flex gap-10 items-center justify-around'>
