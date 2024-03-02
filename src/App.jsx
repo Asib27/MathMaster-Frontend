@@ -28,6 +28,7 @@ import AuthorLessons, { loader as AuthorLessonLoader, action as AuthorLessonsAct
 import AuthorQuizesEdit, { loader as authorQuizLoader } from './routes/author/authorQuizes'
 import AuthorQuizesPreview, { loader as authorQuizesPreviewLoader } from './routes/author/authorQuizesPreview'
 import ModeratorHome, { loader as moderatorHomeLoader } from './routes/moderator/moderatorHome'
+import CreateNewTopic, { loader as createNewTopicLoader } from './routes/author/createNewTopic'
 
 const router = createBrowserRouter([
   {
@@ -173,6 +174,11 @@ const router = createBrowserRouter([
             path: 'quizes/:quizId/edit',
             element: <AuthorQuizesEdit />,
             loader: authorQuizLoader
+          },
+          {
+            path: 'topics/:topicId',
+            element: <CreateNewTopic />,
+            loader: createNewTopicLoader
           }
         ]
       },

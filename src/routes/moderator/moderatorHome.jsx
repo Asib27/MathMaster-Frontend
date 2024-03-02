@@ -10,7 +10,7 @@ export async function loader () {
     return redirect('/login')
   }
 
-  const myCourses = await getCourses({ unpublished: 'false' })
+  const myCourses = await getCourses({ published: 'false' })
   const allCourses = await getCourses()
   const profile = await getUserData()
 
