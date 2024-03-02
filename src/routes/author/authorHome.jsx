@@ -34,12 +34,18 @@ export default function AuthorHome () {
 
       </div>
 
-      <div className='pr-10 '>
+      <div className='pr-10 flex justify-center'>
         <button
           onClick={() => { navigate('/definitions/new') }}
           className='w-96 text-blue-800 border-blue-700 border-2 hover:border-blue-800 hover:bg-zinc-100  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
         >
           Create New Definition
+        </button>
+        <button
+          onClick={() => { navigate('/courses') }}
+          className='w-96 text-blue-800 border-blue-700 border-2 hover:border-blue-800 hover:bg-zinc-100  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+        >
+          Browse All Courses
         </button>
       </div>
 

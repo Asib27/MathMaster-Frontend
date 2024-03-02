@@ -28,7 +28,7 @@ import AuthorLessons, { loader as AuthorLessonLoader, action as AuthorLessonsAct
 import AuthorQuizesEdit, { loader as authorQuizLoader } from './routes/author/authorQuizes'
 import AuthorQuizesPreview, { loader as authorQuizesPreviewLoader } from './routes/author/authorQuizesPreview'
 import ModeratorHome, { loader as moderatorHomeLoader } from './routes/moderator/moderatorHome'
-import CreateNewTopic, { loader as createNewTopicLoader } from './routes/author/createNewTopic'
+import CreateNewTopic, { loader as createNewTopicLoader, action as createNewTopicAction } from './routes/author/createNewTopic'
 import NewDefinition from './routes/author/newDefinition'
 
 const router = createBrowserRouter([
@@ -184,7 +184,8 @@ const router = createBrowserRouter([
           {
             path: 'topics/:topicId',
             element: <CreateNewTopic />,
-            loader: createNewTopicLoader
+            loader: createNewTopicLoader,
+            action: createNewTopicAction
           }
         ]
       },

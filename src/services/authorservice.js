@@ -1,10 +1,11 @@
-export async function editCourseOutline (course) {
-  // name, type, estimatedTime, description
+import axios from 'axios'
+
+const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
+
+export async function editCourseOutline (courseId, course) {
+  const data = await axios.patch(`${API_BASE}author/course/${courseId}/editoutline`, course)
   console.log(course)
-  return {
-    status: 'success',
-    msg: 'successful'
-  }
+  return data.data
 }
 
 export async function createLesson (courseId, topicId) {

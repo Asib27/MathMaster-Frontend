@@ -12,14 +12,13 @@ export async function loader ({ params }) {
   }
 
   const course = await getCourseOutline(params.courseId)
-  return { course }
+  return { course, courseId: params.courseId }
 }
 
 export async function action ({ request, params }) {
   const formData = await request.formData()
   const intent = formData.get('intent')
 
-  console.log(intent)
   if (intent === 'enroll') {
     await enrollCourse(params.courseId)
   } else if (intent === 'rating') {
@@ -30,7 +29,7 @@ export async function action ({ request, params }) {
 }
 
 export default function AuthorCourseOutline () {
-  const { course } = useLoaderData()
+  const { course, courseId } = useLoaderData()
   const navigate = useNavigate()
   const [name, setName] = useState(course.name)
   const [type, setType] = useState(course.type)
@@ -85,7 +84,7 @@ export default function AuthorCourseOutline () {
         type='button'
         className='w-full mt-10 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
         onClick={async () => {
-          await editCourseOutline({
+          await editCourseOutline(courseId, {
             name, type, estimatedTime, description
           })
           navigate(-1)
