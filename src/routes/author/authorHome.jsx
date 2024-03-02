@@ -63,8 +63,8 @@ export default function AuthorHome () {
         <DetailedRatingViewer ratings={authorStat.ratings} />
       </div>
 
-      <CourseAccordion courses={myCourses} name='My Courses' />
-      <CourseAccordion courses={allCourses} name='All Courses' />
+      <CourseAccordion courses={myCourses} name='My Courses' link='/author/courses' />
+      <CourseAccordion courses={allCourses} name='All Courses' link='/author/courses' />
 
       <Link
         to='/courses/1/lessons/1/edit'
