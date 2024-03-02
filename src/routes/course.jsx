@@ -19,14 +19,14 @@ export default function Course () {
     <div className='flex flex-row gap-x-5 pl-10'>
       <div className='basis-1/4'>
         <h3 className='text-4xl p-3'>Course Outline</h3>
-        <ul>
+        <div className='pl-3'>
           {outline.map(topic => (
-            <li key={topic.id} className='text-xl pl-3'>
-              <p className='pb-2 border-b-2 border-zinc-800'>{topic.name}</p>
-              <ul className='pl-8 pt-3'>
+            <div key={topic.id} className='text-2xl py-5'>
+              <p className='pb-2 border-b-2 border-zinc-800 hover:bg-zinc-100 hover:text-slate-800'>{topic.name}</p>
+              <div className='pl-8 pt-3'>
 
                 {topic.lessons.map(lesson => (
-                  <li key={lesson.id} className='flex items-center'>
+                  <div key={lesson.id} className='flex items-center py-2 border-b-2 border-zinc-200 hover:bg-zinc-100 hover:text-slate-800'>
                     {lesson.completed
                       ? (
                         <svg className='w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 20 20'>
@@ -41,12 +41,13 @@ export default function Course () {
                     <Link to={`lessons/${lesson.id}`}>
                       {lesson.name}
                     </Link>
-                  </li>
+                  </div>
                 ))}
-              </ul>
-              <ul className='pl-8 pb-2'>
+              </div>
+
+              <div className='pl-8 pb-2'>
                 {topic.quizes.map(quiz => (
-                  <li key={quiz.id} className='flex items-center'>
+                  <div key={quiz.id} className='flex items-center py-2 border-b-2 border-zinc-200 hover:bg-zinc-100 hover:text-slate-800'>
                     {quiz.completed
                       ? (
                         <svg className='w-3.5 h-3.5 me-2 text-green-500 dark:text-green-400 flex-shrink-0' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 20 20'>
@@ -61,12 +62,12 @@ export default function Course () {
                     <Link to={`quizes/${quiz.id}`}>
                       {quiz.name}
                     </Link>
-                  </li>
+                  </div>
                 ))}
-              </ul>
-            </li>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
       <div className='basis-3/4'>
         <Outlet />
