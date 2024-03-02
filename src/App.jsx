@@ -22,6 +22,7 @@ import AdminIndCourseStatIndex, { loader as AdminIndCourseStatIndexLoader } from
 import AdminIndCourseStat, { loader as adminIndCourseStatLoader } from './routes/admin/indCourseStat'
 import AuthorHome, { loader as authorHomeLoader } from './routes/author/authorHome'
 import AuthorCourse, { loader as authorCourseLoader } from './routes/author/authorCourse'
+import AuthorCourseOutline, { loader as authorCourseOutlineLoader, action as authorCourseOutlineAction } from './routes/author/authorCourseOutline'
 
 const router = createBrowserRouter([
   {
@@ -138,7 +139,15 @@ const router = createBrowserRouter([
       {
         path: 'author/courses/:courseId',
         element: <AuthorCourse />,
-        loader: authorCourseLoader
+        loader: authorCourseLoader,
+        children: [
+          {
+            index: true,
+            element: <AuthorCourseOutline />,
+            loader: authorCourseOutlineLoader,
+            action: authorCourseOutlineAction
+          }
+        ]
       }
     ]
   }
