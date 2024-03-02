@@ -14,7 +14,6 @@ export async function action ({ request, params }) {
   const formData = await request.formData()
   const intent = formData.get('intent')
 
-  console.log(intent)
   if (intent === 'enroll') {
     await enrollCourse(params.courseId)
   } else if (intent === 'rating') {

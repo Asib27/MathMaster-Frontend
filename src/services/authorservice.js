@@ -6,3 +6,17 @@ export async function editCourseOutline (course) {
     msg: 'successful'
   }
 }
+
+export async function createLesson (courseId, topicId) {
+  return {
+    status: 'success',
+    msg: 'successful'
+  }
+}
+
+export async function createQuiz (courseId, topicId) {
+  return {
+    status: 'success',
+    msg: 'successful'
+  }
+}

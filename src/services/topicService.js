@@ -11,3 +11,11 @@ export async function editTopic (topicId, topic) {
     status: 'success'
   }
 }
+
+export async function createTopic () {
+  // name: untitiled, description: lores ipsum
+  console.log('ekhaneo')
+  return {
+    status: 'success'
+  }
+}

@@ -21,7 +21,7 @@ import AdminUserStat, { loader as adminUserStatLoader } from './routes/admin/adm
 import AdminIndCourseStatIndex, { loader as AdminIndCourseStatIndexLoader } from './routes/admin/individualCourseStatIndex'
 import AdminIndCourseStat, { loader as adminIndCourseStatLoader } from './routes/admin/indCourseStat'
 import AuthorHome, { loader as authorHomeLoader } from './routes/author/authorHome'
-import AuthorCourse, { loader as authorCourseLoader } from './routes/author/authorCourse'
+import AuthorCourse, { loader as authorCourseLoader, action as authorCourseAction } from './routes/author/authorCourse'
 import AuthorCourseOutline, { loader as authorCourseOutlineLoader, action as authorCourseOutlineAction } from './routes/author/authorCourseOutline'
 import AuthorCourseOutlinePreview, { loader as authorCourseOutlinePreviewLoader, action as authorCourseOutlinePreviewAction } from './routes/author/authorCourseOutlinePreview'
 import AuthorLessons, { loader as AuthorLessonLoader, action as AuthorLessonsAction } from './routes/author/authorLesson'
@@ -141,6 +141,7 @@ const router = createBrowserRouter([
         path: 'author/courses/:courseId',
         element: <AuthorCourse />,
         loader: authorCourseLoader,
+        action: authorCourseAction,
         children: [
           {
             index: true,
