@@ -28,28 +28,9 @@ explanation : demo $x$
 hint: a simple hint
 `
 
-const quizes = [
-  {
-    id: 1,
-    quiz: quiz1
-  },
-  {
-    id: 2,
-    quiz: quiz2
-  },
-  {
-    id: 3,
-    quiz: quiz3
-  },
-  {
-    id: 4,
-    quiz: quiz4
-  }
-]
-
 export async function getQuizes (quizId) {
   await fakeNetwork()
-  return quizes
+  return [quiz1, quiz2, quiz3, quiz4].join('\n\n\n')
 }
 
 export async function submitResult (quizId, score, xp) {

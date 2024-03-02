@@ -7,7 +7,8 @@ import QuizStartingView from '../components/quiz/quizStartingView'
 // TODO: implement finish quiz
 
 export async function loader ({ params }) {
-  const quizes = await getQuizes(params.quizId)
+  const quizesStr = await getQuizes(params.quizId)
+  const quizes = quizesStr.split('\n\n\n').map((quiz, id) => { return { quiz, id } })
   const quizStat = await getQuizStat(params.quizId)
   return { quizes, quizStat, quizId: params.quizId }
 }
