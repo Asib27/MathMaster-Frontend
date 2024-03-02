@@ -24,6 +24,7 @@ import AuthorHome, { loader as authorHomeLoader } from './routes/author/authorHo
 import AuthorCourse, { loader as authorCourseLoader } from './routes/author/authorCourse'
 import AuthorCourseOutline, { loader as authorCourseOutlineLoader, action as authorCourseOutlineAction } from './routes/author/authorCourseOutline'
 import AuthorCourseOutlinePreview, { loader as authorCourseOutlinePreviewLoader, action as authorCourseOutlinePreviewAction } from './routes/author/authorCourseOutlinePreview'
+import AuthorLessons, { loader as AuthorLessonLoader, action as AuthorLessonsAction } from './routes/author/authorLesson'
 
 const router = createBrowserRouter([
   {
@@ -84,11 +85,6 @@ const router = createBrowserRouter([
             element: <Lessons />,
             loader: lessonLoader,
             action: lessonsAction
-          },
-          {
-            path: 'lessons/:lessonId/edit',
-            element: <EditLesson />,
-            loader: editLessonLoader
           },
           {
             path: 'quizes/:quizId',
@@ -153,6 +149,22 @@ const router = createBrowserRouter([
             element: <AuthorCourseOutline />,
             loader: authorCourseOutlineLoader,
             action: authorCourseOutlineAction
+          },
+          {
+            path: 'lessons/:lessonId',
+            element: <AuthorLessons />,
+            loader: AuthorLessonLoader,
+            action: AuthorLessonsAction
+          },
+          {
+            path: 'lessons/:lessonId/edit',
+            element: <EditLesson />,
+            loader: editLessonLoader
+          },
+          {
+            path: 'quizes/:quizId',
+            element: <Quizes />,
+            loader: quizLoader
           }
         ]
       }
