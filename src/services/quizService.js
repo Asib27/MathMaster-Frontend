@@ -41,6 +41,14 @@ export async function submitResult (quizId, score, xp) {
   }
 }
 
+export async function editQuiz (quizId, quiz) {
+  // quiz = { name, score, xp, content}
+  console.log(quizId, quiz)
+  return {
+    status: 'success'
+  }
+}
+
 export async function getQuizStat (quizId) {
   await fakeNetwork()
   return {

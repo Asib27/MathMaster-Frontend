@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom'
-import { getQuizStat, getQuizes } from '../../services/quizService'
+import { editQuiz, getQuizStat, getQuizes } from '../../services/quizService'
 import EditTitleForm from '../../components/editing/EditTitkeForm'
 import { useState } from 'react'
 import { TextEditor } from '../../components/editing/TextEditor'
@@ -16,13 +16,15 @@ export async function loader ({ params }) {
   return { quizes, quizStat, quizId: params.quizId }
 }
 
-export default function AuthorQuizes () {
-  const { quizes, quizStat } = useLoaderData()
+export default function AuthorQuizesEdit () {
+  const { quizes, quizStat, quizId } = useLoaderData()
   const [name, setName] = useState(quizStat.name)
   const [score, setScore] = useState(quizStat.score)
   const [xp, setXp] = useState(quizStat.xp)
   const [quizesState, setQuizesState] = useState(quizes)
   const [nextIdx, setNextIdx] = useState(quizes.length)
+
+  // const navigate = useNavigate()
 
   const updateQuiz = (idx) => {
     return ({ lesson, remove }) => {
@@ -96,6 +98,22 @@ export default function AuthorQuizes () {
         }}
         className='w-full border-4 border-green-700 hover:border-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
       >Add New Question
+      </button>
+
+      <button
+        type='button'
+        onClick={async () => {
+          await editQuiz(quizId, {
+            name,
+            score,
+            xp,
+            content: quizesState.map(q => q.quiz).join('\n\n\n')
+          })
+
+          // navigate(-1)
+        }}
+        className='w-full border-4 border-green-700 hover:border-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+      >Submit
       </button>
     </div>
   )
