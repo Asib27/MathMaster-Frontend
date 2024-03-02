@@ -23,6 +23,7 @@ import AdminIndCourseStat, { loader as adminIndCourseStatLoader } from './routes
 import AuthorHome, { loader as authorHomeLoader } from './routes/author/authorHome'
 import AuthorCourse, { loader as authorCourseLoader } from './routes/author/authorCourse'
 import AuthorCourseOutline, { loader as authorCourseOutlineLoader, action as authorCourseOutlineAction } from './routes/author/authorCourseOutline'
+import AuthorCourseOutlinePreview, { loader as authorCourseOutlinePreviewLoader, action as authorCourseOutlinePreviewAction } from './routes/author/authorCourseOutlinePreview'
 
 const router = createBrowserRouter([
   {
@@ -143,6 +144,12 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            element: <AuthorCourseOutlinePreview />,
+            loader: authorCourseOutlinePreviewLoader,
+            action: authorCourseOutlinePreviewAction
+          },
+          {
+            path: 'edit',
             element: <AuthorCourseOutline />,
             loader: authorCourseOutlineLoader,
             action: authorCourseOutlineAction
