@@ -1,14 +1,20 @@
-import { useLoaderData } from 'react-router-dom'
+import { redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import { editQuiz, getQuizStat, getQuizes } from '../../services/quizService'
 import EditTitleForm from '../../components/editing/EditTitkeForm'
 import { useState } from 'react'
 import { TextEditor } from '../../components/editing/TextEditor'
+import { getRole } from '../../services/authService'
 
 export async function loader ({ params }) {
+  const auth = await getRole()
+  if (auth !== 'author') {
+    return redirect('/login')
+  }
+
   const quizesStr = await getQuizes(params.quizId)
   const quizes = quizesStr.split('\n\n\n').map((quiz, idx) => {
     return {
-      quiz: '```question\n' + quiz + '\n```',
+      quiz,
       idx
     }
   })
@@ -24,7 +30,7 @@ export default function AuthorQuizesEdit () {
   const [quizesState, setQuizesState] = useState(quizes)
   const [nextIdx, setNextIdx] = useState(quizes.length)
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const updateQuiz = (idx) => {
     return ({ lesson, remove }) => {
@@ -110,9 +116,9 @@ export default function AuthorQuizesEdit () {
             content: quizesState.map(q => q.quiz).join('\n\n\n')
           })
 
-          // navigate(-1)
+          navigate(-1)
         }}
-        className='w-full border-4 border-green-700 hover:border-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+        className='w-full text-white border-4 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
       >Submit
       </button>
     </div>

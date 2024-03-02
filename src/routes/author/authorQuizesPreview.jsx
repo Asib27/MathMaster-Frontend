@@ -1,114 +1,54 @@
-import { useLoaderData } from 'react-router-dom'
-import { getQuizStat, getQuizes, submitResult } from '../../services/quizService'
-import { useState } from 'react'
-import QuizQuestion from '../../pages/quizQuestion'
-import QuizStartingView from '../../components/quiz/quizStartingView'
+import { redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import { getQuizStat, getQuizes } from '../../services/quizService'
+import { getRole } from '../../services/authService'
+import MDXViewer from '../../components/MDXViewer'
 
 // TODO: implement finish quiz
 
 export async function loader ({ params }) {
+  const auth = await getRole()
+  if (auth !== 'author') {
+    return redirect('/login')
+  }
+
   const quizesStr = await getQuizes(params.quizId)
-  const quizes = quizesStr.split('\n\n\n').map((quiz, id) => { return { quiz, id } })
+  const quizes = quizesStr.split('\n\n\n').map((quiz, idx) => {
+    return {
+      quiz,
+      idx
+    }
+  })
   const quizStat = await getQuizStat(params.quizId)
   return { quizes, quizStat, quizId: params.quizId }
 }
 
 export default function AuthorQuizesPreview () {
-  const [quizViewState, setQuizViewState] = useState(0)
-  const { quizes, quizStat, quizId } = useLoaderData()
-  const [curQuiz, setCurQuiz] = useState(0)
-  const [quizState, setQuizState] = useState(Array.from({ length: quizes.length }, () => ''))
+  const { quizes, quizStat } = useLoaderData()
+  const navigate = useNavigate()
 
-  const noQuiz = quizes.length
-  const getColor = (idx) => {
-    if (quizState[idx] === '') {
-      if (idx >= curQuiz) return 'border-black w-4 h-4' // normal
-      else return 'w-5 h-5 bg-gray-400' // skipped
-    } else if (quizState[idx] === 'correct') return 'w-5 h-5 bg-green-800'
-    else if (quizState[idx] === 'wrong') return 'w-5 h-5 bg-red-500'
-    else return 'border-black'
-  }
-
-  const updateArray = (idx, value) => {
-    setQuizState(quizState.map((v, i) => {
-      if (idx === i) return value
-      else return v
-    }))
-  }
-
-  const updateAnswer = (answer) => {
-    updateArray(curQuiz, answer)
-  }
-
-  const getScore = () => {
-    return quizState.filter(q => q === 'correct').length
-  }
-
-  if (quizViewState === 0) {
-    return (
-      <QuizStartingView quizStat={quizStat} setQuizViewState={setQuizViewState} />
-    )
-  } else if (quizViewState === 1) {
-    return (
-      <div className='p-10'>
-        <div className='flex items-center m-10'>
-          <div className='flex flex-row items-center gap-2'>
-            {Array.from({ length: noQuiz }, (_, idx) => {
-              return (
-                <div
-                  key={idx}
-                  className={'rounded-full border-2 cursor-pointer ' + getColor(idx) + ` ${idx} ${curQuiz}`}
-                  onClick={() => setCurQuiz(idx)}
-                />
-              )
-            })}
-          </div>
-
-          <div className='flex-grow' />
-
-          {curQuiz < noQuiz - 1 &&
-            <button
-              className='h-14 w-32 rounded-lg text-white bg-blue-700'
-              onClick={() => setCurQuiz(curQuiz + 1)}
-            >
-              Next Question
-            </button>}
-
-          {curQuiz >= noQuiz - 1 &&
-            <button
-              className='h-14 w-32 rounded-lg text-white bg-blue-700'
-              onClick={() => {
-                setQuizViewState(2)
-                submitResult(quizId, getScore() / quizes.length * quizStat.score, quizStat.xp)
-              }}
-            >
-              Finish Quiz
-            </button>}
-        </div>
+  return (
+    <div className='p-10'>
+      <div className='flex m-10 flex-col gap-5'>
+        <h3 className='text-3xl'>{quizStat.name}</h3>
         <div>
-          <QuizQuestion key={curQuiz} questionStr={quizes[curQuiz].quiz} answerUpdateCallback={updateAnswer} />
+          <h4 className='text-xl'>{`Total Score : ${quizStat.score}`}</h4>
+          <h4 className='text-xl'>{`Total XP : ${quizStat.xp}`}</h4>
         </div>
+        {
+          quizes.map(quiz => {
+            return <MDXViewer key={quiz.id} data={quiz.quiz} />
+          })
+        }
+
+        <button
+          type='button'
+          onClick={async () => {
+            navigate('edit')
+          }}
+          className='w-full text-white border-4 bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+        >Edit
+        </button>
       </div>
-
-    )
-  } else {
-    return (
-      <div className='p-10'>
-        <p className='text-3xl'>{quizStat.name}</p>
-        <p className='text-2xl mt-10 text-green-600'>Congrats You have successfully corrected {getScore()} out of {quizes.length}</p>
-
-        <div className='mt-10 grid grid-cols-2'>
-          <p className='text-xl'>Highest Score :</p>
-          <p className='text-xl'>{quizStat.highest_score}</p>
-
-          <p className='text-xl'>Your Previous Highest Score :</p>
-          <p className='text-xl'>{quizStat.my_highest_score}</p>
-
-          <p className='text-xl'>Your Current Score :</p>
-          <p className='text-xl'>{getScore() / quizes.length * quizStat.score}</p>
-        </div>
-
-      </div>
-    )
-  }
+    </div>
+  )
 }

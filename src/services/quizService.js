@@ -1,36 +1,8 @@
-const quiz1 = `type : mcq
-question : For what value of parameter $m$ does the line intersect the point?
-options : -1, -2, -3, -4
-correct : -1
-explanation : demo $x$
-hint: a simple hint
-`
-
-const quiz3 = `type : mcq
-question : For what value of parameter $m$ does the line intersect the point? 3
-options : 1, 2, 3, 4
-correct : 3
-explanation : demo $x$
-hint: a simple hint
-`
-
-const quiz2 = `type : short_question
-question : For what value of parameter $m$ does the line intersect the point? -1
-correct : -1
-explanation : demo $x$
-hint: a simple hint
-`
-
-const quiz4 = `type : short_question
-question : For what value of parameter $m$ does the line intersect the point? abc
-correct : abc
-explanation : demo $x$
-hint: a simple hint
-`
+let content = '```question\ntype : mcq\nquestion : For what value of parameter $m$ does the line intersect the point?\noptions : -1, -2, -3, -4\ncorrect : -1\nexplanation : demo $x$\nhint: a simple hint\n```\n\n\n```question\n\ntype : short_question\nquestion : For what value of parameter $m$ does the line intersect the point? -1\ncorrect : -1\nexplanation : demo $x$\nhint: a simple hint\n```\n\n\n```question\n\ntype : mcq\nquestion : For what value of parameter $m$ does the line intersect the point? 3\noptions : 1, 2, 3, 4\ncorrect : 3\nexplanation : demo $x$\nhint: a simple hint\n```\n\n\n```question\n\ntype : short_question\nquestion : For what value of parameter $m$ does the line intersect the point? abc\ncorrect : abc\nexplanation : demo $x$\nhint: a simple hint\n\n```'
 
 export async function getQuizes (quizId) {
   await fakeNetwork()
-  return [quiz1, quiz2, quiz3, quiz4].join('\n\n\n')
+  return content
 }
 
 export async function submitResult (quizId, score, xp) {
@@ -44,6 +16,7 @@ export async function submitResult (quizId, score, xp) {
 export async function editQuiz (quizId, quiz) {
   // quiz = { name, score, xp, content}
   console.log(quizId, quiz)
+  content = quiz.content
   return {
     status: 'success'
   }
