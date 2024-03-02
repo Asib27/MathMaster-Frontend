@@ -1,4 +1,4 @@
-import { redirect, useLoaderData } from 'react-router-dom'
+import { redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import AuthorList from '../../components/authorList'
 import { enrollCourse, getCourseOutline, rateCourse } from '../../services/courseService'
 import DetailedRatingViewer from '../../components/stats/detailedRatingViewer'
@@ -30,6 +30,7 @@ export async function action ({ request, params }) {
 
 export default function AuthorCourseOutlinePreview () {
   const { course } = useLoaderData()
+  const navigate = useNavigate()
 
   return (
     <div className='p-10 m-20'>
@@ -46,7 +47,7 @@ export default function AuthorCourseOutlinePreview () {
       <button
         type='button'
         className='w-full mt-10 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
-        onClick={async () => {}}
+        onClick={() => { navigate('edit') }}
       > Edit
       </button>
     </div>

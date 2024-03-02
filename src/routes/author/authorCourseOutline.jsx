@@ -1,8 +1,9 @@
-import { redirect, useLoaderData } from 'react-router-dom'
+import { redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import { enrollCourse, getCourseOutline, rateCourse } from '../../services/courseService'
 import { getRole } from '../../services/authService'
 import { useState } from 'react'
 import EditTitleForm from '../../components/editing/EditTitkeForm'
+import { editCourseOutline } from '../../services/authorservice'
 
 export async function loader ({ params }) {
   const auth = await getRole()
@@ -30,6 +31,7 @@ export async function action ({ request, params }) {
 
 export default function AuthorCourseOutline () {
   const { course } = useLoaderData()
+  const navigate = useNavigate()
   const [name, setName] = useState(course.name)
   const [type, setType] = useState(course.type)
   const [estimatedTime, setEstimatedTime] = useState(course.estimatedTime)
@@ -82,7 +84,12 @@ export default function AuthorCourseOutline () {
       <button
         type='button'
         className='w-full mt-10 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
-        onClick={async () => {}}
+        onClick={async () => {
+          await editCourseOutline({
+            name, type, estimatedTime, description
+          })
+          navigate(-1)
+        }}
       > Submit
       </button>
     </div>
