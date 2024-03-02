@@ -1,4 +1,4 @@
-import { Link, redirect, useLoaderData } from 'react-router-dom'
+import { redirect, useLoaderData } from 'react-router-dom'
 import { getRole, getUserData } from '../../services/authService'
 import { getCourses } from '../../services/courseService'
 import CourseAccordion from '../../components/courseAccordion'
@@ -65,12 +65,6 @@ export default function AuthorHome () {
 
       <CourseAccordion courses={myCourses} name='My Courses' link='/author/courses' />
       <CourseAccordion courses={allCourses} name='All Courses' link='/author/courses' />
-
-      <Link
-        to='/courses/1/lessons/1/edit'
-        className='cursor-pointer underline text-blue-600'
-      >Edit Lesson
-      </Link>
     </div>
   )
 }

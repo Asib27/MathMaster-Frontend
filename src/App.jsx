@@ -27,6 +27,7 @@ import AuthorCourseOutlinePreview, { loader as authorCourseOutlinePreviewLoader,
 import AuthorLessons, { loader as AuthorLessonLoader, action as AuthorLessonsAction } from './routes/author/authorLesson'
 import AuthorQuizesEdit, { loader as authorQuizLoader } from './routes/author/authorQuizes'
 import AuthorQuizesPreview, { loader as authorQuizesPreviewLoader } from './routes/author/authorQuizesPreview'
+import ModeratorHome, { loader as moderatorHomeLoader } from './routes/moderator/moderatorHome'
 
 const router = createBrowserRouter([
   {
@@ -174,6 +175,11 @@ const router = createBrowserRouter([
             loader: authorQuizLoader
           }
         ]
+      },
+      {
+        path: 'moderator/home',
+        element: <ModeratorHome />,
+        loader: moderatorHomeLoader
       }
     ]
   }
