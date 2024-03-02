@@ -26,6 +26,7 @@ import AuthorCourseOutline, { loader as authorCourseOutlineLoader, action as aut
 import AuthorCourseOutlinePreview, { loader as authorCourseOutlinePreviewLoader, action as authorCourseOutlinePreviewAction } from './routes/author/authorCourseOutlinePreview'
 import AuthorLessons, { loader as AuthorLessonLoader, action as AuthorLessonsAction } from './routes/author/authorLesson'
 import AuthorQuizesEdit, { loader as authorQuizLoader } from './routes/author/authorQuizes'
+import AuthorQuizesPreview, { loader as authorQuizesPreviewLoader } from './routes/author/authorQuizesPreview'
 
 const router = createBrowserRouter([
   {
@@ -164,6 +165,11 @@ const router = createBrowserRouter([
           },
           {
             path: 'quizes/:quizId',
+            element: <AuthorQuizesPreview />,
+            loader: authorQuizesPreviewLoader
+          },
+          {
+            path: 'quizes/:quizId/edit',
             element: <AuthorQuizesEdit />,
             loader: authorQuizLoader
           }
