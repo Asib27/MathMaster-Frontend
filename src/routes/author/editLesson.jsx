@@ -1,10 +1,15 @@
-import { redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import { Form, redirect, useLoaderData } from 'react-router-dom'
 import { editLesson, getLesson } from '../../services/lessonService'
 import { useState } from 'react'
 import EditTitleForm from '../../components/editing/EditTitkeForm'
 import { TextEditor } from '../../components/editing/TextEditor'
 import Lesson from '../../pages/lesson'
 import { getRole } from '../../services/authService'
+
+export async function action ({ params }) {
+  return redirect(`/author/courses/${params.courseId}/lessons/${params.lessonId}`)
+  // return {}
+}
 
 export async function loader ({ params }) {
   const role = await getRole()
@@ -25,7 +30,6 @@ export async function loader ({ params }) {
 
 export default function EditLesson () {
   const { lesson } = useLoaderData()
-  const navigate = useNavigate()
 
   const lessonFragment = lesson.content.split('\n\n\n').filter(t => t !== '').map((lesson, idx) => {
     return { lesson, idx }
@@ -77,11 +81,7 @@ export default function EditLesson () {
 
   const submitLesson = async () => {
     const newLesson = getEditedLesson()
-    const status = await editLesson(lesson.id, newLesson)
-
-    if (status.status === 'success') {
-      navigate('/author/home')
-    }
+    await editLesson(lesson.id, newLesson)
   }
 
   if (!isPreview) {
@@ -164,15 +164,16 @@ export default function EditLesson () {
           onClick={() => setIsPreview(!isPreview)}
         > {!isPreview ? 'Preview' : 'Edit'}
         </button>
-        <button
-          type='button'
-          className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
-          onClick={async () => {
-            await submitLesson()
-            navigate(-1)
-          }}
-        > Submit
-        </button>
+        <Form method='POST' className='grow flex'>
+          <button
+            type='submit'
+            className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
+            onClick={async () => {
+              await submitLesson()
+            }}
+          > Submit
+          </button>
+        </Form>
 
       </div>
     )

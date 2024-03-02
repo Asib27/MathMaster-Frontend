@@ -13,7 +13,7 @@ import Signup, { action as signupAction } from './routes/signup'
 import Landing from './routes/landing'
 import Definitions, { loader as definitionsLoader } from './routes/definitions'
 import Definition, { loader as definitionLoader } from './routes/definition'
-import EditLesson, { loader as editLessonLoader } from './routes/author/editLesson'
+import EditLesson, { loader as editLessonLoader, action as editLessonAction } from './routes/author/editLesson'
 import AdminLayout, { loader as adminLayoutLoader } from './routes/admin/adminLayout'
 import AdminHome, { loader as adminHomeLoader } from './routes/admin/adminHome'
 import AdminCourseStat, { loader as adminCourseStatLoader } from './routes/admin/courseStat'
@@ -169,7 +169,8 @@ const router = createBrowserRouter([
           {
             path: 'lessons/:lessonId/edit',
             element: <EditLesson />,
-            loader: editLessonLoader
+            loader: editLessonLoader,
+            action: editLessonAction
           },
           {
             path: 'quizes/:quizId',

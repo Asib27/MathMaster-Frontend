@@ -9,10 +9,14 @@ export async function editCourseOutline (courseId, course) {
 }
 
 export async function createLesson (courseId, topicId) {
-  return {
-    status: 'success',
-    msg: 'successful'
-  }
+  const data = await axios.post(`${API_BASE}lessons/${topicId}/addLesson`, {
+    xp: 50,
+    name: 'untitled',
+    content: '',
+    language: 'English',
+    abstraction_level: 'Novice'
+  })
+  return data.data
 }
 
 export async function createQuiz (courseId, topicId) {
