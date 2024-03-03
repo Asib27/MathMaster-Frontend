@@ -1,86 +1,64 @@
 import { redirect, useLoaderData } from 'react-router-dom'
 import { getRole } from '../../services/authService'
-import { getUnpublished } from '../../services/modService'
+import { getRequest } from '../../services/modService'
+import MDXViewer from '../../components/MDXViewer'
+import { useState } from 'react'
 
-export async function loader () {
+export async function loader ({ params }) {
   const role = await getRole()
 
   if (role !== 'moderator') {
     return redirect('/login')
   }
 
-  const unpublished = await getUnpublished()
+  const request = await getRequest(params.requestId)
 
-  return { unpublished }
+  return { request: request[0] }
 }
 
 export default function ViewRequests () {
-  const { unpublished } = useLoaderData()
+  const { request } = useLoaderData()
+  const [feedback, setFeedback] = useState('')
+
   return (
-    <div className='px-40 py-32'>
+    <div className='px-40 py-32 flex flex-col gap-5'>
+      <p className='text-2xl'> {`Course Name : ${request.content.courseName}`}</p>
+      <p className='text-2xl'> {`Topic Name : ${request.content.topicName}`}</p>
+      <p className='text-2xl'> {`Lesson Name : ${request.content.lessonName}`}</p>
+      <div>
+        <p className='text-l'> {`Abstraction Level : ${request.content.abstractionLevel}`}</p>
+        <p className='text-l'> {`Language : ${request.content.language}`}</p>
+      </div>
+      <MDXViewer data={request.content.lessonContent} />
 
-      <p className='text-2xl my-2'>Lessons</p>
-      <div className='flex flex-col gap-2'>
-        {
-          unpublished.filter(u => u.request_type === 'lesson').length === 0 && (
-            <div className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
-              <p className='text-xl'>No Unpublished Lesson</p>
-            </div>
-          )
-        }
-        {
-          unpublished.filter(u => u.request_type === 'lesson').map((u, idx) => {
-            return (
-              <div key={idx} className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
-                <p className='text-xl'>{u.content.lessonName}</p>
-                <p className='text-xl'>{u.author_feedback}</p>
-              </div>
-            )
-          })
-        }
+      <div>
+        <h4 className='text-xl'> Feedback</h4>
+        <textarea
+          value={feedback}
+          onChange={(event) => {
+            setFeedback(event.target.value)
+          }}
+          rows='10'
+          className='col-span-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+        />
+      </div>
+      <div className='flex'>
+        <button
+          type='submit'
+          className='w-full mt-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
+          onClick={async () => {
+          }}
+        > Reject
+        </button>
+        <button
+          type='submit'
+          className='w-full mt-5 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
+          onClick={async () => {
+          }}
+        > Accept
+        </button>
       </div>
 
-      <p className='text-2xl my-2'>Quiz</p>
-      <div className='flex flex-col gap-2'>
-        {
-          unpublished.filter(u => u.request_type === 'quiz').length === 0 && (
-            <div className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
-              <p className='text-xl'>No Unpublished quiz</p>
-            </div>
-          )
-        }
-        {
-          unpublished.filter(u => u.request_type === 'quiz').map((u, idx) => {
-            return (
-              <div key={idx} className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
-                <p className='text-xl'>{u.content.quizName}</p>
-                <p className='text-xl'>{u.author_feedback}</p>
-              </div>
-            )
-          })
-        }
-      </div>
-
-      <p className='text-2xl my-2'>Definitions</p>
-      <div className='flex flex-col gap-2'>
-        {
-          unpublished.filter(u => u.request_type === 'definition').length === 0 && (
-            <div className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
-              <p className='text-xl'>No Unpublished definition</p>
-            </div>
-          )
-        }
-        {
-          unpublished.filter(u => u.request_type === 'definition').map((u, idx) => {
-            return (
-              <div key={idx} className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
-                <p className='text-xl'>{u.content.name}</p>
-                <p className='text-xl'>{u.author_feedback}</p>
-              </div>
-            )
-          })
-        }
-      </div>
     </div>
   )
 }
