@@ -20,7 +20,7 @@ export default function Landing ({ params }) {
     {
       short: 'Stay motivated',
       description: 'Form a real learning habit with fun and well-paced content, game-like progress tracking, and friendly reminders.',
-      image: '/public/learn.png'
+      image: '/public/stay.png'
     }
   ]
 

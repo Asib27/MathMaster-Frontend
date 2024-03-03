@@ -26,7 +26,7 @@ export async function action ({ request, params }) {
 export default function CourseOutline () {
   const { course } = useLoaderData()
 
-  const completeion = (course.lessonCompleted * course.lessonCount + course.quizCompleted * course.quizCount) / (course.lessonCount * course.quizCount)
+  const completeion = (course.lessonCompleted * course.lessonCount + course.quizCompleted * course.quizCount) / (course.lessonCount * course.quizCount) || 0
 
   return (
     <div className='p-10 m-20'>
@@ -42,7 +42,7 @@ export default function CourseOutline () {
         ? (
           <div className='pl-5 mt-10 text-zinc-700'>
             <div className='flex gap-4'>
-              <div className='text-nowrap'>{`Course Completed : ${Math.round(completeion * 100)}% `}</div>
+              <div className='text-nowrap'>{`Course Completed : ${Math.round(completeion)}% `}</div>
               <ProgressBar className='w-96 m-2' complete={completeion} />
             </div>
             <div className='flex gap-4'>

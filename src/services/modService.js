@@ -3,7 +3,7 @@ import axios from 'axios'
 const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
 
 export async function getUnpublished () {
-  const data = await axios.get(`${API_BASE}mod/editrequests/published`)
+  const data = await axios.get(`${API_BASE}mod/editrequests/unpublished`)
   return data.data
 }
 

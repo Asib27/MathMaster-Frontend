@@ -8,6 +8,7 @@ export async function loader ({ params }) {
     return redirect('/login')
   }
   const course = await getCourse(params.courseId)
+  console.log(course)
   return { course }
 }
 

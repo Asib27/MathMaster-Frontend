@@ -13,7 +13,7 @@ export default function QuizStartingView ({ quizStat, setQuizViewState }) {
         <p className='text-xl'>Highest Score :</p>
         <p className='text-xl'>{quizStat.highest_score}</p>
 
-        <p className='text-xl'>Your Highest Score :</p>
+        <p className='text-xl'>Your last Score :</p>
         <p className='text-xl'>{quizStat.my_highest_score}</p>
       </div>
 

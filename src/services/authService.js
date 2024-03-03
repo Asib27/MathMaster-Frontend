@@ -5,7 +5,6 @@ import Cookies from 'js-cookie'
 const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
 
 export async function login (loginInfo) {
-  console.log(loginInfo)
   const data = await axios.post(
     API_BASE + 'auth/login',
     loginInfo)
@@ -14,12 +13,12 @@ export async function login (loginInfo) {
 }
 
 export async function signup (signupInfo) {
-  await fakeNetwork()
+  const data = await axios.post(
+    API_BASE + 'auth/signup',
+    signupInfo
+  )
 
-  return {
-    status: 'success',
-    message: 'success'
-  }
+  return data.data
 }
 
 export async function getRole () {

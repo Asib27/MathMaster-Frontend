@@ -10,8 +10,11 @@ export async function getQuizes (quizId) {
 export async function submitResult (quizId, score, xp) {
   await fakeNetwork()
   // { score: score, xp: xp}
-  // const data = await axios.post(`${API_BASE}quizzes/${quizId}/submit`)
-  // return data.data
+  const data = await axios.post(`${API_BASE}quizzes/${quizId}/submit`, {
+    score,
+    xp
+  })
+  return data.data
 }
 
 export async function editQuiz (quizId, quiz) {
@@ -23,15 +26,8 @@ export async function editQuiz (quizId, quiz) {
 }
 
 export async function getQuizStat (quizId) {
-  await fakeNetwork()
-  return {
-    name: 'Quiz 1',
-    score: 50,
-    xp: 20,
-    highest_score: 40,
-    my_highest_score: 40,
-    language: 'English'
-  }
+  const data = await axios.get(`${API_BASE}quizzes/${quizId}/stat`)
+  return data.data
 }
 
 async function fakeNetwork () {

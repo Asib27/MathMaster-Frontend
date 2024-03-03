@@ -12,6 +12,7 @@ export async function loader ({ params }) {
   const quizesStr = await getQuizes(params.quizId)
   const quizes = quizesStr.content.split('\n\n\n').map((quiz, id) => { return { quiz, id } })
   const quizStat = await getQuizStat(params.quizId)
+  quizStat.my_highest_score = quizStat.my_score
   return { quizes, quizStat, quizId: params.quizId }
 }
 
