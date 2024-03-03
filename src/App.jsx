@@ -31,6 +31,7 @@ import ModeratorHome, { loader as moderatorHomeLoader } from './routes/moderator
 import CreateNewTopic, { loader as createNewTopicLoader, action as createNewTopicAction } from './routes/author/createNewTopic'
 import NewDefinition from './routes/author/newDefinition'
 import ViewRequests, { loader as viewRequestsLoader } from './routes/moderator/viewRequests'
+import NewCourse, { loader as newCourseLoader, action as newCourseAction } from './routes/moderator/newCourse'
 
 const router = createBrowserRouter([
   {
@@ -202,6 +203,12 @@ const router = createBrowserRouter([
         path: 'moderator/requests/:requestId',
         element: <ViewRequests />,
         loader: viewRequestsLoader
+      },
+      {
+        path: 'moderator/courses/new',
+        element: <NewCourse />,
+        loader: newCourseLoader,
+        action: newCourseAction
       }
     ]
   }

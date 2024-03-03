@@ -1,4 +1,4 @@
-import { Link, redirect, useLoaderData } from 'react-router-dom'
+import { Link, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import { getRole, getUserData } from '../../services/authService'
 import { getUnpublished } from '../../services/modService'
 
@@ -17,6 +17,7 @@ export async function loader () {
 
 export default function ModeratorHome () {
   const { unpublished, profile } = useLoaderData()
+  const navigate = useNavigate()
   return (
     <div className='px-40 py-32'>
       <div className='flex justify-between items-center mb-20'>
@@ -25,6 +26,24 @@ export default function ModeratorHome () {
             <img src={profile.picture} className='w-28 h-28 rounded-full' alt='avatar' />
             <p className='text-2xl text-center'> {profile.name}</p>
           </div>
+        </div>
+      </div>
+
+      <div>
+
+        <div className='pr-10 flex justify-center'>
+          <button
+            onClick={() => { navigate('/moderator/courses/new') }}
+            className='w-96 text-blue-800 border-blue-700 border-2 hover:border-blue-800 hover:bg-zinc-100  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+          >
+            Create New Courses
+          </button>
+          <button
+            onClick={() => { navigate('/courses') }}
+            className='w-96 text-blue-800 border-blue-700 border-2 hover:border-blue-800 hover:bg-zinc-100  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+          >
+            Browse All Courses
+          </button>
         </div>
       </div>
 

@@ -5,22 +5,22 @@ export default function Landing ({ params }) {
     {
       short: 'Effective, hands-on learning',
       description: 'Visual, interactive lessons make concepts feel intuitive — so even complex ideas just click. Our real-time feedback and simple explanations make learning efficient.',
-      image: ''
+      image: '/public/interactive.png'
     },
     {
       short: 'Learn at your level',
       description: 'Choose lessons according to your understanding level.',
-      image: ''
+      image: '/public/learn.png'
     },
     {
       short: 'Byte sized lessons',
       description: 'We make it easy to stay on track, see your progress, and build your problem solving skills one concept at a time.',
-      image: ''
+      image: '/public/byte.png'
     },
     {
       short: 'Stay motivated',
       description: 'Form a real learning habit with fun and well-paced content, game-like progress tracking, and friendly reminders.',
-      image: ''
+      image: '/public/learn.png'
     }
   ]
 
@@ -36,7 +36,7 @@ export default function Landing ({ params }) {
             </Link>
           </div>
         </div>
-        <div className='w-96 h-96 bg-gray-600 rounded-3xl text-center p-2 m-2'> placeholder</div>
+        <img src='/public/effective.png' className='w-96 h-96 bg-gray-600 rounded-3xl text-center p-2 m-2' />
       </div>
 
       <div id='features'>
@@ -48,7 +48,7 @@ export default function Landing ({ params }) {
                 <p className='text-3xl m-5'>{text.short}</p>
                 <p className='text-lg m-5'>{text.description}</p>
               </div>
-              <div className='min-w-60 min-h-60 bg-gray-600 rounded-3xl text-center p-2 m-2'> placeholder</div>
+              <img src={text.image} className='w-60 h-60 bg-gray-600 rounded-3xl text-center p-2 m-2' />
             </div>
           )
         })}

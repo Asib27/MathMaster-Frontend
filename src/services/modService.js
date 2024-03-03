@@ -23,3 +23,13 @@ export async function publish (requestId) {
   const data = await axios.post(`${API_BASE}mod/editrequests/${requestId}/publish`)
   return data.data
 }
+
+export async function createNewCourse (course, authorname) {
+  console.log(course)
+  const data = await axios.post(`${API_BASE}mod/addcourse`, course)
+  const id = data.data.newCourse.course_id
+  const da = await axios.post(`${API_BASE}mod/addAuthorizedAuthor/${id}`, {
+    authorId: 2
+  })
+  return da.data
+}
