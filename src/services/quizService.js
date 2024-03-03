@@ -1,8 +1,11 @@
-let content = '```question\ntype : mcq\nquestion : For what value of parameter $m$ does the line intersect the point?\noptions : -1, -2, -3, -4\ncorrect : -1\nexplanation : demo $x$\nhint: a simple hint\n```\n\n\n```question\n\ntype : short_question\nquestion : For what value of parameter $m$ does the line intersect the point? -1\ncorrect : -1\nexplanation : demo $x$\nhint: a simple hint\n```\n\n\n```question\n\ntype : mcq\nquestion : For what value of parameter $m$ does the line intersect the point? 3\noptions : 1, 2, 3, 4\ncorrect : 3\nexplanation : demo $x$\nhint: a simple hint\n```\n\n\n```question\n\ntype : short_question\nquestion : For what value of parameter $m$ does the line intersect the point? abc\ncorrect : abc\nexplanation : demo $x$\nhint: a simple hint\n\n```'
+import axios from 'axios'
+
+const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
 
 export async function getQuizes (quizId) {
-  await fakeNetwork()
-  return content
+  const data = await axios.get(`${API_BASE}quizzes/${quizId}`)
+  console.log(data.data)
+  return data.data
 }
 
 export async function submitResult (quizId, score, xp) {
@@ -16,10 +19,9 @@ export async function submitResult (quizId, score, xp) {
 export async function editQuiz (quizId, quiz) {
   // quiz = { name, score, xp, content}
   console.log(quizId, quiz)
-  content = quiz.content
-  return {
-    status: 'success'
-  }
+  const data = await axios.patch(`${API_BASE}quizzes/${quizId}/update`, quiz)
+
+  return data.data
 }
 
 export async function getQuizStat (quizId) {
@@ -29,7 +31,8 @@ export async function getQuizStat (quizId) {
     score: 50,
     xp: 20,
     highest_score: 40,
-    my_highest_score: 40
+    my_highest_score: 40,
+    language: 'English'
   }
 }
 

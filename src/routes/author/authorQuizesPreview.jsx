@@ -12,7 +12,7 @@ export async function loader ({ params }) {
   }
 
   const quizesStr = await getQuizes(params.quizId)
-  const quizes = quizesStr.split('\n\n\n').map((quiz, idx) => {
+  const quizes = quizesStr.content.split('\n\n\n').map((quiz, idx) => {
     return {
       quiz,
       idx

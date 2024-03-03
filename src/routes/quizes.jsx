@@ -1,14 +1,16 @@
-import { useLoaderData } from 'react-router-dom'
+import { Form, redirect, useLoaderData } from 'react-router-dom'
 import { getQuizStat, getQuizes, submitResult } from '../services/quizService'
 import { useState } from 'react'
 import QuizQuestion from '../pages/quizQuestion'
 import QuizStartingView from '../components/quiz/quizStartingView'
 
-// TODO: implement finish quiz
+export async function action ({ params }) {
+  return redirect(`/courses/${params.courseId}`)
+}
 
 export async function loader ({ params }) {
   const quizesStr = await getQuizes(params.quizId)
-  const quizes = quizesStr.split('\n\n\n').map((quiz, id) => { return { quiz, id } })
+  const quizes = quizesStr.content.split('\n\n\n').map((quiz, id) => { return { quiz, id } })
   const quizStat = await getQuizStat(params.quizId)
   return { quizes, quizStat, quizId: params.quizId }
 }
@@ -107,6 +109,18 @@ export default function Quizes () {
           <p className='text-xl'>Your Current Score :</p>
           <p className='text-xl'>{getScore() / quizes.length * quizStat.score}</p>
         </div>
+
+        <Form method='POST'>
+          <button
+            className='w-full h-10 rounded-lg text-white bg-blue-700'
+            onClick={() => {
+              setQuizViewState(2)
+              submitResult(quizId, getScore() / quizes.length * quizStat.score, quizStat.xp)
+            }}
+          >
+            Back to Course Page
+          </button>
+        </Form>
 
       </div>
     )

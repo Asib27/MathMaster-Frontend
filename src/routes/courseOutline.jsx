@@ -42,7 +42,7 @@ export default function CourseOutline () {
         ? (
           <div className='pl-5 mt-10 text-zinc-700'>
             <div className='flex gap-4'>
-              <div className='text-nowrap'>{`Course Completed : ${completeion}% `}</div>
+              <div className='text-nowrap'>{`Course Completed : ${Math.round(completeion * 100)}% `}</div>
               <ProgressBar className='w-96 m-2' complete={completeion} />
             </div>
             <div className='flex gap-4'>

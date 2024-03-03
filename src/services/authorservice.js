@@ -20,8 +20,12 @@ export async function createLesson (courseId, topicId) {
 }
 
 export async function createQuiz (courseId, topicId) {
-  return {
-    status: 'success',
-    msg: 'successful'
-  }
+  const data = await axios.post(`${API_BASE}quizzes/${topicId}/addQuiz`, {
+    xp: 0,
+    totalScore: 0,
+    name: 'untitled quiz',
+    content: '',
+    language: 'English'
+  })
+  return data.data
 }

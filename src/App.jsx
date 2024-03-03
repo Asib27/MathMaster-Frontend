@@ -5,7 +5,7 @@ import Courses, { loader as allCoursesLoader } from './routes/courses'
 import ErrorPage from './routes/error-page'
 import Course, { loader as courseLoader } from './routes/course'
 import Lessons, { loader as lessonLoader, action as lessonsAction } from './routes/lessons'
-import Quizes, { loader as quizLoader } from './routes/quizes'
+import Quizes, { loader as quizLoader, action as quizAction } from './routes/quizes'
 import CourseOutline, { loader as courseOutlineLoader, action as courseOutlineAction } from './routes/courseOutline'
 import Home, { loader as homeLoader } from './routes/home'
 import Login, { action as loginAction } from './routes/login'
@@ -25,7 +25,7 @@ import AuthorCourse, { loader as authorCourseLoader, action as authorCourseActio
 import AuthorCourseOutline, { loader as authorCourseOutlineLoader, action as authorCourseOutlineAction } from './routes/author/authorCourseOutline'
 import AuthorCourseOutlinePreview, { loader as authorCourseOutlinePreviewLoader, action as authorCourseOutlinePreviewAction } from './routes/author/authorCourseOutlinePreview'
 import AuthorLessons, { loader as AuthorLessonLoader, action as AuthorLessonsAction } from './routes/author/authorLesson'
-import AuthorQuizesEdit, { loader as authorQuizLoader } from './routes/author/authorQuizes'
+import AuthorQuizesEdit, { loader as authorQuizLoader, action as authorQuizesAction } from './routes/author/authorQuizes'
 import AuthorQuizesPreview, { loader as authorQuizesPreviewLoader } from './routes/author/authorQuizesPreview'
 import ModeratorHome, { loader as moderatorHomeLoader } from './routes/moderator/moderatorHome'
 import CreateNewTopic, { loader as createNewTopicLoader, action as createNewTopicAction } from './routes/author/createNewTopic'
@@ -98,7 +98,8 @@ const router = createBrowserRouter([
           {
             path: 'quizes/:quizId',
             element: <Quizes />,
-            loader: quizLoader
+            loader: quizLoader,
+            action: quizAction
           }
         ]
       },
@@ -180,7 +181,8 @@ const router = createBrowserRouter([
           {
             path: 'quizes/:quizId/edit',
             element: <AuthorQuizesEdit />,
-            loader: authorQuizLoader
+            loader: authorQuizLoader,
+            action: authorQuizesAction
           },
           {
             path: 'topics/:topicId',
