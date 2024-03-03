@@ -9,6 +9,17 @@ export async function getUnpublished () {
 
 export async function getRequest (requestId) {
   const data = await axios.get(`${API_BASE}mod/editrequests/${requestId}`)
-  console.log(data.data)
+  return data.data
+}
+
+export async function submitFeedback (requestId, feedback) {
+  const data = await axios.patch(`${API_BASE}mod/editrequests/${requestId}/addfeedback`, {
+    feedback
+  })
+  return data.data
+}
+
+export async function publish (requestId) {
+  const data = await axios.post(`${API_BASE}mod/editrequests/${requestId}/publish`)
   return data.data
 }

@@ -1,6 +1,6 @@
-import { redirect, useLoaderData } from 'react-router-dom'
+import { redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import { getRole } from '../../services/authService'
-import { getRequest } from '../../services/modService'
+import { getRequest, submitFeedback } from '../../services/modService'
 import MDXViewer from '../../components/MDXViewer'
 import { useState } from 'react'
 
@@ -13,12 +13,14 @@ export async function loader ({ params }) {
 
   const request = await getRequest(params.requestId)
 
-  return { request: request[0] }
+  return { request: request[0], requestId: params.requestId }
 }
 
 export default function ViewRequests () {
-  const { request } = useLoaderData()
+  const { request, requestId } = useLoaderData()
   const [feedback, setFeedback] = useState('')
+
+  const navigate = useNavigate()
 
   return (
     <div className='px-40 py-32 flex flex-col gap-5'>
@@ -77,6 +79,8 @@ export default function ViewRequests () {
           type='submit'
           className='w-full mt-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
           onClick={async () => {
+            if (feedback !== '') { await submitFeedback(requestId, feedback) }
+            navigate('/moderator/home')
           }}
         > Reject
         </button>
@@ -84,6 +88,8 @@ export default function ViewRequests () {
           type='submit'
           className='w-full mt-5 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 grow'
           onClick={async () => {
+            if (feedback !== '') { await submitFeedback(requestId, feedback) }
+            navigate('/moderator/home')
           }}
         > Accept
         </button>
