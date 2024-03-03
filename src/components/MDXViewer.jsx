@@ -34,6 +34,9 @@ const MDXViewer = ({ data, className }) => {
                   return parseEquation(parsedValue[key])
                 })
                 return <Graph equations={equations} view={parsedValue.view} className='m-4' />
+              } else if (className === 'language-image') {
+                console.log(value)
+                return <img src={value} />
               }
 
               return (
