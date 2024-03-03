@@ -4,16 +4,14 @@ const API_BASE = import.meta.env.VITE_REACT_APP_API_BASE
 
 export async function getQuizes (quizId) {
   const data = await axios.get(`${API_BASE}quizzes/${quizId}`)
-  console.log(data.data)
   return data.data
 }
 
 export async function submitResult (quizId, score, xp) {
   await fakeNetwork()
   // { score: score, xp: xp}
-  return {
-    status: 'success'
-  }
+  // const data = await axios.post(`${API_BASE}quizzes/${quizId}/submit`)
+  // return data.data
 }
 
 export async function editQuiz (quizId, quiz) {

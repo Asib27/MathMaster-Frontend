@@ -30,6 +30,7 @@ import AuthorQuizesPreview, { loader as authorQuizesPreviewLoader } from './rout
 import ModeratorHome, { loader as moderatorHomeLoader } from './routes/moderator/moderatorHome'
 import CreateNewTopic, { loader as createNewTopicLoader, action as createNewTopicAction } from './routes/author/createNewTopic'
 import NewDefinition from './routes/author/newDefinition'
+import ViewRequests, { loader as viewRequestsLoader } from './routes/moderator/viewRequests'
 
 const router = createBrowserRouter([
   {
@@ -196,6 +197,11 @@ const router = createBrowserRouter([
         path: 'moderator/home',
         element: <ModeratorHome />,
         loader: moderatorHomeLoader
+      },
+      {
+        path: 'moderator/requests/:requestId',
+        element: <ViewRequests />,
+        loader: viewRequestsLoader
       }
     ]
   }
