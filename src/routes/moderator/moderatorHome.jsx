@@ -63,10 +63,12 @@ export default function ModeratorHome () {
         {
           unpublished.filter(u => u.request_type === 'quiz').map((u, idx) => {
             return (
-              <div key={idx} className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
-                <p className='text-xl'>{u.content.quizName}</p>
-                <p className='text-xl'>{u.author_feedback}</p>
-              </div>
+              <Link to={`/moderator/requests/${u.edit_request_id}`} key={idx}>
+                <div className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
+                  <p className='text-xl'>{u.content.quizName}</p>
+                  <p className='text-xl'>{u.author_feedback}</p>
+                </div>
+              </Link>
             )
           })
         }
@@ -84,10 +86,12 @@ export default function ModeratorHome () {
         {
           unpublished.filter(u => u.request_type === 'definition').map((u, idx) => {
             return (
-              <div key={idx} className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
-                <p className='text-xl'>{u.content.name}</p>
-                <p className='text-xl'>{u.author_feedback}</p>
-              </div>
+              <Link to={`/moderator/requests/${u.edit_request_id}`} key={idx}>
+                <div key={idx} className='p-5 flex justify-between items-center bg-zinc-100 h-16 hover:bg-zinc-200'>
+                  <p className='text-xl'>{u.content.name}</p>
+                  <p className='text-xl'>{u.author_feedback}</p>
+                </div>
+              </Link>
             )
           })
         }

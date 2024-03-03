@@ -22,14 +22,44 @@ export default function ViewRequests () {
 
   return (
     <div className='px-40 py-32 flex flex-col gap-5'>
-      <p className='text-2xl'> {`Course Name : ${request.content.courseName}`}</p>
-      <p className='text-2xl'> {`Topic Name : ${request.content.topicName}`}</p>
-      <p className='text-2xl'> {`Lesson Name : ${request.content.lessonName}`}</p>
-      <div>
-        <p className='text-l'> {`Abstraction Level : ${request.content.abstractionLevel}`}</p>
-        <p className='text-l'> {`Language : ${request.content.language}`}</p>
-      </div>
-      <MDXViewer data={request.content.lessonContent} />
+      {
+        request.request_type === 'lesson' && (
+          <div>
+            <p className='text-2xl'> {`Course Name : ${request.content.courseName}`}</p>
+            <p className='text-2xl'> {`Topic Name : ${request.content.topicName}`}</p>
+            <p className='text-2xl'> {`Lesson Name : ${request.content.lessonName}`}</p>
+            <div>
+              <p className='text-l'> {`Abstraction Level : ${request.content.abstractionLevel}`}</p>
+              <p className='text-l'> {`Language : ${request.content.language}`}</p>
+            </div>
+            <MDXViewer data={request.content.lessonContent} />
+          </div>
+        )
+      }
+      {
+        request.request_type === 'quiz' && (
+          <div>
+            <p className='text-2xl'> {`Course Name : ${request.content.courseName}`}</p>
+            <p className='text-2xl'> {`Topic Name : ${request.content.topicName}`}</p>
+            <p className='text-2xl'> {`Lesson Name : ${request.content.quizName}`}</p>
+            <div className='py-2'>
+              <p className='text-l'> {`Language : ${request.content.language}`}</p>
+            </div>
+            <MDXViewer data={request.content.quizContent} />
+          </div>
+        )
+      }
+      {
+        request.request_type === 'definition' && (
+          <div>
+            <p className='text-2xl'> {`Definition of : ${request.content.name}`}</p>
+            <div className='py-2'>
+              <p className='text-l'> {`Language : ${request.content.language}`}</p>
+            </div>
+            <MDXViewer data={request.content.content} />
+          </div>
+        )
+      }
 
       <div>
         <h4 className='text-xl'> Feedback</h4>
